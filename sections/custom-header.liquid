@@ -32,17 +32,17 @@
       <div class="flex-1 flex items-center justify-start">
         <button
           type="button"
-          class="relative inline-flex items-center justify-center w-14 h-14 text-text-main bg-transparent border-none cursor-pointer hover:opacity-60 transition-opacity js-menu-toggle group"
+          class="relative inline-flex items-center justify-center gap-4 h-16 text-text-main bg-transparent border-none cursor-pointer hover:opacity-60 transition-opacity js-menu-toggle group"
           aria-haspopup="dialog"
           aria-controls="site-menu-drawer"
           aria-expanded="false"
         >
-          <span class="flex flex-col justify-center gap-[7px] w-8" aria-hidden="true">
-            <span class="block h-[3px] w-full bg-current rounded-full transition-all duration-200 group-aria-expanded:translate-y-[10px] group-aria-expanded:rotate-45"></span>
-            <span class="block h-[3px] w-full bg-current rounded-full transition-all duration-200 group-aria-expanded:opacity-0"></span>
-            <span class="block h-[3px] w-full bg-current rounded-full transition-all duration-200 group-aria-expanded:-translate-y-[10px] group-aria-expanded:-rotate-45"></span>
+          <span class="flex flex-col justify-center gap-[8px] w-10" aria-hidden="true">
+            <span class="block h-[4px] w-full bg-current rounded-full transition-all duration-200 group-aria-expanded:translate-y-[12px] group-aria-expanded:rotate-45"></span>
+            <span class="block h-[4px] w-full bg-current rounded-full transition-all duration-200 group-aria-expanded:opacity-0"></span>
+            <span class="block h-[4px] w-full bg-current rounded-full transition-all duration-200 group-aria-expanded:-translate-y-[12px] group-aria-expanded:-rotate-45"></span>
           </span>
-          <span class="sr-only">{{ 'sections.custom_header.menu' | t }}</span>
+          <span class="font-display font-black text-2xl tracking-wide uppercase">{{ 'sections.custom_header.menu' | t }}</span>
         </button>
       </div>
 
@@ -58,25 +58,25 @@
       </div>
 
       <!-- Right: Actions -->
-      <div class="flex-1 flex items-center justify-end gap-4 md:gap-6">
-        <a href="{{ routes.search_url }}" class="relative inline-flex items-center justify-center w-14 h-14 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.search' | t }}">
-          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <div class="flex-1 flex items-center justify-end gap-5 md:gap-7">
+        <a href="{{ routes.search_url }}" class="relative inline-flex items-center justify-center w-16 h-16 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.search' | t }}">
+          <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </a>
 
-        <a href="{{ routes.account_url }}" class="hidden md:inline-flex relative items-center justify-center w-14 h-14 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.account' | t }}">
-          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <a href="{{ routes.account_url }}" class="hidden md:inline-flex relative items-center justify-center w-16 h-16 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.account' | t }}">
+          <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
           </svg>
         </a>
 
-        <a href="{{ routes.cart_url }}" class="relative inline-flex items-center justify-center w-14 h-14 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.cart' | t }}">
-          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <a href="{{ routes.cart_url }}" class="relative inline-flex items-center justify-center w-16 h-16 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.cart' | t }}">
+          <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
           </svg>
           {% if cart_count > 0 %}
-            <span class="absolute top-[4px] right-[4px] min-w-[1.4rem] h-[1.4rem] px-1 bg-accent text-surface text-[0.8rem] font-black leading-[1.4rem] text-center rounded-full">{{ cart_count }}</span>
+            <span class="absolute top-[4px] right-[4px] min-w-[1.6rem] h-[1.6rem] px-1 bg-accent text-surface text-[0.9rem] font-black leading-[1.6rem] text-center rounded-full">{{ cart_count }}</span>
           {% endif %}
         </a>
       </div>
