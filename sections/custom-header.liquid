@@ -154,6 +154,15 @@
 </div>
 
 <!-- Drawer Menu -->
+<style>
+  @keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .js-menu-drawer[data-drawer-state="open"] .menu-item-anim {
+    animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>
 <div
   id="site-menu-drawer"
   class="fixed inset-0 z-[100] hidden js-menu-drawer"
@@ -161,31 +170,40 @@
   aria-modal="true"
   aria-label="{{ 'sections.custom_header.menu' | t }}"
 >
-  <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 ease-out js-menu-overlay [[data-drawer-state=open]_&]:opacity-100"></div>
+  <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-500 ease-out js-menu-overlay [[data-drawer-state=open]_&]:opacity-100 backdrop-blur-sm"></div>
 
-  <div class="absolute top-0 left-0 h-full w-[min(85vw,380px)] bg-surface text-text-main flex flex-col -translate-x-full transition-transform duration-300 ease-out [[data-drawer-state=open]_&]:translate-x-0">
-    <div class="flex items-center justify-between p-4 md:p-5 border-b border-border">
-      <span class="text-xs font-bold tracking-widest uppercase">{{ 'sections.custom_header.menu' | t }}</span>
-      <button type="button" class="relative inline-flex items-center justify-center w-10 h-10 text-text-main hover:opacity-60 transition-opacity js-menu-close" aria-label="{{ 'sections.custom_header.close' | t }}">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+  <div class="absolute top-0 left-0 h-full w-[min(90vw,450px)] bg-surface text-text-main flex flex-col -translate-x-full transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ease-out [[data-drawer-state=open]_&]:translate-x-0 shadow-2xl border-r border-border/10">
+    <div class="flex items-center justify-between p-6 md:p-8 border-b border-border/10">
+      <span class="text-sm font-black tracking-widest uppercase text-text-main/50">{{ 'sections.custom_header.menu' | t }}</span>
+      <button type="button" class="relative inline-flex items-center justify-center w-12 h-12 text-text-main hover:text-accent hover:rotate-90 transition-all duration-300 js-menu-close" aria-label="{{ 'sections.custom_header.close' | t }}">
+        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
-    <nav class="flex-1 overflow-y-auto p-6 md:p-5">
-      <ul class="list-none m-0 p-0 flex flex-col" role="list">
+    <nav class="flex-1 overflow-y-auto p-6 md:p-8">
+      <ul class="list-none m-0 p-0 flex flex-col gap-2" role="list">
         {% for link in section.settings.menu.links %}
-          <li class="border-b border-border last:border-b-0">
-            <a href="{{ link.url }}" class="block py-4 text-2xl font-display font-black uppercase tracking-tight text-text-main no-underline transition-colors hover:text-accent">{{ link.title }}</a>
+          <li class="menu-item-anim opacity-0 border-b border-border/5 last:border-b-0 overflow-hidden" style="animation-delay: {{ forloop.index | times: 0.08 }}s;">
+            <a href="{{ link.url }}" class="group flex items-center justify-between py-4 text-3xl md:text-5xl font-display font-black uppercase tracking-tighter text-text-main no-underline transition-colors hover:text-accent {% if link.active %}text-accent{% endif %}">
+              <span class="transition-transform duration-300 group-hover:translate-x-4">{{ link.title }}</span>
+              <span class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center opacity-0 -translate-x-8 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg>
+              </span>
+            </a>
           </li>
         {% endfor %}
       </ul>
     </nav>
 
-    <div class="flex gap-6 p-5 border-t border-border">
-      <a href="{{ routes.account_url }}" class="text-xs font-bold tracking-wide uppercase text-text-main no-underline hover:text-accent">{{ 'sections.custom_header.account' | t }}</a>
-      <a href="{{ routes.search_url }}" class="text-xs font-bold tracking-wide uppercase text-text-main no-underline hover:text-accent">{{ 'sections.custom_header.search' | t }}</a>
+    <div class="flex flex-col gap-4 p-6 md:p-8 bg-text-main/5 border-t border-border/10">
+      <a href="{{ routes.account_url }}" class="flex items-center gap-4 text-sm font-black tracking-widest uppercase text-text-main no-underline hover:text-accent transition-colors group">
+        <span class="w-10 h-10 flex items-center justify-center bg-surface rounded-full shadow-sm group-hover:shadow-md transition-shadow">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+        </span>
+        {{ 'sections.custom_header.account' | t }}
+      </a>
     </div>
   </div>
 </div>
