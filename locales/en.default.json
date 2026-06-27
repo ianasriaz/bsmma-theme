@@ -529,5 +529,28 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
+  },
+  "sections": {
+    "custom_header": {
+      "name": "Custom Header",
+      "menu": "Menu",
+      "search": "Search",
+      "account": "Log in",
+      "cart": "Cart",
+      "close": "Close",
+      "announcement_default": "Summer collection is now live. Shop new arrivals.",
+      "logo_default": "Brand Store MM Alam",
+      "settings": {
+        "announcement_text": {
+          "label": "Announcement Text"
+        },
+        "logo_text": {
+          "label": "Logo Text"
+        },
+        "menu": {
+          "label": "Menu"
+        }
+      }
+    }
   }
 }
