@@ -1,4 +1,4 @@
-<span class="w-10 h-10 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current [&>svg]:scale-[2.4] [&>svg]:stroke-current [&>svg]:stroke-[1.5]">
+<span class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current [&>svg]:scale-[2.4] [&>svg]:stroke-current [&>svg]:stroke-[1.5]">
   {% if cart == empty %}
     {{ 'icon-cart-empty.svg' | inline_asset_content }}
   {% else %}
@@ -7,5 +7,5 @@
 </span>
 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
 {%- if cart != empty -%}
-  <span class="absolute top-[4px] right-[4px] min-w-[1.6rem] h-[1.6rem] px-1 bg-accent text-surface text-[0.9rem] font-black leading-[1.6rem] text-center rounded-full">{{ cart.item_count }}</span>
+  <span class="absolute top-[2px] right-[2px] min-w-[1.4rem] h-[1.4rem] px-1 bg-accent text-surface text-[0.8rem] md:text-[0.9rem] font-black leading-[1.4rem] text-center rounded-full">{{ cart.item_count }}</span>
 {%- endif -%}
