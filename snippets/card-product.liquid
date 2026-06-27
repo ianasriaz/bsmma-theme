@@ -53,7 +53,7 @@
 
   <product-component 
     view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}"
-    class="group/card block h-full"
+    class="group/card block h-full mb-10 md:mb-14"
   >
     <article 
       class="card-product relative flex flex-col h-full !border-none !shadow-none !bg-transparent"
@@ -199,7 +199,7 @@
           </span>
         {%- endif -%}
 
-        <h3 class="font-display font-black uppercase tracking-tighter text-lg md:text-xl leading-tight group-hover/card:text-accent transition-colors duration-200">
+        <h3 class="font-sans font-medium uppercase tracking-widest text-lg md:text-2xl leading-tight text-zinc-800 group-hover/card:text-accent transition-colors duration-200">
           <a href="{{ card_product.url }}" class="full-unstyled-link">
             {{ card_product.title | escape }}
           </a>
@@ -228,7 +228,7 @@
         {%- endif -%}
 
         <div class="mt-1">
-          {% render 'price', product: card_product, price_class: 'font-display font-black text-lg text-text-main', show_compare_at_price: true %}
+          {% render 'price', product: card_product, price_class: 'font-display font-black text-xl md:text-2xl text-text-main', show_compare_at_price: true %}
         </div>
 
         {%- if card_product.quantity_price_breaks_configured? -%}

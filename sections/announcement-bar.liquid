@@ -1,26 +1,7 @@
-<style>
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .ticker-wrap {
-    display: flex;
-    width: max-content;
-    animation: marquee 30s linear infinite;
-  }
-  .ticker-wrap:hover {
-    animation-play-state: paused;
-  }
-</style>
-
-<div class="w-full bg-accent text-surface overflow-hidden py-5 text-sm md:text-base font-display font-black tracking-widest uppercase shadow-md relative z-10">
-  <div class="ticker-wrap cursor-pointer" onclick="window.location.href='{{ routes.all_products_collection_url }}'">
-    {%- for i in (1..10) -%}
-      <div class="flex items-center gap-6 px-6 shrink-0 hover:opacity-80 transition-opacity">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2L15 9H22L16 14L18 22L12 17L6 22L8 14L2 9H9L12 2Z"/></svg>
-        <span>Summer Collection Is Now Live! Shop Trendy T-Shirts, Polos, Shorts, Accessories & Many More</span>
-      </div>
-    {%- endfor -%}
+<div class="w-full bg-accent text-surface py-3 md:py-4 shadow-md relative z-10 flex justify-center text-center">
+  <div class="cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-center gap-3 px-4 text-xl md:text-2xl font-display font-bold uppercase tracking-widest" onclick="window.location.href='{{ routes.all_products_collection_url }}'">
+    <span>Summer Collection Is Now Live!</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-8 md:h-8 fill-current" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
   </div>
 </div>
 

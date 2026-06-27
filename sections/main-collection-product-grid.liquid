@@ -188,7 +188,13 @@
               </ul>
 
               {%- if paginate.pages > 1 -%}
-                {% render 'pagination', paginate: paginate, anchor: '' %}
+                <div class="load-more-container flex justify-center mt-12 mb-8 block w-full text-center">
+                  {% if paginate.next %}
+                    <button type="button" class="load-more-btn inline-flex items-center justify-center px-12 py-4 bg-transparent border-2 border-zinc-900 text-zinc-900 hover:border-accent hover:bg-accent hover:text-white font-bold uppercase tracking-widest transition-all duration-300 text-sm md:text-base cursor-pointer" data-next-url="{{ paginate.next.url }}">
+                      Load More
+                    </button>
+                  {% endif %}
+                </div>
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -414,3 +420,51 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('click', function(event) {
+    const btn = event.target.closest('.load-more-btn');
+    if (!btn) return;
+    
+    event.preventDefault();
+    
+    const nextUrl = btn.getAttribute('data-next-url');
+    if (!nextUrl) return;
+
+    const originalText = btn.innerText;
+    btn.innerText = 'Loading...';
+    btn.disabled = true;
+    btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+    fetch(nextUrl)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        const newProducts = doc.querySelectorAll('#product-grid .grid__item');
+        const grid = document.querySelector('#product-grid');
+        
+        newProducts.forEach(product => {
+          grid.appendChild(product);
+        });
+
+        const newLoadMoreBtn = doc.querySelector('.load-more-btn');
+        if (newLoadMoreBtn && newLoadMoreBtn.getAttribute('data-next-url')) {
+          btn.setAttribute('data-next-url', newLoadMoreBtn.getAttribute('data-next-url'));
+          btn.innerText = originalText;
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+          const container = btn.closest('.load-more-container');
+          if (container) container.remove();
+        }
+      })
+      .catch(error => {
+        console.error('Error loading more products:', error);
+        btn.innerText = 'Load More';
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+  });
+</script>

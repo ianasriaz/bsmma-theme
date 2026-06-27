@@ -1,0 +1,86 @@
+{% schema %}
+{
+  "name": "Custom Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Dark & Moody Aesthetic."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Elevate your style with our latest premium collection."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Hero",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="relative w-full h-[80vh] md:h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-black">
+  <!-- Background Image or Placeholder -->
+  <div class="absolute inset-0 bg-black">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover object-center', loading: 'eager' }}
+    {% else %}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover object-center !fill-zinc-800' }}
+    {% endif %}
+  </div>
+
+  <!-- Overlay for Moody Aesthetic -->
+  <div class="absolute inset-0 z-10 bg-black" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <!-- Content -->
+  <div class="relative z-20 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto w-full">
+    {% if section.settings.heading != blank %}
+      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase mb-6 leading-none">
+        {{ section.settings.heading }}
+      </h1>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="text-zinc-300 text-lg md:text-2xl font-light mb-10 max-w-2xl mx-auto">
+        {{ section.settings.subheading }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="inline-flex items-center justify-center px-10 py-5 bg-accent hover:bg-accent/90 text-white font-bold uppercase tracking-widest transition-all duration-300 ease-out hover:scale-105 border border-accent">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>

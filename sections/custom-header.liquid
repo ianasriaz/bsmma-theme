@@ -13,7 +13,7 @@
 <!-- Header Sticky Wrapper Removed (Handled in theme.liquid) -->
 
   <!-- Main Header -->
-  <header class="w-full bg-surface text-text-main border-b border-border">
+  <header class="w-full bg-surface text-text-main border-b border-border relative">
     <div class="w-full max-w-[1400px] mx-auto h-32 px-6 flex justify-between items-center">
 
       <!-- Left: Menu trigger -->
@@ -36,7 +36,7 @@
 
       <!-- Center: Wordmark -->
       <div class="flex items-center justify-center">
-        <a href="{{ routes.root_url }}" class="font-display text-[2rem] md:text-[2.5rem] font-black tracking-tight uppercase text-text-main no-underline whitespace-nowrap transition-opacity hover:opacity-60">
+        <a href="{{ routes.root_url }}" class="font-sans text-[2rem] md:text-[2.5rem] !font-bold tracking-tight uppercase text-text-main no-underline whitespace-nowrap transition-opacity hover:opacity-60">
           {% if section.settings.logo_text != blank %}
             {{ section.settings.logo_text }}
           {% else %}
@@ -46,35 +46,36 @@
       </div>
 
       <!-- Right: Actions -->
-      <div class="flex-1 flex items-center justify-end gap-5 md:gap-7">
-        <details-modal class="header__search">
-          <details>
+      <div class="flex-1 flex items-center justify-end gap-5 md:gap-7 !static">
+        <details-modal class="header__search !static">
+          <details class="!static">
             <summary class="relative inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 text-text-main hover:opacity-60 transition-opacity cursor-pointer list-none [&::-webkit-details-marker]:hidden" aria-haspopup="dialog" aria-label="{{ 'sections.custom_header.search' | t }}">
               <span class="w-6 h-6 md:w-8 md:h-8 transition-opacity duration-200 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current [&>svg]:scale-[1.3] [&>svg]:stroke-current [&>svg]:stroke-[0.2]">
                 {{ 'icon-search.svg' | inline_asset_content }}
               </span>
             </summary>
-            <div class="search-modal modal__content gradient !absolute !top-full !h-auto !min-h-0 border-t border-border/10 shadow-2xl" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="search-modal modal__content gradient !fixed !left-0 !right-0 !w-[100vw] !max-w-[100vw] !mt-8 !h-auto !min-h-0 border-t-2 border-border bg-surface shadow-2xl z-50" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
               <div class="modal-overlay !hidden"></div>
-              <div class="search-modal__content !py-6 md:!py-8{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}" tabindex="-1">
+              <div class="search-modal__content !py-8 md:!py-12 max-w-4xl mx-auto px-4 w-full flex items-center justify-center relative" tabindex="-1">
                 {%- if settings.predictive_search_enabled -%}
-                  <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+                  <predictive-search class="search-modal__form w-full" data-loading-text="{{ 'accessibility.loading' | t }}">
                 {%- else -%}
-                  <search-form class="search-modal__form">
+                  <search-form class="search-modal__form w-full">
                 {%- endif -%}
-                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-                  <div class="field">
-                    <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results" aria-controls="predictive-search-results" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%}>
-                    <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
-                    <input type="hidden" name="options[prefix]" value="last">
-                    <button type="reset" class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}" aria-label="{{ 'general.search.reset' | t }}">
-                      <span class="svg-wrapper">
-                        {{- 'icon-reset.svg' | inline_asset_content -}}
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form w-full relative flex items-center">
+                  <div class="relative w-full flex items-center border-2 border-text-main rounded-none bg-background overflow-hidden group focus-within:border-accent transition-colors">
+                    <button class="search__button w-14 h-14 flex items-center justify-center text-text-main group-focus-within:text-accent transition-colors shrink-0" aria-label="{{ 'general.search.search' | t }}">
+                      <span class="w-6 h-6 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current [&>svg]:scale-[1.3] [&>svg]:stroke-current [&>svg]:stroke-[0.2]">
+                        {{- 'icon-search.svg' | inline_asset_content -}}
                       </span>
                     </button>
-                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                      <span class="svg-wrapper">
-                        {{- 'icon-search.svg' | inline_asset_content -}}
+                    
+                    <input class="search__input w-full h-14 bg-transparent border-none outline-none text-xl md:text-2xl font-semibold text-text-main placeholder:text-text-main/40 px-2" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results" aria-controls="predictive-search-results" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%}>
+                    <input type="hidden" name="options[prefix]" value="last">
+                    
+                    <button type="reset" class="reset__button w-14 h-14 flex items-center justify-center text-text-main hover:text-accent transition-colors shrink-0 {% if search.terms == blank %} hidden{% endif %}" aria-label="{{ 'general.search.reset' | t }}">
+                      <span class="w-5 h-5 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current">
+                        {{- 'icon-reset.svg' | inline_asset_content -}}
                       </span>
                     </button>
                   </div>
@@ -91,8 +92,8 @@
                 {%- else -%}
                   </search-form>
                 {%- endif -%}
-                <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
-                  <span class="svg-wrapper">
+                <button type="button" class="search-modal__close-button absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 flex items-center justify-center text-text-main hover:text-accent transition-colors bg-surface hover:bg-surface-subdued rounded-full" aria-label="{{ 'accessibility.close' | t }}">
+                  <span class="w-5 h-5 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current">
                     {{- 'icon-close.svg' | inline_asset_content -}}
                   </span>
                 </button>
@@ -157,14 +158,55 @@
 
     <nav class="flex-1 overflow-y-auto p-6 md:p-8">
       <ul class="list-none m-0 p-0 flex flex-col gap-2" role="list">
-        {% for link in section.settings.menu.links %}
+        {% assign header_menu = section.settings.menu | default: linklists['main-menu'] %}
+        {% for link in header_menu.links %}
           <li class="menu-item-anim opacity-0 border-b border-border/5 last:border-b-0 overflow-hidden" style="animation-delay: {{ forloop.index | times: 0.08 }}s;">
-            <a href="{{ link.url }}" class="group flex items-center justify-between py-4 text-3xl md:text-5xl font-display font-black uppercase tracking-tighter text-text-main no-underline transition-colors hover:text-accent {% if link.active %}text-accent{% endif %}">
-              <span class="transition-transform duration-300 group-hover:translate-x-4">{{ link.title }}</span>
-              <span class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center opacity-0 -translate-x-8 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg>
-              </span>
-            </a>
+            {% if link.links != blank %}
+              <details class="group/details">
+                <summary class="group flex items-center justify-between py-4 text-3xl md:text-5xl font-display font-black uppercase tracking-tighter text-text-main no-underline transition-colors hover:text-accent cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <span class="transition-transform duration-300 group-hover:translate-x-4">{{ link.title }}</span>
+                  <span class="w-8 h-8 md:w-10 md:h-10 text-text-main flex items-center justify-center transition-transform duration-300 group-open/details:rotate-180">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                  </span>
+                </summary>
+                <ul class="pl-4 md:pl-8 pb-4 flex flex-col gap-3">
+                  {% for child_link in link.links %}
+                    <li>
+                      {% if child_link.links != blank %}
+                        <details class="group/subdetails">
+                          <summary class="flex items-center justify-between py-2 text-xl md:text-2xl font-sans font-bold uppercase tracking-widest text-text-main/80 hover:text-accent transition-colors cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                            <span>{{ child_link.title }}</span>
+                            <span class="transition-transform duration-300 group-open/subdetails:rotate-180">
+                              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </span>
+                          </summary>
+                          <ul class="pl-4 md:pl-6 pt-2 pb-2 flex flex-col gap-2">
+                            {% for grandchild_link in child_link.links %}
+                              <li>
+                                <a href="{{ grandchild_link.url }}" class="block py-1 text-base md:text-lg font-sans font-semibold uppercase tracking-wider text-text-main/60 hover:text-accent transition-colors {% if grandchild_link.active %}text-accent{% endif %}">
+                                  {{ grandchild_link.title }}
+                                </a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        </details>
+                      {% else %}
+                        <a href="{{ child_link.url }}" class="block py-2 text-xl md:text-2xl font-sans font-bold uppercase tracking-widest text-text-main/80 hover:text-accent transition-colors {% if child_link.active %}text-accent{% endif %}">
+                          {{ child_link.title }}
+                        </a>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </details>
+            {% else %}
+              <a href="{{ link.url }}" class="group flex items-center justify-between py-4 text-3xl md:text-5xl font-display font-black uppercase tracking-tighter text-text-main no-underline transition-colors hover:text-accent {% if link.active %}text-accent{% endif %}">
+                <span class="transition-transform duration-300 group-hover:translate-x-4">{{ link.title }}</span>
+                <span class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center opacity-0 -translate-x-8 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                  <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                </span>
+              </a>
+            {% endif %}
           </li>
         {% endfor %}
       </ul>

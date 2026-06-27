@@ -1,0 +1,114 @@
+{% schema %}
+{
+  "name": "Image with Text Modern",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Crafting premium aesthetics for the modern world."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "We believe in high-quality materials, sustainable practices, and timeless design. Experience the difference with our latest collection."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Read More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text Modern",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="w-full bg-black py-20 md:py-32 border-t border-zinc-900 overflow-hidden">
+  <div class="max-w-[1400px] mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24 {% if section.settings.layout == 'right' %}md:flex-row-reverse{% endif %}">
+      
+      <!-- Image Side -->
+      <div class="w-full md:w-1/2 relative group">
+        <div class="aspect-[4/5] md:aspect-[3/4] overflow-hidden bg-zinc-900 w-full relative">
+          {% if section.settings.image != blank %}
+            {{ section.settings.image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700', loading: 'lazy' }}
+          {% else %}
+            {{ 'collection-2' | placeholder_svg_tag: 'w-full h-full object-cover object-center !fill-zinc-700 opacity-50 group-hover:scale-105 transition-transform duration-700' }}
+          {% endif %}
+          
+          <!-- Subtle overlay for aesthetic -->
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+        </div>
+      </div>
+
+      <!-- Text Side -->
+      <div class="w-full md:w-1/2 flex flex-col justify-center text-left">
+        {% if section.settings.caption != blank %}
+          <p class="text-accent font-bold uppercase tracking-[0.2em] mb-4 text-sm">
+            {{ section.settings.caption }}
+          </p>
+        {% endif %}
+        
+        {% if section.settings.heading != blank %}
+          <h2 class="font-display text-6xl md:text-8xl lg:text-[8rem] !font-black !text-white leading-[0.9] tracking-tighter mb-10 drop-shadow-md">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+        
+        {% if section.settings.text != blank %}
+          <p class="text-zinc-400 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-lg">
+            {{ section.settings.text }}
+          </p>
+        {% endif %}
+        
+        {% if section.settings.button_label != blank %}
+          <div class="mt-2">
+            <a href="{{ section.settings.button_link | default: '#' }}" class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white hover:border-accent hover:bg-accent text-white font-bold uppercase tracking-widest transition-all duration-300">
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
