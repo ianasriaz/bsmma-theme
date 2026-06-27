@@ -39,6 +39,7 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+    assign ratio = 1
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
@@ -77,7 +78,7 @@
                   src="{{ card_product.featured_media | image_url: width: 533 }}"
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                   alt="{{ card_product.featured_media.alt | escape }}"
-                  class="motion-reduce transition-transform duration-700 ease-out group-hover:scale-110"
+                  class="motion-reduce transition-transform duration-700 ease-out group-hover:scale-110 !object-cover !w-full !h-full"
                   {% unless lazy_load == false %}
                     loading="lazy"
                   {% endunless %}
@@ -100,7 +101,7 @@
                     src="{{ card_product.media[1] | image_url: width: 533 }}"
                     sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                     alt="{{ card_product.media[1].alt | escape }}"
-                    class="motion-reduce"
+                    class="motion-reduce !object-cover !w-full !h-full"
                     loading="lazy"
                     width="{{ card_product.media[1].width }}"
                     height="{{ card_product.media[1].height }}"
@@ -131,14 +132,14 @@
               {%- if card_product.available == false -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                  class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }} !font-display !font-black !uppercase !tracking-widest !rounded-none !text-xs !px-3 !py-1"
+                  class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }} !bg-accent !text-surface !font-display !font-black !uppercase !tracking-widest !rounded-none !text-sm !px-4 !py-2"
                 >
                   {{- 'products.product.sold_out' | t -}}
                 </span>
               {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }} !font-display !font-black !uppercase !tracking-widest !rounded-none !text-xs !px-3 !py-1"
+                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }} !bg-accent !text-surface !font-display !font-black !uppercase !tracking-widest !rounded-none !text-sm !px-4 !py-2"
                 >
                   {{- 'products.product.on_sale' | t -}}
                 </span>
