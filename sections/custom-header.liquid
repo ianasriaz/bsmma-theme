@@ -66,9 +66,9 @@
                 {{ 'icon-search.svg' | inline_asset_content }}
               </span>
             </summary>
-            <div class="search-modal modal__content gradient" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
-              <div class="modal-overlay"></div>
-              <div class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}" tabindex="-1">
+            <div class="search-modal modal__content gradient !absolute !top-full !h-auto !min-h-0 border-t border-border/10 shadow-2xl" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+              <div class="modal-overlay !hidden"></div>
+              <div class="search-modal__content !py-6 md:!py-8{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}" tabindex="-1">
                 {%- if settings.predictive_search_enabled -%}
                   <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
                 {%- else -%}
