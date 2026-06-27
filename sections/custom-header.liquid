@@ -62,9 +62,9 @@
         <details-modal class="header__search relative">
           <details>
             <summary class="relative inline-flex items-center justify-center w-16 h-16 text-text-main hover:opacity-60 transition-opacity cursor-pointer list-none [&::-webkit-details-marker]:hidden" aria-haspopup="dialog" aria-label="{{ 'sections.custom_header.search' | t }}">
-              <svg class="w-10 h-10 transition-opacity duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
+              <span class="w-10 h-10 transition-opacity duration-200 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current">
+                {{ 'icon-search.svg' | inline_asset_content }}
+              </span>
             </summary>
             <div class="search-modal modal__content gradient" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
               <div class="modal-overlay"></div>
@@ -120,9 +120,13 @@
         </a>
 
         <a href="{{ routes.cart_url }}" id="cart-icon-bubble" class="relative inline-flex items-center justify-center w-16 h-16 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.cart' | t }}">
-          <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-          </svg>
+          <span class="w-10 h-10 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current">
+            {% if cart == empty %}
+              {{ 'icon-cart-empty.svg' | inline_asset_content }}
+            {% else %}
+              {{ 'icon-cart.svg' | inline_asset_content }}
+            {% endif %}
+          </span>
           {% if cart_count > 0 %}
             <span class="absolute top-[4px] right-[4px] min-w-[1.6rem] h-[1.6rem] px-1 bg-accent text-surface text-[0.9rem] font-black leading-[1.6rem] text-center rounded-full">{{ cart_count }}</span>
           {% endif %}
