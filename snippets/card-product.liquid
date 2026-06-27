@@ -42,7 +42,7 @@
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
-    <div class="card-wrapper product-card-wrapper underline-links-hover">
+    <div class="card-wrapper product-card-wrapper group">
       <div
         class="
           card card--{{ settings.card_style }}
@@ -52,11 +52,12 @@
           {% if extend_height %} card--extend-height{% endif %}
           {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
           {% if horizontal_class %} card--horizontal{% endif %}
+          !border-none !shadow-none !bg-transparent
         "
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         <div
-          class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
+          class="card__inner !border-none !bg-transparent !shadow-none {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
           style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
         >
           {%- if card_product.featured_media -%}
@@ -76,7 +77,7 @@
                   src="{{ card_product.featured_media | image_url: width: 533 }}"
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                   alt="{{ card_product.featured_media.alt | escape }}"
-                  class="motion-reduce"
+                  class="motion-reduce transition-transform duration-700 ease-out group-hover:scale-110"
                   {% unless lazy_load == false %}
                     loading="lazy"
                   {% endunless %}
@@ -130,14 +131,14 @@
               {%- if card_product.available == false -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                  class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
+                  class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }} !font-display !font-black !uppercase !tracking-widest !rounded-none !text-xs !px-3 !py-1"
                 >
                   {{- 'products.product.sold_out' | t -}}
                 </span>
               {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }} !font-display !font-black !uppercase !tracking-widest !rounded-none !text-xs !px-3 !py-1"
                 >
                   {{- 'products.product.on_sale' | t -}}
                 </span>
@@ -145,10 +146,10 @@
             </div>
           </div>
         </div>
-        <div class="card__content">
+        <div class="card__content !p-0 !pt-4">
           <div class="card__information">
             <h3
-              class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
+              class="card__heading !font-display !font-black !uppercase !tracking-tighter !text-lg md:!text-xl !leading-tight hover:!text-accent transition-colors"
               {% if card_product.featured_media or settings.card_style == 'card' %}
                 id="title-{{ section_id }}-{{ card_product.id }}"
               {% endif %}
@@ -162,7 +163,7 @@
                 {{ card_product.title | escape }}
               </a>
             </h3>
-            <div class="card-information">
+            <div class="card-information !mt-2">
               {%- if show_vendor -%}
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
                 <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
@@ -206,7 +207,7 @@
                 </p>
               {%- endif -%}
 
-              {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {% render 'price', product: card_product, price_class: '!font-display !font-black !text-lg !text-text-main !mt-1', show_compare_at_price: true %}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid
@@ -360,7 +361,7 @@
                       id="{{ product_form_id }}-submit"
                       type="submit"
                       name="add"
-                      class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                      class="quick-add__submit button button--full-width !bg-text-main !text-surface !font-display !font-black !tracking-widest !uppercase !rounded-none hover:!bg-accent transition-colors !border-none{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
                       aria-haspopup="dialog"
                       aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                       aria-live="polite"
@@ -403,7 +404,7 @@
                     id="{{ product_form_id }}-submit"
                     type="submit"
                     name="add"
-                    class="quick-add__submit button button--full-width button--secondary"
+                    class="quick-add__submit button button--full-width !bg-text-main !text-surface !font-display !font-black !tracking-widest !uppercase !rounded-none hover:!bg-accent transition-colors !border-none"
                     aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                     data-sold-out-message="true"
                     disabled
@@ -434,7 +435,7 @@
                     id="{{ product_form_id }}-submit"
                     type="submit"
                     name="add"
-                    class="quick-add__submit button button--full-width button--secondary"
+                    class="quick-add__submit button button--full-width !bg-text-main !text-surface !font-display !font-black !tracking-widest !uppercase !rounded-none hover:!bg-accent transition-colors !border-none"
                     aria-haspopup="dialog"
                     aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                     data-product-url="{{ card_product.url }}"
