@@ -319,6 +319,8 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    <!-- Tailwind Custom Polish -->
+    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -330,7 +332,7 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {% section 'custom-header' %}
 
     <main
       id="MainContent"

@@ -1,0 +1,201 @@
+{% doc %}
+  Renders the store's topbar (announcement strip) and main header, with a
+  full-height drawer menu triggered by the hamburger icon. Topbar and header
+  stick together to the top of the viewport on scroll.
+
+  @example
+  {% section 'custom-header' %}
+{% enddoc %}
+
+{% liquid
+  assign cart_count = cart.item_count
+%}
+
+<div class="sticky top-0 z-50 flex flex-col w-full shadow-sm">
+
+  <!-- Topbar -->
+  <div class="w-full bg-accent text-surface px-4 py-2.5 flex justify-center items-center">
+    <p class="m-0 text-xs font-bold tracking-widest uppercase text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+      {% if section.settings.announcement_text != blank %}
+        {{ section.settings.announcement_text }}
+      {% else %}
+        {{ 'sections.custom_header.announcement_default' | t }}
+      {% endif %}
+    </p>
+  </div>
+
+  <!-- Main Header -->
+  <header class="w-full bg-surface text-text-main border-b border-border">
+    <div class="max-w-[1400px] mx-auto h-16 px-4 grid grid-cols-[1fr_auto_1fr] items-center">
+
+      <!-- Left: Menu trigger -->
+      <div class="flex items-center justify-self-start">
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center w-10 h-10 text-text-main bg-transparent border-none cursor-pointer hover:opacity-60 transition-opacity js-menu-toggle group"
+          aria-haspopup="dialog"
+          aria-controls="site-menu-drawer"
+          aria-expanded="false"
+        >
+          <span class="flex flex-col justify-center gap-[5px] w-6" aria-hidden="true">
+            <span class="block h-[2px] w-full bg-current transition-all duration-200 group-aria-expanded:translate-y-[7px] group-aria-expanded:rotate-45"></span>
+            <span class="block h-[2px] w-full bg-current transition-all duration-200 group-aria-expanded:opacity-0"></span>
+            <span class="block h-[2px] w-full bg-current transition-all duration-200 group-aria-expanded:-translate-y-[7px] group-aria-expanded:-rotate-45"></span>
+          </span>
+          <span class="sr-only">{{ 'sections.custom_header.menu' | t }}</span>
+        </button>
+      </div>
+
+      <!-- Center: Wordmark -->
+      <div class="flex items-center justify-self-center">
+        <a href="{{ routes.root_url }}" class="font-display text-[1.35rem] font-black tracking-tight uppercase text-text-main no-underline whitespace-nowrap transition-opacity hover:opacity-60">
+          {% if section.settings.logo_text != blank %}
+            {{ section.settings.logo_text }}
+          {% else %}
+            {{ 'sections.custom_header.logo_default' | t }}
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- Right: Actions -->
+      <div class="flex items-center justify-self-end gap-3 md:gap-5">
+        <a href="{{ routes.search_url }}" class="relative inline-flex items-center justify-center w-10 h-10 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.search' | t }}">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </a>
+
+        <a href="{{ routes.account_url }}" class="hidden md:inline-flex relative items-center justify-center w-10 h-10 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.account' | t }}">
+          <span class="w-6 h-6 inline-block [&>svg]:w-full [&>svg]:h-full">{{ 'icon-account.svg' | inline_asset_content }}</span>
+        </a>
+
+        <a href="{{ routes.cart_url }}" class="relative inline-flex items-center justify-center w-10 h-10 text-text-main hover:opacity-60 transition-opacity" aria-label="{{ 'sections.custom_header.cart' | t }}">
+          <span class="w-6 h-6 inline-block [&>svg]:w-full [&>svg]:h-full">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+          {% if cart_count > 0 %}
+            <span class="absolute top-[2px] right-[2px] min-w-[1.1rem] h-[1.1rem] px-1 bg-accent text-surface text-[0.65rem] font-bold leading-[1.1rem] text-center rounded-full">{{ cart_count }}</span>
+          {% endif %}
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+</div>
+
+<!-- Drawer Menu -->
+<div
+  id="site-menu-drawer"
+  class="fixed inset-0 z-[100] hidden js-menu-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ 'sections.custom_header.menu' | t }}"
+>
+  <div class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 ease-out js-menu-overlay [[data-drawer-state=open]_&]:opacity-100"></div>
+
+  <div class="absolute top-0 left-0 h-full w-[min(85vw,380px)] bg-surface text-text-main flex flex-col -translate-x-full transition-transform duration-300 ease-out [[data-drawer-state=open]_&]:translate-x-0">
+    <div class="flex items-center justify-between p-4 md:p-5 border-b border-border">
+      <span class="text-xs font-bold tracking-widest uppercase">{{ 'sections.custom_header.menu' | t }}</span>
+      <button type="button" class="relative inline-flex items-center justify-center w-10 h-10 text-text-main hover:opacity-60 transition-opacity js-menu-close" aria-label="{{ 'sections.custom_header.close' | t }}">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto p-6 md:p-5">
+      <ul class="list-none m-0 p-0 flex flex-col" role="list">
+        {% for link in section.settings.menu.links %}
+          <li class="border-b border-border last:border-b-0">
+            <a href="{{ link.url }}" class="block py-4 text-2xl font-display font-black uppercase tracking-tight text-text-main no-underline transition-colors hover:text-accent">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="flex gap-6 p-5 border-t border-border">
+      <a href="{{ routes.account_url }}" class="text-xs font-bold tracking-wide uppercase text-text-main no-underline hover:text-accent">{{ 'sections.custom_header.account' | t }}</a>
+      <a href="{{ routes.search_url }}" class="text-xs font-bold tracking-wide uppercase text-text-main no-underline hover:text-accent">{{ 'sections.custom_header.search' | t }}</a>
+    </div>
+  </div>
+</div>
+
+{% javascript %}
+  (function () {
+    var toggle = document.querySelector('.js-menu-toggle');
+    var drawer = document.querySelector('.js-menu-drawer');
+    var overlay = drawer ? drawer.querySelector('.js-menu-overlay') : null;
+    var closeBtn = drawer ? drawer.querySelector('.js-menu-close') : null;
+
+    if (!toggle || !drawer) return;
+
+    function openDrawer() {
+      drawer.classList.remove('hidden');
+      requestAnimationFrame(function () {
+        drawer.setAttribute('data-drawer-state', 'open');
+      });
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeDrawer() {
+      drawer.removeAttribute('data-drawer-state');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      window.setTimeout(function () {
+        drawer.classList.add('hidden');
+      }, 300);
+      toggle.focus();
+    }
+
+    toggle.addEventListener('click', function () {
+      var isOpen = drawer.hasAttribute('data-drawer-state');
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    if (overlay) overlay.addEventListener('click', closeDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && drawer.hasAttribute('data-drawer-state')) {
+        closeDrawer();
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.custom_header.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "t:sections.custom_header.settings.announcement_text.label",
+      "default": "Summer collection is now live. Shop new arrivals."
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "t:sections.custom_header.settings.logo_text.label",
+      "default": "Brand Store MM Alam"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.custom_header.settings.menu.label",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_header.name"
+    }
+  ]
+}
+{% endschema %}
