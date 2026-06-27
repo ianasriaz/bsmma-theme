@@ -1,0 +1,1 @@
+C:/Users/youra/.gemini/antigravity-ide/scratch/bsmma-dawn-theme/AGENTS.md
