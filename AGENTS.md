@@ -1474,4 +1474,7 @@ Schema locale files, saved with a .schema.json extension, store translation stri
 }
 {% endschema %}
 ```
+```
 
+## UI Design Guidelines (User Preference)
+- **"Minimal" means "bold and clear, not too big"**: When asked to make UI elements minimal, clean, or bold, prioritize legibility and clarity, but **do not** make text, badges, or icons excessively massive. Use sensible scaling (e.g., `text-sm`, `text-base`, `font-bold`) instead of extreme scaling (`text-5xl`, `font-black`).

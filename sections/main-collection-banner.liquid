@@ -11,14 +11,14 @@
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
+    <div class="collection-hero__text-wrapper flex flex-col items-center text-center py-10 md:py-16">
+      <h1 class="collection-hero__title !text-5xl md:!text-6xl lg:!text-7xl !font-black font-display uppercase tracking-tight text-foreground m-0">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        <div class="collection-hero__description rte !text-lg md:!text-xl opacity-80 mt-6 max-w-3xl">{{ collection.description }}</div>
       {%- endif -%}
     </div>
 

@@ -332,8 +332,10 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% section 'custom-header' %}
-
+    <div class="sticky top-0 z-50 flex flex-col w-full shadow-sm">
+      {% section 'announcement-bar' %}
+      {% section 'custom-header' %}
+    </div>
     <main
       id="MainContent"
       class="content-for-layout focus-none"
