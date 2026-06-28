@@ -334,8 +334,8 @@
     {%- endif -%}
 
     <div class="sticky top-0 z-50 flex flex-col w-full shadow-sm">
-      {% section 'announcement-bar' %}
-      {% section 'custom-header' %}
+      <div style="display:none"> {% section 'announcement-bar' %} </div>
+      <div style="display:none"> {% section 'custom-header' %} </div>
     </div>
     <main
       id="MainContent"

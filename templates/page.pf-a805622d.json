@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pf-a805622d": {
+      "type": "pf-a805622d",
+      "settings": {
+        "pf_34e4d374_value": "SELECT YOUR SIZE",
+        "pf_4284d833_value": "MEDIUM",
+        "pf_33776c36_value": "LARGE",
+        "pf_5c49fe5b_value": "SMALL",
+        "pf_acd962b8_value": "3XL",
+        "pf_d6ce79ac_value": "2XL",
+        "pf_a59400d6_value": "XL"
+      }
+    }
+  },
+  "order": [
+    "pf-a805622d"
+  ]
+}
