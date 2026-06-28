@@ -96,27 +96,7 @@
               height="{{ card_product.featured_media.height }}"
             >
 
-            {% comment %} Secondary Image on Hover — same object-cover treatment {% endcomment %}
-            {%- if card_product.media[1] != null and show_secondary_image -%}
-              <img
-                srcset="
-                  {%- if card_product.media[1].width >= 165 -%}{{ card_product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
-                  {%- if card_product.media[1].width >= 360 -%}{{ card_product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
-                  {%- if card_product.media[1].width >= 533 -%}{{ card_product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
-                  {%- if card_product.media[1].width >= 720 -%}{{ card_product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
-                  {%- if card_product.media[1].width >= 940 -%}{{ card_product.media[1] | image_url: width: 940 }} 940w,{%- endif -%}
-                  {%- if card_product.media[1].width >= 1066 -%}{{ card_product.media[1] | image_url: width: 1066 }} 1066w,{%- endif -%}
-                  {{ card_product.media[1] | image_url }} {{ card_product.media[1].width }}w
-                "
-                src="{{ card_product.media[1] | image_url: width: 533 }}"
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                alt="{{ card_product.media[1].alt | escape }}"
-                class="motion-reduce absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover/card:opacity-100"
-                loading="lazy"
-                width="{{ card_product.media[1].width }}"
-                height="{{ card_product.media[1].height }}"
-              >
-            {%- endif -%}
+            {% comment %} Secondary image hover removed per user request {% endcomment %}
           </a>
 
           {% comment %} 
@@ -135,54 +115,7 @@
             {%- endif -%}
           </div>
 
-          {% comment %} Quick Add Overlay {% endcomment %}
-          {%- if quick_add == 'standard' and card_product.available -%}
-            <div class="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover/card:translate-y-0 transition-transform duration-300 ease-out z-10">
-              {%- liquid
-                assign qty_rules = false
-                if card_product.selected_or_first_available_variant.quantity_rule.min > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
-                  assign qty_rules = true
-                endif
-              -%}
-              
-              {%- if card_product.variants_count > 1 or qty_rules -%}
-                <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
-                  <button
-                    type="button"
-                    class="w-full bg-text-main text-surface font-display font-black tracking-widest uppercase text-sm py-3 px-4 hover:bg-accent transition-colors duration-200"
-                    aria-haspopup="dialog"
-                    aria-label="{{ 'products.product.choose_options' | t: product_name: card_product.title | escape }}"
-                    data-product-url="{{ card_product.url }}"
-                  >
-                    {{ 'products.product.choose_options' | t }}
-                  </button>
-                </modal-opener>
-              {%- else -%}
-                <product-form data-section-id="{{ section.id }}">
-                  {%- form 'product', card_product, id: 'quick-add-' | append: card_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                    <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}" class="product-variant-id">
-                    <button
-                      type="submit"
-                      name="add"
-                      class="w-full bg-text-main text-surface font-display font-black tracking-widest uppercase text-sm py-3 px-4 hover:bg-accent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                      aria-live="polite"
-                      {% unless card_product.selected_or_first_available_variant.available %}disabled{% endunless %}
-                    >
-                      <span class="flex items-center justify-center gap-2">
-                        {%- if card_product.selected_or_first_available_variant.available -%}
-                          {{ 'products.product.add_to_cart' | t }}
-                        {%- else -%}
-                          {{ 'products.product.sold_out' | t }}
-                        {%- endif -%}
-                      </span>
-                      <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
-                      {%- render 'loading-spinner' -%}
-                    </button>
-                  {%- endform -%}
-                </product-form>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
+          {% comment %} Quick Add Overlay removed per user request {% endcomment %}
         {%- else -%}
           {% comment %} No Image Placeholder {% endcomment %}
           <div class="absolute inset-0 flex items-center justify-center bg-surface">
@@ -193,11 +126,7 @@
 
       {% comment %} Content — Title & Price (already perfect per your feedback) {% endcomment %}
       <div class="card-product__content flex flex-col gap-1.5 pt-4">
-        {%- if show_vendor and card_product.vendor != blank -%}
-          <span class="text-xs text-text-muted font-sans tracking-wide uppercase">
-            {{ card_product.vendor }}
-          </span>
-        {%- endif -%}
+
 
         <h3 class="font-sans font-medium uppercase tracking-widest text-lg md:text-2xl leading-tight text-zinc-800 group-hover/card:text-accent transition-colors duration-200">
           <a href="{{ card_product.url }}" class="full-unstyled-link">

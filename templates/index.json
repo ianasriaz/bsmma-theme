@@ -3,11 +3,12 @@
     "custom_hero": {
       "type": "custom-hero",
       "settings": {
-        "heading": "DARK & MOODY AESTHETIC.",
+        "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Shirt_Hero_Banner.jpg?v=1782607184",
+        "heading": "PREMIUM SHIRTS",
         "subheading": "Elevate your style with our latest premium collection.",
-        "button_label": "Shop Collection",
-        "button_link": "shopify://collections/all",
-        "overlay_opacity": 60
+        "button_label": "SHOP NOW",
+        "button_link": "shopify://collections/shirts",
+        "overlay_opacity": 50
       }
     },
     "marquee": {
@@ -21,6 +22,37 @@
     },
     "collections_carousel": {
       "type": "collections-carousel",
+      "blocks": {
+        "shirts": {
+          "type": "collection",
+          "settings": {
+            "title": "SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/SHIRTS.jpg?v=1782605022",
+            "link": "shopify://collections/shirts"
+          }
+        },
+        "t_shirts": {
+          "type": "collection",
+          "settings": {
+            "title": "T-SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/T-SHIRTS.jpg?v=1782604965",
+            "link": "shopify://collections/t-shirts"
+          }
+        },
+        "polo_shirts": {
+          "type": "collection",
+          "settings": {
+            "title": "POLO SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/POLO_SHIRTS.jpg?v=1782604966",
+            "link": "shopify://collections/polo-shirts"
+          }
+        }
+      },
+      "block_order": [
+        "shirts",
+        "t_shirts",
+        "polo_shirts"
+      ],
       "settings": {
         "heading": "Shop Collections"
       }

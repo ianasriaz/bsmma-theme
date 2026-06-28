@@ -37,6 +37,69 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    /* BSMMA Custom Product Page Overrides */
+    .product-form__input--pill input[type="radio"]:checked + label {
+      background-color: #18181b !important;
+      color: #ffffff !important;
+      border-color: #18181b !important;
+    }
+    .product-form__input--pill label {
+      border-radius: 0 !important;
+      margin: 0 !important;
+    }
+    .product-form__input--pill {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    quantity-input.quantity {
+      border: 2px solid #18181b !important;
+      border-radius: 0 !important;
+      min-height: 3rem !important;
+    }
+    quantity-input.quantity::after, quantity-input.quantity::before {
+      display: none !important;
+    }
+
+
+
+
+    /* Layout override: perfectly center both columns together */
+    @media screen and (min-width: 990px) {
+      .product.product:not(.product--no-media) {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        gap: 6rem !important;
+      }
+      .product__media-wrapper {
+        flex: 0 0 450px !important;
+        width: 450px !important;
+        max-width: 100% !important;
+      }
+      .product__info-wrapper {
+        flex: 0 0 500px !important;
+        width: 500px !important;
+        max-width: 100% !important;
+      }
+    }
+    
+    /* Force 1:1 image ratio without squishing */
+    .product-media-container {
+      aspect-ratio: 1 / 1 !important;
+      padding-top: 0 !important; /* override dawn's height hack */
+      height: auto !important;
+    }
+    .product__media img {
+      object-fit: cover !important;
+      height: 100% !important;
+      width: 100% !important;
+      position: absolute !important;
+      top: 0;
+      left: 0;
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -92,19 +155,16 @@
                   {% render block %}
                 {%- when 'text' -%}
                   <p
-                    class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+                    class="font-sans uppercase tracking-widest font-bold text-zinc-500 text-sm mb-2"
                     {{ block.shopify_attributes }}
                   >
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
-                  <div class="product__title" {{ block.shopify_attributes }}>
-                    <h1>{{ product.title | escape }}</h1>
-                    <a href="{{ product.url }}" class="product__title">
-                      <h2 class="h1">
-                        {{ product.title | escape }}
-                      </h2>
-                    </a>
+                  <div class="product__title mb-4" {{ block.shopify_attributes }}>
+                    <h1 class="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter leading-none text-zinc-900">
+                      {{ product.title | escape }}
+                    </h1>
                   </div>
                 {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>

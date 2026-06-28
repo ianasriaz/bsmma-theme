@@ -7,12 +7,39 @@
       "id": "heading",
       "label": "Heading",
       "default": "Shop Collections"
-    },
+    }
+  ],
+  "blocks": [
     {
-      "type": "collection_list",
-      "id": "collection_list",
-      "label": "Collections",
-      "limit": 12
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title Overide"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image Override"
+        },
+        {
+          "type": "url",
+          "id": "custom_image_url",
+          "label": "Custom External Image URL (Overrides above)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom Link Override"
+        }
+      ]
     }
   ],
   "presets": [
@@ -35,41 +62,55 @@
     <!-- Carousel Container -->
     <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
       
-      {% if section.settings.collection_list != blank %}
-        {% for collection in section.settings.collection_list %}
-          <a href="{{ collection.url }}" class="group relative flex-none w-[280px] md:w-[350px] aspect-[4/5] snap-start overflow-hidden bg-zinc-900 border border-zinc-800 transition-transform duration-500 hover:-translate-y-2">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {%- assign collection = block.settings.collection -%}
+          {%- assign custom_image = block.settings.custom_image -%}
+          {%- assign custom_image_url = block.settings.custom_image_url -%}
+          {%- assign title = block.settings.title | default: collection.title | default: 'Collection' -%}
+          {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
+          
+          <a href="{{ link }}" class="group relative flex-none w-[280px] md:w-[350px] snap-start flex flex-col" {{ block.shopify_attributes }}>
             <!-- Collection Image -->
-            {% if collection.image != blank %}
-              {{ collection.image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-110', loading: 'lazy' }}
-            {% else %}
-              {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover object-center opacity-50 !fill-zinc-700 group-hover:scale-110 transition-transform duration-500' }}
-            {% endif %}
+            <div class="w-full aspect-[4/5] overflow-hidden bg-zinc-900 border border-zinc-800 transition-transform duration-500 group-hover:-translate-y-2">
+              {% if custom_image_url != blank %}
+                <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" loading="lazy">
+              {% elsif custom_image != blank %}
+                {{ custom_image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110', loading: 'lazy' }}
+              {% elsif collection != blank and collection.image != blank %}
+                {{ collection.image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110', loading: 'lazy' }}
+              {% else %}
+                {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover object-center opacity-50 !fill-zinc-700 transition-transform duration-500 group-hover:scale-110' }}
+              {% endif %}
+            </div>
 
-            <!-- Overlay Gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-            <!-- Collection Title -->
-            <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-              <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider group-hover:text-accent transition-colors duration-300">
-                {{ collection.title }}
+            <!-- Collection Title (Below Image) -->
+            <div class="mt-5 flex items-center justify-between pr-4">
+              <h3 class="font-display text-2xl md:text-3xl font-black !text-white uppercase tracking-widest transition-colors duration-300">
+                {{ title }}
               </h3>
-              <span class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white group-hover:bg-accent group-hover:text-white transition-colors duration-300 backdrop-blur-sm">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span class="!text-white transition-colors duration-300">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </div>
           </a>
         {% endfor %}
       {% else %}
-        <!-- Placeholder Fallback if no collections selected -->
+        <!-- Placeholder Fallback if no blocks -->
         {% for i in (1..5) %}
-          <a href="#" class="group relative flex-none w-[280px] md:w-[350px] aspect-[4/5] snap-start overflow-hidden bg-zinc-900 border border-zinc-800">
-            {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
-            {{ 'collection-' | append: current | placeholder_svg_tag: 'w-full h-full object-cover object-center opacity-50 !fill-zinc-700' }}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-            <div class="absolute bottom-8 left-8">
-              <h3 class="font-display text-3xl font-black !text-white uppercase tracking-widest group-hover:text-accent transition-colors">
+          <a href="#" class="group relative flex-none w-[280px] md:w-[350px] snap-start flex flex-col">
+            <div class="w-full aspect-[4/5] overflow-hidden bg-zinc-900 border border-zinc-800 transition-transform duration-500 group-hover:-translate-y-2">
+              {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+              {{ 'collection-' | append: current | placeholder_svg_tag: 'w-full h-full object-cover object-center opacity-50 !fill-zinc-700 transition-transform duration-500 group-hover:scale-110' }}
+            </div>
+            
+            <div class="mt-5 flex items-center justify-between pr-4">
+              <h3 class="font-display text-2xl md:text-3xl font-black !text-white uppercase tracking-widest transition-colors duration-300">
                 Collection {{ i }}
               </h3>
+              <span class="!text-white transition-colors duration-300">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </div>
           </a>
         {% endfor %}
