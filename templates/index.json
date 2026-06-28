@@ -59,7 +59,7 @@
           "type": "collection",
           "settings": {
             "title": "CAPS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAPS.jpg?v=1782651229",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAPS.jpg?v=1782678684",
             "link": "shopify://collections/caps"
           }
         },
@@ -67,8 +67,16 @@
           "type": "collection",
           "settings": {
             "title": "LUGGAGE BAGS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Luggage_Bags.jpg?v=1782653120",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Luggage_Bags.jpg?v=1782678684",
             "link": "shopify://collections/luggage-bags"
+          }
+        },
+        "belts": {
+          "type": "collection",
+          "settings": {
+            "title": "BELTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/BELTS.jpg?v=1782679154",
+            "link": "shopify://collections/belts"
           }
         }
       },
@@ -78,7 +86,8 @@
         "polo_shirts",
         "tracksuits",
         "caps",
-        "luggage_bags"
+        "luggage_bags",
+        "belts"
       ],
       "settings": {
         "heading": "Shop Collections"
