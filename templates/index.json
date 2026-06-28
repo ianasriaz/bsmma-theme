@@ -46,12 +46,39 @@
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/POLO_SHIRTS.jpg?v=1782604966",
             "link": "shopify://collections/polo-shirts"
           }
+        },
+        "tracksuits": {
+          "type": "collection",
+          "settings": {
+            "title": "SUMMER TRACKSUITS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Summer_Tracksuits.jpg?v=1782652861",
+            "link": "shopify://collections/tracksuits"
+          }
+        },
+        "caps": {
+          "type": "collection",
+          "settings": {
+            "title": "CAPS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAPS.jpg?v=1782651229",
+            "link": "shopify://collections/caps"
+          }
+        },
+        "luggage_bags": {
+          "type": "collection",
+          "settings": {
+            "title": "LUGGAGE BAGS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Luggage_Bags.jpg?v=1782653120",
+            "link": "shopify://collections/luggage-bags"
+          }
         }
       },
       "block_order": [
         "shirts",
         "t_shirts",
-        "polo_shirts"
+        "polo_shirts",
+        "tracksuits",
+        "caps",
+        "luggage_bags"
       ],
       "settings": {
         "heading": "Shop Collections"
