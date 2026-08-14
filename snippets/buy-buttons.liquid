@@ -74,7 +74,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit w-full py-5 md:py-6 bg-white border-2 border-zinc-900 text-zinc-900 font-display font-black text-xl md:text-2xl uppercase tracking-widest hover:bg-zinc-900 hover:text-white transition-colors duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            class="product-form__submit w-full py-5 md:py-6 bg-white border-2 border-white text-zinc-950 font-display font-black text-xl md:text-2xl uppercase tracking-widest hover:bg-accent hover:border-accent hover:text-white transition-colors duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
@@ -96,7 +96,7 @@
           {%- if show_dynamic_checkout -%}
             <button
               type="button"
-              class="product-form__submit w-full mt-4 py-5 md:py-6 bg-zinc-900 text-white font-display font-black text-xl md:text-2xl uppercase tracking-widest hover:bg-accent transition-colors duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              class="product-form__submit w-full mt-4 py-5 md:py-6 bg-surface-subdued border-2 border-border text-text-main font-display font-black text-xl md:text-2xl uppercase tracking-widest hover:bg-accent hover:border-accent hover:text-white transition-colors duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               onclick="
                 const form = this.closest('form');
                 const formData = new FormData(form);

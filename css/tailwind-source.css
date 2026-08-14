@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Semantic Color System */
+  /* Semantic Dark Color System */
   --color-accent: #ea0101;
-  --color-text-main: #1a1a1a;
-  --color-border: #000000;
-  --color-surface: #ffffff;
-  --color-background: #f8f8f8;
+  --color-accent-hover: #ff1a1a;
+  --color-text-main: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+  --color-border: #27272a;
+  --color-surface: #121215;
+  --color-surface-subdued: #18181b;
+  --color-surface-hover: #1f1f23;
+  --color-background: #09090b;
 
   /* Typography System */
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
@@ -18,5 +22,10 @@
     background-color: var(--color-background);
     color: var(--color-text-main);
     font-family: var(--font-sans);
+  }
+
+  /* Smooth dark transitions */
+  * {
+    border-color: var(--color-border);
   }
 }
