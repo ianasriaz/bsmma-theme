@@ -56,7 +56,7 @@
     class="group/card block h-full mb-10 md:mb-14"
   >
     <article 
-      class="card-product relative flex flex-col h-full bg-[#111114] border border-[#222226] hover:border-zinc-600/80 shadow-md hover:shadow-2xl transition-all duration-500 rounded-[6px] overflow-hidden"
+      class="card-product relative flex flex-col h-full bg-[#111114] border border-zinc-800/80 hover:border-zinc-500/80 shadow-[0_12px_36px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.98)] transition-all duration-300 rounded-[6px] overflow-hidden"
       data-product-id="{{ card_product.id }}"
     >
       {% comment %} 
@@ -103,13 +103,13 @@
             PROMINENT BADGES — Much larger, bolder, more visible
             Increased padding, font size, and visual weight
           {% endcomment %}
-          <div class="absolute top-3 left-3 z-10 flex items-center gap-2 pointer-events-none">
+          <div class="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1.5 pointer-events-none">
             {%- if is_sold_out -%}
-              <span class="badge-sold-out inline-flex items-center gap-1.5 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-zinc-400 font-sans font-bold uppercase tracking-[0.18em] text-[10px] rounded-full shadow-lg">
+              <span class="badge-sold-out inline-flex items-center bg-zinc-950/90 backdrop-blur-md border border-zinc-700/80 text-zinc-200 font-sans font-black uppercase tracking-widest text-xs md:text-sm px-3.5 py-1.5 rounded-[4px] shadow-lg">
                 {{- 'products.product.sold_out' | t -}}
               </span>
             {%- elsif is_on_sale -%}
-              <span class="badge-sale inline-flex items-center gap-1.5 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-white font-sans font-bold uppercase tracking-[0.18em] text-[10px] rounded-full shadow-lg"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+              <span class="badge-sale inline-flex items-center bg-gradient-to-r from-[#ea0101] to-[#c70000] backdrop-blur-md border border-white/30 text-white font-sans font-black uppercase tracking-widest text-xs md:text-sm px-3.5 py-1.5 rounded-[4px] shadow-lg shadow-red-950/50">
                 SALE
               </span>
             {%- endif -%}
@@ -148,11 +148,11 @@
                   endfor
                 -%}
                 {%- if is_available -%}
-                  <span class="text-[9px] md:text-[10px] font-sans font-bold uppercase px-1.5 py-1 bg-zinc-900/90 text-zinc-200 border border-zinc-700/60 rounded-[3px] leading-none tracking-wider shadow-sm">
+                  <span class="text-[10px] md:text-[11px] font-sans font-bold uppercase px-2 py-1 bg-zinc-800 text-white border border-zinc-600 rounded-[3px] leading-none tracking-wider shadow-sm">
                     {{ value }}
                   </span>
                 {%- else -%}
-                  <span class="text-[9px] md:text-[10px] font-sans font-bold uppercase px-1.5 py-1 text-zinc-600 line-through decoration-zinc-700 opacity-30 bg-transparent leading-none tracking-wider">
+                  <span class="text-[10px] md:text-[11px] font-sans font-semibold uppercase px-2 py-1 bg-zinc-900/90 text-zinc-400 border border-zinc-700/80 line-through decoration-red-500/90 decoration-[1.5px] rounded-[3px] leading-none tracking-wider">
                     {{ value }}
                   </span>
                 {%- endif -%}
