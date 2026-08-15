@@ -140,20 +140,20 @@
         </h3>
 
         <!-- Price Row: Regular Price + Sale Price + Save Amount -->
-        <div class="flex items-baseline flex-wrap gap-x-2 gap-y-1 text-sm md:text-base mt-0.5">
+        <div class="flex items-baseline flex-wrap gap-x-3 gap-y-1 text-base md:text-xl font-sans mt-1">
           {%- if is_on_sale -%}
-            <s class="text-zinc-400 line-through text-xs md:text-sm font-normal">
+            <s class="text-zinc-400 line-through text-base md:text-xl font-medium">
               {{ card_product.compare_at_price | money }}
             </s>
-            <span class="text-white font-bold text-sm md:text-base">
+            <span class="text-white font-bold text-base md:text-xl">
               {{ card_product.price | money }}
             </span>
             {%- assign save_amount = card_product.compare_at_price | minus: card_product.price -%}
-            <span class="text-[#ea0101] font-semibold text-xs md:text-sm whitespace-nowrap">
+            <span class="text-[#ea0101] font-bold text-base md:text-xl whitespace-nowrap">
               Save {{ save_amount | money }}
             </span>
           {%- else -%}
-            <span class="text-white font-bold text-sm md:text-base">
+            <span class="text-white font-bold text-base md:text-xl">
               {{ card_product.price | money }}
             </span>
           {%- endif -%}
