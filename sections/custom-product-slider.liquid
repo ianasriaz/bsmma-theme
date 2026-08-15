@@ -48,7 +48,7 @@
     </div>
 
     <!-- Product Grid Container -->
-    <div class="!grid !grid-cols-2 lg:!grid-cols-4 gap-4 md:gap-6 pb-8">
+    <div class="!grid !grid-cols-2 lg:!grid-cols-4 gap-x-4 md:gap-x-6 gap-y-12 md:gap-y-20 pb-8">
       
       {% if target_collection != blank and target_collection.products_count > 0 %}
         {% for product in target_collection.products limit: section.settings.products_to_show %}
