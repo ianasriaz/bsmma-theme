@@ -1255,3 +1255,36 @@ input.mobile-facets__checkbox {
     padding: 0 1rem 1rem;
   }
 }
+
+@media screen and (max-width: 989px) {
+  .facets-container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 1rem !important;
+  }
+  .mobile-facets__wrapper {
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .mobile-facets__disclosure {
+    width: auto !important;
+  }
+  .mobile-facets__open-wrapper {
+    width: auto !important;
+  }
+  .product-count {
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+    align-self: center !important;
+    padding: 0 !important;
+  }
+  .product-count__text {
+    margin: 0 !important;
+  }
+}
