@@ -39,23 +39,23 @@
 }
 {% endschema %}
 
-<div class="w-full bg-[#111114] border-y border-zinc-800/80 overflow-hidden py-3 text-white">
+<div class="w-full bg-[#111114] border-y border-zinc-800 overflow-hidden py-4 md:py-5 text-white">
   <div class="marquee-track flex whitespace-nowrap" style="animation: marquee {{ section.settings.speed }}s linear infinite;">
-    <div class="flex items-center gap-6 px-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-200">
+    <div class="flex items-center gap-8 px-6 text-sm md:text-base font-black uppercase tracking-[0.2em] text-zinc-100">
       <span>{{ section.settings.text }}</span>
-      <span class="text-accent text-xs">◆</span>
+      <span class="text-accent text-sm">◆</span>
       <span>{{ section.settings.text }}</span>
-      <span class="text-accent text-xs">◆</span>
+      <span class="text-accent text-sm">◆</span>
       <span>{{ section.settings.text }}</span>
-      <span class="text-accent text-xs">◆</span>
+      <span class="text-accent text-sm">◆</span>
     </div>
-    <div class="flex items-center gap-6 px-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-200" aria-hidden="true">
+    <div class="flex items-center gap-8 px-6 text-sm md:text-base font-black uppercase tracking-[0.2em] text-zinc-100" aria-hidden="true">
       <span>{{ section.settings.text }}</span>
-      <span class="text-accent text-xs">◆</span>
+      <span class="text-accent text-sm">◆</span>
       <span>{{ section.settings.text }}</span>
-      <span class="text-accent text-xs">◆</span>
+      <span class="text-accent text-sm">◆</span>
       <span>{{ section.settings.text }}</span>
-      <span class="text-accent text-xs">◆</span>
+      <span class="text-accent text-sm">◆</span>
     </div>
   </div>
 </div>
