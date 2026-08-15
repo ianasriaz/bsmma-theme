@@ -103,14 +103,19 @@
             PROMINENT BADGES — Much larger, bolder, more visible
             Increased padding, font size, and visual weight
           {% endcomment %}
-          <div class="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1.5 pointer-events-none">
+          <div class="absolute top-0 right-0 z-10 pointer-events-none">
             {%- if is_sold_out -%}
-              <span class="badge-sold-out inline-flex items-center bg-zinc-950/90 backdrop-blur-md border border-zinc-700/80 text-zinc-200 font-sans font-black uppercase tracking-widest text-xs md:text-sm px-3.5 py-1.5 rounded-[4px] shadow-lg">
+              <span class="badge-sold-out inline-block bg-zinc-950/90 text-zinc-300 font-sans font-bold uppercase tracking-wider text-xs px-3 py-1.5 shadow-sm">
                 {{- 'products.product.sold_out' | t -}}
               </span>
             {%- elsif is_on_sale -%}
-              <span class="badge-sale inline-flex items-center bg-gradient-to-r from-[#ea0101] to-[#c70000] backdrop-blur-md border border-white/30 text-white font-sans font-black uppercase tracking-widest text-xs md:text-sm px-3.5 py-1.5 rounded-[4px] shadow-lg shadow-red-950/50">
-                SALE
+              {%- assign discount_percent = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
+              <span class="badge-sale inline-block bg-[#ea0101] text-white font-sans font-bold uppercase tracking-wider text-xs px-3 py-1.5 shadow-sm">
+                {%- if discount_percent > 0 -%}
+                  {{ discount_percent }}% OFF
+                {%- else -%}
+                  SALE
+                {%- endif -%}
               </span>
             {%- endif -%}
           </div>
@@ -125,15 +130,36 @@
       </div>
 
       {% comment %} Content — Title & Price (already perfect per your feedback) {% endcomment %}
-      <div class="card-product__content flex flex-col justify-between gap-2.5 p-4 md:p-5 flex-grow bg-[#111114]">
+      <div class="card-product__content flex flex-col gap-2.5 p-4 md:p-5 flex-grow bg-[#111114]">
 
-
-        <h3 class="font-sans font-medium uppercase tracking-[0.05em] text-sm md:text-base leading-snug text-zinc-100 group-hover/card:text-white transition-colors duration-200 line-clamp-1">
+        <!-- Product Title -->
+        <h3 class="font-sans font-medium text-sm md:text-base leading-snug text-zinc-100 group-hover/card:text-white transition-colors duration-200 line-clamp-2 m-0">
           <a href="{{ card_product.url }}" class="full-unstyled-link">
             {{ card_product.title | escape }}
           </a>
         </h3>
 
+        <!-- Price Row: Regular Price + Sale Price + Save Amount -->
+        <div class="flex items-baseline flex-wrap gap-x-2 gap-y-1 text-sm md:text-base mt-0.5">
+          {%- if is_on_sale -%}
+            <s class="text-zinc-400 line-through text-xs md:text-sm font-normal">
+              {{ card_product.compare_at_price | money }}
+            </s>
+            <span class="text-white font-bold text-sm md:text-base">
+              {{ card_product.price | money }}
+            </span>
+            {%- assign save_amount = card_product.compare_at_price | minus: card_product.price -%}
+            <span class="text-[#ea0101] font-semibold text-xs md:text-sm whitespace-nowrap">
+              Save {{ save_amount | money }}
+            </span>
+          {%- else -%}
+            <span class="text-white font-bold text-sm md:text-base">
+              {{ card_product.price | money }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        <!-- Size Badges at the bottom -->
         {%- if card_product.has_only_default_variant == false -%}
           <div class="flex flex-wrap gap-1.5 items-center mt-1">
             {%- for option in card_product.options_with_values -%}
@@ -148,11 +174,11 @@
                   endfor
                 -%}
                 {%- if is_available -%}
-                  <span class="text-[10px] md:text-[11px] font-sans font-bold uppercase px-2 py-1 bg-zinc-800 text-white border border-zinc-600 rounded-[3px] leading-none tracking-wider shadow-sm">
+                  <span class="min-w-[28px] h-6 inline-flex items-center justify-center text-xs font-bold uppercase px-2 bg-zinc-800 text-white border border-zinc-700 rounded-sm leading-none tracking-wider shadow-sm">
                     {{ value }}
                   </span>
                 {%- else -%}
-                  <span class="text-[10px] md:text-[11px] font-sans font-medium uppercase px-2 py-1 bg-zinc-900/40 text-zinc-500 border border-zinc-800 rounded-[3px] leading-none tracking-wider opacity-60">
+                  <span class="min-w-[28px] h-6 inline-flex items-center justify-center text-xs font-medium uppercase px-2 bg-zinc-900/40 text-zinc-500 border border-zinc-800 rounded-sm leading-none tracking-wider opacity-60">
                     {{ value }}
                   </span>
                 {%- endif -%}
@@ -160,32 +186,6 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
-        {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
-          {% liquid
-            assign rating_decimal = 0
-            assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
-            if decimal >= 0.3 and decimal <= 0.7
-              assign rating_decimal = 0.5
-            elsif decimal > 0.7
-              assign rating_decimal = 1
-            endif
-          %}
-          <div class="flex items-center gap-1.5" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}">
-            <span
-              aria-hidden="true"
-              class="rating-star"
-              style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-            ></span>
-            <span class="text-xs text-text-muted" aria-hidden="true">
-              ({{ card_product.metafields.reviews.rating_count }})
-            </span>
-          </div>
-        {%- endif -%}
-
-        <div class="mt-1">
-          {% render 'price', product: card_product, price_class: 'font-sans font-bold text-base md:text-lg text-white', show_compare_at_price: true %}
-        </div>
 
         {%- if card_product.quantity_price_breaks_configured? -%}
           <div class="mt-1">
