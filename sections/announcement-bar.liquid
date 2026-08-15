@@ -1,7 +1,55 @@
-<div class="w-full bg-[#27272a] text-white py-3 md:py-3.5 border-b border-zinc-700/60 shadow-sm relative z-10 flex justify-center text-center">
-  <div class="cursor-pointer hover:text-accent transition-colors flex items-center justify-center gap-2.5 px-4 text-xs sm:text-sm md:text-base font-sans font-black uppercase tracking-[0.2em]" onclick="window.location.href='{{ routes.all_products_collection_url }}'">
-    <span>Summer Collection Is Now Live!</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-5 md:h-5 fill-current" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+<style>
+@keyframes topbarTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.topbar-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: topbarTicker 24s linear infinite;
+}
+
+.topbar-ticker-track:hover {
+  animation-play-state: paused;
+}
+</style>
+
+<div 
+  class="w-full bg-[#27272a] text-white py-2.5 sm:py-3 border-b border-zinc-700/80 shadow-sm relative z-30 overflow-hidden cursor-pointer"
+  onclick="window.location.href='{{ routes.all_products_collection_url }}'"
+  title="Click to explore the latest collection"
+>
+  <div class="topbar-ticker-track whitespace-nowrap flex items-center">
+    
+    <!-- Item Set 1 -->
+    <div class="flex items-center gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-sans font-black uppercase tracking-[0.18em] text-white">
+      <span class="inline-flex items-center gap-2">🔥 2026 SUMMER COLLECTION IS NOW LIVE</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">⚡ DAILY NEW ARTICLES ADDED</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">👑 1:1 MASTER LUXURY APPAREL</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">🚚 FREE EXPRESS DELIVERY OVER RS. 5,000</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">✨ PREMIUM TURKEY EDITION</span>
+      <span class="text-accent text-xs">◆</span>
+    </div>
+
+    <!-- Item Set 2 (Seamless loop clone) -->
+    <div class="flex items-center gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-sans font-black uppercase tracking-[0.18em] text-white" aria-hidden="true">
+      <span class="inline-flex items-center gap-2">🔥 2026 SUMMER COLLECTION IS NOW LIVE</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">⚡ DAILY NEW ARTICLES ADDED</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">👑 1:1 MASTER LUXURY APPAREL</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">🚚 FREE EXPRESS DELIVERY OVER RS. 5,000</span>
+      <span class="text-accent text-xs">◆</span>
+      <span class="inline-flex items-center gap-2">✨ PREMIUM TURKEY EDITION</span>
+      <span class="text-accent text-xs">◆</span>
+    </div>
+
   </div>
 </div>
 
