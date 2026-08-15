@@ -63,6 +63,49 @@
 }
 {% endschema %}
 
+<style>
+.luxury-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+/* Mobile: Card 1 is full width */
+.luxury-collection-grid > a:first-child {
+  grid-column: span 2 / span 2;
+  min-height: 260px;
+}
+
+.luxury-collection-grid > a {
+  grid-column: span 1 / span 1;
+  min-height: 220px;
+}
+
+/* Desktop: 6-column grid with 2 - 3 - 2 rhythm */
+@media (min-width: 768px) {
+  .luxury-collection-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  /* 2-card rows (Cards 1, 2, 6, 7, 11, 12...): span 3 (50% each) */
+  .luxury-collection-grid > a:nth-child(5n + 1),
+  .luxury-collection-grid > a:nth-child(5n + 2) {
+    grid-column: span 3 / span 3;
+    min-height: 380px;
+  }
+
+  /* 3-card rows (Cards 3, 4, 5, 8, 9, 10...): span 2 (33.3% each) */
+  .luxury-collection-grid > a:nth-child(5n + 3),
+  .luxury-collection-grid > a:nth-child(5n + 4),
+  .luxury-collection-grid > a:nth-child(5n + 5) {
+    grid-column: span 2 / span 2;
+    min-height: 340px;
+  }
+}
+</style>
+
 <section class="w-full bg-black py-16 md:py-24 border-b border-zinc-800">
   <div class="max-w-[1400px] mx-auto px-4 md:px-8">
     
@@ -83,11 +126,8 @@
       </span>
     </div>
 
-    <!-- Dynamic Rhythm Grid (No Horizontal Scroll) -->
-    {%- assign total_blocks = section.blocks.size -%}
-    {%- assign total_even = total_blocks | modulo: 2 -%}
-
-    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 md:gap-6">
+    <!-- Editorial Collection Grid -->
+    <div class="luxury-collection-grid">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {%- assign collection = block.settings.collection -%}
@@ -97,40 +137,9 @@
           {%- assign tagline = block.settings.tagline | default: 'EXPLORE COLLECTION' -%}
           {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
 
-          {% comment %}
-            Dynamic Desktop Span (2-3-2-3 rhythm using modulo 5):
-            - Items 1 & 2: md:col-span-3 (2 in a row)
-            - Items 3, 4, 5: md:col-span-2 (3 in a row)
-          {% endcomment %}
-          {%- assign mod5 = forloop.index | modulo: 5 -%}
-          {%- if mod5 == 1 or mod5 == 2 -%}
-            {%- assign desktop_span = 'md:col-span-3' -%}
-            {%- assign desktop_aspect = 'md:aspect-[16/10]' -%}
-          {%- else -%}
-            {%- assign desktop_span = 'md:col-span-2' -%}
-            {%- assign desktop_aspect = 'md:aspect-[4/5]' -%}
-          {%- endif -%}
-
-          {% comment %}
-            Dynamic Mobile Span (1-2-2... rhythm):
-            - Item 1 is full-width (col-span-2)
-            - Intermediate items are col-span-1
-            - If total items is even, the last item becomes full-width (col-span-2)
-          {% endcomment %}
-          {%- assign mobile_span = 'col-span-1' -%}
-          {%- assign mobile_aspect = 'aspect-[4/5]' -%}
-
-          {%- if forloop.first -%}
-            {%- assign mobile_span = 'col-span-2' -%}
-            {%- assign mobile_aspect = 'aspect-[16/10] sm:aspect-[16/9]' -%}
-          {%- elsif forloop.last and total_even == 0 -%}
-            {%- assign mobile_span = 'col-span-2' -%}
-            {%- assign mobile_aspect = 'aspect-[16/10] sm:aspect-[16/9]' -%}
-          {%- endif -%}
-
           <a 
             href="{{ link }}" 
-            class="group relative flex flex-col justify-end {{ mobile_span }} {{ desktop_span }} rounded-lg overflow-hidden bg-[#111114] border border-zinc-800 hover:border-zinc-500 transition-all duration-500 shadow-2xl min-h-[220px] sm:min-h-[260px] md:min-h-[320px]"
+            class="group relative flex flex-col justify-end rounded-lg overflow-hidden bg-[#111114] border border-zinc-800 hover:border-zinc-500 transition-all duration-500 shadow-2xl"
             {{ block.shopify_attributes }}
           >
             <!-- Background Image Frame -->
@@ -138,15 +147,15 @@
               {% if custom_image_url != blank %}
                 <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
               {% elsif custom_image != blank %}
-                {{ custom_image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
+                {{ custom_image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
               {% elsif collection != blank and collection.image != blank %}
-                {{ collection.image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
+                {{ collection.image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
               {% else %}
                 {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-40 !fill-zinc-800' }}
               {% endif %}
 
               <!-- Cinematic Dark Vignette & Gradient -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
             </div>
 
             <!-- Content Overlay at Bottom -->
