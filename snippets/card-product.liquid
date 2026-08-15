@@ -56,7 +56,7 @@
     class="group/card block h-full mb-10 md:mb-14"
   >
     <article 
-      class="card-product relative flex flex-col h-full bg-surface border border-border shadow-md hover:shadow-xl hover:border-zinc-700 transition-all duration-300 overflow-hidden rounded-md"
+      class="card-product relative flex flex-col h-full bg-[#111114] border border-[#222226] hover:border-zinc-600/80 shadow-md hover:shadow-2xl transition-all duration-500 rounded-[6px] overflow-hidden"
       data-product-id="{{ card_product.id }}"
     >
       {% comment %} 
@@ -88,7 +88,7 @@
               src="{{ card_product.featured_media | image_url: width: 533 }}"
               sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
               alt="{{ card_product.featured_media.alt | escape }}"
-              class="motion-reduce w-full h-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
+              class="motion-reduce w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.04]"
               {% unless lazy_load == false %}
                 loading="lazy"
               {% endunless %}
@@ -103,13 +103,13 @@
             PROMINENT BADGES — Much larger, bolder, more visible
             Increased padding, font size, and visual weight
           {% endcomment %}
-          <div class="absolute top-0 left-0 z-10 flex flex-col gap-2 pointer-events-none">
+          <div class="absolute top-3 left-3 z-10 flex items-center gap-2 pointer-events-none">
             {%- if is_sold_out -%}
-              <span class="badge-sold-out inline-flex items-center bg-zinc-900 border border-zinc-700 text-zinc-200 font-sans font-bold uppercase tracking-widest text-sm md:text-base px-4 py-2">
+              <span class="badge-sold-out inline-flex items-center gap-1.5 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-zinc-400 font-sans font-bold uppercase tracking-[0.18em] text-[10px] rounded-full shadow-lg">
                 {{- 'products.product.sold_out' | t -}}
               </span>
             {%- elsif is_on_sale -%}
-              <span class="badge-sale inline-flex items-center bg-accent text-white font-sans font-bold uppercase tracking-widest text-sm md:text-base px-4 py-2">
+              <span class="badge-sale inline-flex items-center gap-1.5 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-white font-sans font-bold uppercase tracking-[0.18em] text-[10px] rounded-full shadow-lg"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
                 SALE
               </span>
             {%- endif -%}
@@ -125,10 +125,10 @@
       </div>
 
       {% comment %} Content — Title & Price (already perfect per your feedback) {% endcomment %}
-      <div class="card-product__content flex flex-col gap-1.5 p-4 md:p-5 flex-grow">
+      <div class="card-product__content flex flex-col justify-between gap-2.5 p-4 md:p-5 flex-grow bg-[#111114]">
 
 
-        <h3 class="font-sans font-medium uppercase tracking-widest text-lg md:text-2xl leading-tight text-text-main group-hover/card:text-accent transition-colors duration-200">
+        <h3 class="font-sans font-medium uppercase tracking-[0.05em] text-sm md:text-base leading-snug text-zinc-100 group-hover/card:text-white transition-colors duration-200 line-clamp-1">
           <a href="{{ card_product.url }}" class="full-unstyled-link">
             {{ card_product.title | escape }}
           </a>
@@ -148,11 +148,11 @@
                   endfor
                 -%}
                 {%- if is_available -%}
-                  <span class="text-[9px] md:text-[10px] font-sans font-bold uppercase px-1.5 py-1 bg-surface-subdued text-text-main border border-border rounded-sm leading-none tracking-wider">
+                  <span class="text-[9px] md:text-[10px] font-sans font-bold uppercase px-1.5 py-1 bg-zinc-900/90 text-zinc-200 border border-zinc-700/60 rounded-[3px] leading-none tracking-wider shadow-sm">
                     {{ value }}
                   </span>
                 {%- else -%}
-                  <span class="text-[9px] md:text-[10px] font-sans font-bold uppercase px-1.5 py-1 text-zinc-500 line-through decoration-zinc-600 opacity-50 bg-transparent leading-none tracking-wider">
+                  <span class="text-[9px] md:text-[10px] font-sans font-bold uppercase px-1.5 py-1 text-zinc-600 line-through decoration-zinc-700 opacity-30 bg-transparent leading-none tracking-wider">
                     {{ value }}
                   </span>
                 {%- endif -%}
@@ -184,7 +184,7 @@
         {%- endif -%}
 
         <div class="mt-1">
-          {% render 'price', product: card_product, price_class: 'font-sans font-bold text-lg md:text-xl text-text-main', show_compare_at_price: true %}
+          {% render 'price', product: card_product, price_class: 'font-sans font-bold text-base md:text-lg text-white', show_compare_at_price: true %}
         </div>
 
         {%- if card_product.quantity_price_breaks_configured? -%}
