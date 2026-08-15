@@ -1,29 +1,52 @@
 <style>
-@keyframes topbarTicker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes topbarMarquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@-webkit-keyframes topbarMarquee {
+  0% { -webkit-transform: translate3d(0, 0, 0); }
+  100% { -webkit-transform: translate3d(-50%, 0, 0); }
+}
+
+.topbar-ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #27272a;
 }
 
 .topbar-ticker-track {
-  display: flex;
-  width: max-content;
-  animation: topbarTicker 24s linear infinite;
+  display: flex !important;
+  width: max-content !important;
+  min-width: 200% !important;
+  animation: topbarMarquee 20s linear infinite !important;
+  -webkit-animation: topbarMarquee 20s linear infinite !important;
+  will-change: transform;
 }
 
 .topbar-ticker-track:hover {
-  animation-play-state: paused;
+  animation-play-state: paused !important;
+  -webkit-animation-play-state: paused !important;
+}
+
+.topbar-ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1.5rem;
+  white-space: nowrap;
 }
 </style>
 
 <div 
-  class="w-full bg-[#27272a] text-white py-2.5 sm:py-3 border-b border-zinc-700/80 shadow-sm relative z-30 overflow-hidden cursor-pointer"
+  class="topbar-ticker-wrapper text-white py-2.5 sm:py-3 border-b border-zinc-700/80 shadow-sm relative z-30 cursor-pointer"
   onclick="window.location.href='{{ routes.all_products_collection_url }}'"
   title="Click to explore the latest collection"
 >
   <div class="topbar-ticker-track whitespace-nowrap flex items-center">
     
-    <!-- Item Set 1 -->
-    <div class="flex items-center gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-sans font-black uppercase tracking-[0.18em] text-white">
+    <!-- Set 1 -->
+    <div class="topbar-ticker-item text-xs sm:text-sm md:text-base font-sans font-black uppercase tracking-[0.18em] text-white">
       <span class="inline-flex items-center gap-2">🔥 2026 SUMMER COLLECTION IS NOW LIVE</span>
       <span class="text-accent text-xs">◆</span>
       <span class="inline-flex items-center gap-2">⚡ DAILY NEW ARTICLES ADDED</span>
@@ -36,8 +59,8 @@
       <span class="text-accent text-xs">◆</span>
     </div>
 
-    <!-- Item Set 2 (Seamless loop clone) -->
-    <div class="flex items-center gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-sans font-black uppercase tracking-[0.18em] text-white" aria-hidden="true">
+    <!-- Set 2 (Continuous Loop) -->
+    <div class="topbar-ticker-item text-xs sm:text-sm md:text-base font-sans font-black uppercase tracking-[0.18em] text-white" aria-hidden="true">
       <span class="inline-flex items-center gap-2">🔥 2026 SUMMER COLLECTION IS NOW LIVE</span>
       <span class="text-accent text-xs">◆</span>
       <span class="inline-flex items-center gap-2">⚡ DAILY NEW ARTICLES ADDED</span>
