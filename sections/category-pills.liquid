@@ -1,0 +1,102 @@
+{% schema %}
+{
+  "name": "Category Quick Nav",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (Optional)",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Category"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "url",
+          "id": "custom_image_url",
+          "label": "Custom Image URL"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_hot",
+          "label": "Show 'HOT' Indicator",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Quick Nav",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="w-full bg-[#09090b] border-b border-zinc-800/80 py-3.5 md:py-5 overflow-hidden">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+    {% if section.settings.heading != blank %}
+      <div class="mb-3">
+        <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-zinc-400">{{ section.settings.heading }}</h3>
+      </div>
+    {% endif %}
+
+    <div class="flex items-center gap-4 md:gap-7 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-1 pt-1 -mx-4 px-4 md:mx-0 md:px-0" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+      {% for block in section.blocks %}
+        {%- assign title = block.settings.title -%}
+        {%- assign image = block.settings.image -%}
+        {%- assign custom_image_url = block.settings.custom_image_url -%}
+        {%- assign link = block.settings.link | default: '#' -%}
+        {%- assign is_hot = block.settings.is_hot -%}
+
+        <a href="{{ link }}" class="group flex flex-col items-center flex-shrink-0 snap-start text-center focus:outline-none" {{ block.shopify_attributes }}>
+          <!-- Circle Avatar with Luxury Ring -->
+          <div class="relative w-[68px] h-[68px] md:w-[84px] md:h-[84px] p-[2px] rounded-full bg-gradient-to-tr from-zinc-700 via-zinc-800 to-zinc-600 group-hover:from-accent group-hover:to-red-500 transition-all duration-300 shadow-md">
+            <div class="w-full h-full rounded-full overflow-hidden bg-zinc-950 p-[2px]">
+              <div class="w-full h-full rounded-full overflow-hidden bg-zinc-900">
+                {% if custom_image_url != blank %}
+                  <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                {% elsif image != blank %}
+                  {{ image | image_url: width: 200 | image_tag: class: 'w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500', loading: 'lazy' }}
+                {% else %}
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-zinc-800' }}
+                {% endif %}
+              </div>
+            </div>
+
+            {% if is_hot %}
+              <span class="absolute -top-1 -right-1 bg-accent text-white text-[8px] md:text-[9px] font-black tracking-widest px-1.5 py-0.5 rounded-full uppercase border border-black shadow-sm">
+                HOT
+              </span>
+            {% endif %}
+          </div>
+
+          <!-- Micro Label -->
+          <span class="mt-2 text-[10px] md:text-xs font-semibold uppercase tracking-wider text-zinc-300 group-hover:text-white transition-colors duration-200 line-clamp-1 max-w-[76px] md:max-w-[95px]">
+            {{ title }}
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

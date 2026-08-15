@@ -10,573 +10,132 @@
     {
       "type": "url",
       "id": "custom_image_url",
-      "label": "Custom External Image URL (Overrides above)"
+      "label": "Custom External Image URL"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "HIGH GRADE COPIES • 2026 EDITION"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Dark & Moody Aesthetic."
+      "default": "PREMIUM TURKEY APPAREL"
     },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Elevate your style with our latest premium collection."
+      "default": "Crafted with 1:1 precision, master fabrics, and unmatched luxury detailing."
     },
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button Label",
-      "default": "Shop Collection"
+      "label": "Primary Button Label",
+      "default": "SHOP COLLECTION"
     },
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button Link"
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary Button Label",
+      "default": "NEW ARRIVALS"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
     },
     {
       "type": "range",
       "id": "overlay_opacity",
-      "label": "Overlay Opacity",
-      "min": 0,
-      "max": 100,
+      "label": "Overlay Darkness",
+      "min": 20,
+      "max": 80,
       "step": 5,
       "unit": "%",
-      "default": 60
-    },
-    {
-      "type": "select",
-      "id": "overlay_type",
-      "label": "Overlay Type",
-      "options": [
-        {
-          "value": "solid",
-          "label": "Solid Color"
-        },
-        {
-          "value": "gradient",
-          "label": "Gradient"
-        },
-        {
-          "value": "vignette",
-          "label": "Vignette (Dark Edges)"
-        },
-        {
-          "value": "radial",
-          "label": "Radial (Spotlight)"
-        }
-      ],
-      "default": "gradient"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color_secondary",
-      "label": "Secondary Overlay Color (for gradients)",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text Alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "content_position",
-      "label": "Content Vertical Position",
-      "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_parallax",
-      "label": "Enable Parallax Effect",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_fade_animation",
-      "label": "Enable Fade In Animation",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "section_height",
-      "label": "Section Height",
-      "min": 60,
-      "max": 100,
-      "step": 5,
-      "unit": "vh",
-      "default": 90
-    },
-    {
-      "type": "header",
-      "content": "Text Enhancement"
-    },
-    {
-      "type": "checkbox",
-      "id": "text_shadow",
-      "label": "Enable Text Shadow",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "text_shadow_blur",
-      "label": "Text Shadow Blur",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "checkbox",
-      "id": "text_background",
-      "label": "Add Background Behind Text",
-      "default": false
-    },
-    {
-      "type": "color",
-      "id": "text_background_color",
-      "label": "Text Background Color",
-      "default": "rgba(0,0,0,0.6)"
-    },
-    {
-      "type": "range",
-      "id": "text_background_padding",
-      "label": "Text Background Padding",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "text_background_blur",
-      "label": "Text Background Blur",
-      "min": 0,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 10
+      "default": 45
     }
   ],
   "presets": [
     {
       "name": "Custom Hero",
-      "category": "Hero"
+      "category": "Image"
     }
   ]
 }
 {% endschema %}
 
-<style>
-  .hero-section {
-    height: {{ section.settings.section_height }}vh;
-    min-height: 600px;
-    position: relative;
-    overflow: hidden;
-    background-color: {{ section.settings.overlay_color }};
-  }
+{%- assign hero_img = section.settings.custom_image_url -%}
+{%- if hero_img == blank and section.settings.image != blank -%}
+  {%- assign hero_img = section.settings.image | image_url: width: 1800 -%}
+{%- endif -%}
 
-  .hero-section .hero-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .hero-section .hero-background img,
-  .hero-section .hero-background svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease-out;
-  }
-
-  .hero-section.parallax .hero-background img {
-    transform: translateY(0);
-    will-change: transform;
-  }
-
-  /* Overlay Styles */
-  .hero-section .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  /* Solid Overlay */
-  .hero-section .hero-overlay.type-solid {
-    background-color: {{ section.settings.overlay_color }};
-    opacity: {{ section.settings.overlay_opacity }}%;
-  }
-
-  /* Gradient Overlay */
-  .hero-section .hero-overlay.type-gradient {
-    background: linear-gradient(135deg, 
-      {{ section.settings.overlay_color }} 0%, 
-      {{ section.settings.overlay_color }} 30%,
-      {{ section.settings.overlay_color_secondary }} 70%,
-      {{ section.settings.overlay_color }} 100%
-    );
-    opacity: {{ section.settings.overlay_opacity }}%;
-  }
-
-  /* Vignette Overlay */
-  .hero-section .hero-overlay.type-vignette {
-    background: radial-gradient(ellipse at center, 
-      transparent 50%, 
-      {{ section.settings.overlay_color }} 100%
-    );
-    opacity: calc({{ section.settings.overlay_opacity }}% + 20%);
-  }
-
-  /* Radial Spotlight Overlay */
-  .hero-section .hero-overlay.type-radial {
-    background: radial-gradient(ellipse at center, 
-      transparent 30%, 
-      {{ section.settings.overlay_color }} 70%,
-      {{ section.settings.overlay_color }} 100%
-    );
-    opacity: calc({{ section.settings.overlay_opacity }}% + 10%);
-  }
-
-  /* Content Styles */
-  .hero-section .hero-content {
-    position: relative;
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: {{ section.settings.text_alignment }};
-    justify-content: center;
-    text-align: {{ section.settings.text_alignment }};
-    padding: 0 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-  }
-
-  .hero-section .hero-content.position-top {
-    justify-content: flex-start;
-    padding-top: 6rem;
-  }
-
-  .hero-section .hero-content.position-center {
-    justify-content: center;
-  }
-
-  .hero-section .hero-content.position-bottom {
-    justify-content: flex-end;
-    padding-bottom: 6rem;
-  }
-
-  /* Text Background Container */
-  .hero-section .text-container {
-    display: inline-block;
-    padding: {{ section.settings.text_background_padding }}px;
-    {% if section.settings.text_background %}
-      background: {{ section.settings.text_background_color }};
-      backdrop-filter: blur({{ section.settings.text_background_blur }}px);
-      -webkit-backdrop-filter: blur({{ section.settings.text_background_blur }}px);
-      border-radius: 12px;
-    {% endif %}
-    max-width: 100%;
-    {% if section.settings.text_alignment == 'center' %}
-      margin-left: auto;
-      margin-right: auto;
-    {% elsif section.settings.text_alignment == 'right' %}
-      margin-left: auto;
-      margin-right: 0;
-    {% endif %}
-  }
-
-  .hero-section .hero-heading {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 900;
-    color: #FFFFFF;
-    letter-spacing: -0.04em;
-    text-transform: uppercase;
-    line-height: 1.05;
-    margin-bottom: 0.75rem;
-    {% if section.settings.text_shadow %}
-      text-shadow: 0 2px {{ section.settings.text_shadow_blur }}px rgba(0,0,0,0.6);
-    {% endif %}
-  }
-
-  .hero-section .hero-subheading {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: rgba(255,255,255,0.95);
-    font-weight: 300;
-    margin-bottom: 2rem;
-    max-width: 650px;
-    line-height: 1.6;
-    {% if section.settings.text_shadow %}
-      text-shadow: 0 2px {{ section.settings.text_shadow_blur }}px rgba(0,0,0,0.5);
-    {% endif %}
-  }
-
-  .hero-section .hero-subheading.align-center {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-section .hero-subheading.align-right {
-    margin-left: auto;
-    margin-right: 0;
-  }
-
-  /* Button Styles - Keeping Your Original Color */
-  .hero-section .hero-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2.5rem;
-    background: #e32c2b; /* Accent Red */
-    color: #FFFFFF;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    border: 2px solid #e32c2b;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    font-size: clamp(0.8rem, 1vw, 1rem);
-    min-width: 180px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  }
-
-  .hero-section .hero-button:hover {
-    background: #cc2625; /* Darker Accent Red */
-    border-color: #cc2625;
-    transform: scale(1.05);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-  }
-
-  .hero-section .hero-button::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.15);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  .hero-section .hero-button:hover::after {
-    transform: translateX(0);
-  }
-
-  /* Fade in animation */
-  .hero-section.animate .hero-heading,
-  .hero-section.animate .hero-subheading,
-  .hero-section.animate .hero-button-wrapper {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: heroFadeIn 1s ease-out forwards;
-  }
-
-  .hero-section.animate .hero-subheading {
-    animation-delay: 0.2s;
-  }
-
-  .hero-section.animate .hero-button-wrapper {
-    animation-delay: 0.4s;
-  }
-
-  @keyframes heroFadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Mobile optimizations */
-  @media (max-width: 768px) {
-    .hero-section {
-      min-height: 500px;
-    }
-
-    .hero-section .hero-content {
-      padding: 0 1.5rem;
-    }
-
-    .hero-section .hero-heading {
-      letter-spacing: -0.02em;
-    }
-
-    .hero-section .hero-button {
-      padding: 0.8rem 2rem;
-      min-width: 150px;
-      font-size: 0.8rem;
-    }
-
-    .hero-section .hero-content.position-top {
-      padding-top: 4rem;
-    }
-
-    .hero-section .hero-content.position-bottom {
-      padding-bottom: 4rem;
-    }
-
-    .hero-section .text-container {
-      padding: {{ section.settings.text_background_padding | times: 0.7 | round }}px !important;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero-section .hero-heading {
-      letter-spacing: 0;
-    }
-  }
-</style>
-
-{% assign alignment_class = '' %}
-{% if section.settings.text_alignment == 'center' %}
-  {% assign alignment_class = 'align-center' %}
-{% elsif section.settings.text_alignment == 'right' %}
-  {% assign alignment_class = 'align-right' %}
-{% endif %}
-
-{% assign position_class = '' %}
-{% if section.settings.content_position == 'top' %}
-  {% assign position_class = 'position-top' %}
-{% elsif section.settings.content_position == 'bottom' %}
-  {% assign position_class = 'position-bottom' %}
-{% else %}
-  {% assign position_class = 'position-center' %}
-{% endif %}
-
-<section 
-  class="hero-section{% if section.settings.enable_parallax %} parallax{% endif %}{% if section.settings.enable_fade_animation %} animate{% endif %}" 
-  id="hero-{{ section.id }}"
-  data-section-id="{{ section.id }}"
->
-  <!-- Background Image -->
-  <div class="hero-background">
-    {% if section.settings.custom_image_url != blank %}
-      <img 
-        src="{{ section.settings.custom_image_url }}" 
-        alt="{{ section.settings.heading | escape }}" 
+<section class="relative w-full min-h-[520px] md:min-h-[640px] lg:min-h-[720px] flex items-center justify-center bg-black overflow-hidden">
+  <!-- Background Image with Cinematic Pan/Zoom -->
+  {% if hero_img != blank %}
+    <div class="absolute inset-0 z-0">
+      <img
+        src="{{ hero_img }}"
+        alt="{{ section.settings.heading }}"
+        class="w-full h-full object-cover object-center scale-105 transform motion-reduce:transform-none"
         loading="eager"
-        width="1920"
-        height="1080"
       >
-    {% elsif section.settings.image != blank %}
-      {{ section.settings.image | image_url: width: 2000 | image_tag: 
-        class: '',
-        loading: 'eager',
-        width: 1920,
-        height: 1080,
-        alt: section.settings.heading | escape
-      }}
-    {% else %}
-      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover object-center !fill-zinc-800' }}
+      <!-- Luxury Dark Vignette -->
+      <div 
+        class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30"
+        style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+      ></div>
+      <div class="absolute inset-0 bg-radial-vignette pointer-events-none opacity-60"></div>
+    </div>
+  {% endif %}
+
+  <!-- Hero Content Frame -->
+  <div class="relative z-10 max-w-[1200px] mx-auto px-6 py-16 md:py-24 text-center flex flex-col items-center">
+    
+    {% if section.settings.eyebrow != blank %}
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-zinc-300 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-4 shadow-lg">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+        {{ section.settings.eyebrow }}
+      </span>
     {% endif %}
-  </div>
 
-  <!-- Overlay with Multiple Options -->
-  <div class="hero-overlay type-{{ section.settings.overlay_type }}"></div>
+    <h1 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white leading-none max-w-4xl drop-shadow-2xl mb-4">
+      {{ section.settings.heading }}
+    </h1>
 
-  <!-- Content -->
-  <div class="hero-content {{ position_class }}">
-    <div class="text-container">
-      {% if section.settings.heading != blank %}
-        <h1 class="hero-heading">
-          {{ section.settings.heading }}
-        </h1>
+    {% if section.settings.subheading != blank %}
+      <p class="text-sm md:text-lg text-zinc-300 font-normal max-w-2xl mx-auto mb-8 opacity-90 leading-relaxed">
+        {{ section.settings.subheading }}
+      </p>
+    {% endif %}
+
+    <!-- Dual Action Buttons -->
+    <div class="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
+      {% if section.settings.button_label != blank %}
+        <a 
+          href="{{ section.settings.button_link | default: '/collections/all' }}"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-white text-black font-sans font-bold text-xs md:text-sm uppercase tracking-[0.18em] rounded-[4px] hover:bg-zinc-200 transition-all duration-300 shadow-xl"
+        >
+          {{ section.settings.button_label }}
+        </a>
       {% endif %}
 
-      {% if section.settings.subheading != blank %}
-        <p class="hero-subheading {{ alignment_class }}">
-          {{ section.settings.subheading }}
-        </p>
-      {% endif %}
-
-      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-        <div class="hero-button-wrapper">
-          <a 
-            href="{{ section.settings.button_link }}" 
-            class="hero-button"
-            aria-label="{{ section.settings.button_label | escape }}"
-          >
-            {{ section.settings.button_label }}
-          </a>
-        </div>
+      {% if section.settings.secondary_button_label != blank %}
+        <a 
+          href="{{ section.settings.secondary_button_link | default: '/collections/all' }}"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-black/70 backdrop-blur-md text-white border border-white/20 font-sans font-bold text-xs md:text-sm uppercase tracking-[0.18em] rounded-[4px] hover:bg-white hover:text-black transition-all duration-300 shadow-xl"
+        >
+          {{ section.settings.secondary_button_label }}
+        </a>
       {% endif %}
     </div>
+
   </div>
 </section>
-
-{% if section.settings.enable_parallax %}
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const heroSection = document.getElementById('hero-{{ section.id }}');
-    if (!heroSection) return;
-
-    const image = heroSection.querySelector('.hero-background img');
-    if (!image) return;
-
-    function updateParallax() {
-      const rect = heroSection.getBoundingClientRect();
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * 0.3;
-      
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        const offset = Math.min(Math.max(rate, -100), 100);
-        image.style.transform = `translateY(${offset * 0.2}px) scale(1.1)`;
-      }
-    }
-
-    let ticking = false;
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        window.requestAnimationFrame(function() {
-          updateParallax();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    updateParallax();
-  });
-</script>
-{% endif %}

@@ -1,12 +1,18 @@
 {% schema %}
 {
-  "name": "Collections Carousel",
+  "name": "Collections Showcase",
   "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Subtitle",
+      "default": "CURATED CAPSULES"
+    },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Shop Collections"
+      "default": "SHOP BY CATEGORY"
     }
   ],
   "blocks": [
@@ -22,17 +28,23 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Custom Title Overide"
+          "label": "Custom Title Override"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Short Tagline / Count",
+          "default": "EXPLORE COLLECTION"
         },
         {
           "type": "image_picker",
           "id": "custom_image",
-          "label": "Custom Image Override"
+          "label": "Custom Image"
         },
         {
           "type": "url",
           "id": "custom_image_url",
-          "label": "Custom External Image URL (Overrides above)"
+          "label": "Custom External Image URL"
         },
         {
           "type": "url",
@@ -44,84 +56,81 @@
   ],
   "presets": [
     {
-      "name": "Collections Carousel",
+      "name": "Collections Showcase",
       "category": "Collection"
     }
   ]
 }
 {% endschema %}
 
-<section class="w-full bg-black py-16 md:py-24">
-  <div class="max-w-[1400px] mx-auto px-6">
-    {% if section.settings.heading != blank %}
-      <h2 class="font-display text-6xl md:text-8xl lg:text-[8rem] !font-black !text-white uppercase tracking-tighter mb-16 text-center drop-shadow-md leading-none">
-        {{ section.settings.heading }}
-      </h2>
-    {% endif %}
+<section class="w-full bg-black py-12 md:py-20 border-b border-zinc-800/80">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <span class="text-xs md:text-sm font-black uppercase tracking-[0.25em] text-accent block mb-1">
+            {{ section.settings.eyebrow }}
+          </span>
+        {% endif %}
+        <h2 class="font-display text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white m-0">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+      <span class="hidden md:inline-block text-xs uppercase tracking-[0.2em] text-zinc-500 font-semibold">
+        SWIPE TO DISCOVER →
+      </span>
+    </div>
 
-    <!-- Carousel Container -->
-    <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
-      
+    <!-- Category Grid / Carousel -->
+    <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 md:gap-6 pb-4 -mx-4 px-4 md:mx-0 md:px-0" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {%- assign collection = block.settings.collection -%}
           {%- assign custom_image = block.settings.custom_image -%}
           {%- assign custom_image_url = block.settings.custom_image_url -%}
           {%- assign title = block.settings.title | default: collection.title | default: 'Collection' -%}
+          {%- assign tagline = block.settings.tagline | default: 'EXPLORE COLLECTION' -%}
           {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
-          
-          <a href="{{ link }}" class="group relative flex-none w-[280px] md:w-[350px] snap-start flex flex-col" {{ block.shopify_attributes }}>
-            <!-- Collection Image -->
-            <div class="w-full aspect-[4/5] overflow-hidden bg-zinc-900 border border-zinc-800 transition-transform duration-500 group-hover:-translate-y-2">
+
+          <a href="{{ link }}" class="group relative flex-none w-[240px] sm:w-[280px] md:w-[320px] snap-start flex flex-col rounded-[6px] overflow-hidden bg-[#111114] border border-zinc-800/80 hover:border-zinc-500 transition-all duration-500 shadow-xl" {{ block.shopify_attributes }}>
+            <!-- Image Frame -->
+            <div class="relative w-full aspect-[4/5] overflow-hidden bg-zinc-950">
               {% if custom_image_url != blank %}
-                <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
               {% elsif custom_image != blank %}
-                {{ custom_image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110', loading: 'lazy' }}
+                {{ custom_image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
               {% elsif collection != blank and collection.image != blank %}
-                {{ collection.image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110', loading: 'lazy' }}
+                {{ collection.image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
               {% else %}
-                {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover object-center opacity-50 !fill-zinc-700 transition-transform duration-500 group-hover:scale-110' }}
+                {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-40 !fill-zinc-800' }}
               {% endif %}
+
+              <!-- Subtle Gradient Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+
+              <!-- Floating Micro-Tag -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                <span class="text-[10px] font-bold tracking-[0.18em] uppercase px-2.5 py-1 bg-black/80 backdrop-blur-md border border-white/10 text-white rounded-full">
+                  {{ tagline }}
+                </span>
+                <span class="w-6 h-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
             </div>
 
-            <!-- Collection Title (Below Image) -->
-            <div class="mt-5 flex items-center justify-between pr-4">
-              <h3 class="font-display text-2xl md:text-3xl font-black !text-white uppercase tracking-widest transition-colors duration-300">
+            <!-- Title Box -->
+            <div class="p-4 bg-[#111114] flex items-center justify-between border-t border-zinc-800/60">
+              <h3 class="font-sans text-sm md:text-base font-bold text-zinc-100 uppercase tracking-wider group-hover:text-white transition-colors m-0">
                 {{ title }}
               </h3>
-              <span class="!text-white transition-colors duration-300">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </span>
-            </div>
-          </a>
-        {% endfor %}
-      {% else %}
-        <!-- Placeholder Fallback if no blocks -->
-        {% for i in (1..5) %}
-          <a href="#" class="group relative flex-none w-[280px] md:w-[350px] snap-start flex flex-col">
-            <div class="w-full aspect-[4/5] overflow-hidden bg-zinc-900 border border-zinc-800 transition-transform duration-500 group-hover:-translate-y-2">
-              {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
-              {{ 'collection-' | append: current | placeholder_svg_tag: 'w-full h-full object-cover object-center opacity-50 !fill-zinc-700 transition-transform duration-500 group-hover:scale-110' }}
-            </div>
-            
-            <div class="mt-5 flex items-center justify-between pr-4">
-              <h3 class="font-display text-2xl md:text-3xl font-black !text-white uppercase tracking-widest transition-colors duration-300">
-                Collection {{ i }}
-              </h3>
-              <span class="!text-white transition-colors duration-300">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </span>
             </div>
           </a>
         {% endfor %}
       {% endif %}
-
     </div>
+
   </div>
 </section>
-
-<style>
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-</style>

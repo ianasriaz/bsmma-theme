@@ -1,69 +1,72 @@
 {% schema %}
 {
-  "name": "Marquee",
+  "name": "Luxury Marquee",
   "settings": [
     {
       "type": "text",
       "id": "text",
       "label": "Marquee Text",
-      "default": "PREMIUM QUALITY • FREE SHIPPING • SECURE PAYMENTS • EASY RETURNS • "
+      "default": "HIGH GRADE TURKEY COLLECTION • COMPLIMENTARY EXPRESS DELIVERY OVER RS. 5,000 • VIP LUXURY PACKAGING • HASSLE-FREE EXCHANGES"
     },
     {
       "type": "color",
       "id": "bg_color",
       "label": "Background Color",
-      "default": "#000000"
+      "default": "#111114"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
-      "default": "#ffffff"
+      "default": "#f4f4f5"
     },
     {
       "type": "range",
       "id": "speed",
-      "label": "Animation Speed (Seconds)",
-      "min": 5,
+      "label": "Scroll Speed",
+      "min": 10,
       "max": 60,
-      "step": 1,
-      "default": 20
+      "step": 5,
+      "default": 25
     }
   ],
   "presets": [
     {
-      "name": "Marquee",
+      "name": "Luxury Marquee",
       "category": "Text"
     }
   ]
 }
 {% endschema %}
 
-<style>
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .animate-marquee {
-    animation: marquee {{ section.settings.speed }}s linear infinite;
-    display: flex;
-    width: max-content;
-  }
-</style>
-
-<section class="w-full overflow-hidden border-y border-zinc-800 py-4 flex items-center" style="background-color: {{ section.settings.bg_color }};">
-  <div class="animate-marquee">
-    <div class="flex shrink-0 px-4 whitespace-nowrap text-xl md:text-2xl font-display font-bold uppercase tracking-widest" style="color: {{ section.settings.text_color }};">
-      {{ section.settings.text }}
+<div class="w-full bg-[#111114] border-y border-zinc-800/80 overflow-hidden py-3 text-white">
+  <div class="marquee-track flex whitespace-nowrap" style="animation: marquee {{ section.settings.speed }}s linear infinite;">
+    <div class="flex items-center gap-6 px-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-200">
+      <span>{{ section.settings.text }}</span>
+      <span class="text-accent text-xs">◆</span>
+      <span>{{ section.settings.text }}</span>
+      <span class="text-accent text-xs">◆</span>
+      <span>{{ section.settings.text }}</span>
+      <span class="text-accent text-xs">◆</span>
     </div>
-    <div class="flex shrink-0 px-4 whitespace-nowrap text-xl md:text-2xl font-display font-bold uppercase tracking-widest" style="color: {{ section.settings.text_color }};">
-      {{ section.settings.text }}
-    </div>
-    <div class="flex shrink-0 px-4 whitespace-nowrap text-xl md:text-2xl font-display font-bold uppercase tracking-widest" style="color: {{ section.settings.text_color }};">
-      {{ section.settings.text }}
-    </div>
-    <div class="flex shrink-0 px-4 whitespace-nowrap text-xl md:text-2xl font-display font-bold uppercase tracking-widest" style="color: {{ section.settings.text_color }};">
-      {{ section.settings.text }}
+    <div class="flex items-center gap-6 px-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-zinc-200" aria-hidden="true">
+      <span>{{ section.settings.text }}</span>
+      <span class="text-accent text-xs">◆</span>
+      <span>{{ section.settings.text }}</span>
+      <span class="text-accent text-xs">◆</span>
+      <span>{{ section.settings.text }}</span>
+      <span class="text-accent text-xs">◆</span>
     </div>
   </div>
-</section>
+</div>
+
+<style>
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: 200%;
+}
+</style>

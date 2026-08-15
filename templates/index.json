@@ -1,23 +1,104 @@
 {
   "sections": {
+    "category_pills": {
+      "type": "category-pills",
+      "blocks": {
+        "shirts": {
+          "type": "category",
+          "settings": {
+            "title": "SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/SHIRTS.jpg?v=1782605022",
+            "link": "shopify://collections/shirts",
+            "is_hot": true
+          }
+        },
+        "t_shirts": {
+          "type": "category",
+          "settings": {
+            "title": "T-SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/T-SHIRTS.jpg?v=1782604965",
+            "link": "shopify://collections/t-shirts",
+            "is_hot": true
+          }
+        },
+        "polo_shirts": {
+          "type": "category",
+          "settings": {
+            "title": "POLOS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/POLO_SHIRTS.jpg?v=1782604966",
+            "link": "shopify://collections/polo-shirts",
+            "is_hot": false
+          }
+        },
+        "tracksuits": {
+          "type": "category",
+          "settings": {
+            "title": "TRACKSUITS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Summer_Tracksuits.jpg?v=1782652861",
+            "link": "shopify://collections/tracksuits",
+            "is_hot": true
+          }
+        },
+        "caps": {
+          "type": "category",
+          "settings": {
+            "title": "CAPS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAPS.jpg?v=1782678684",
+            "link": "shopify://collections/caps",
+            "is_hot": false
+          }
+        },
+        "luggage_bags": {
+          "type": "category",
+          "settings": {
+            "title": "BAGS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Luggage_Bags.jpg?v=1782678684",
+            "link": "shopify://collections/luggage-bags",
+            "is_hot": false
+          }
+        },
+        "belts": {
+          "type": "category",
+          "settings": {
+            "title": "BELTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/BELTS.jpg?v=1782679154",
+            "link": "shopify://collections/belts",
+            "is_hot": false
+          }
+        }
+      },
+      "block_order": [
+        "shirts",
+        "t_shirts",
+        "polo_shirts",
+        "tracksuits",
+        "caps",
+        "luggage_bags",
+        "belts"
+      ],
+      "settings": {}
+    },
     "custom_hero": {
       "type": "custom-hero",
       "settings": {
         "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Shirt_Hero_Banner.jpg?v=1782607184",
-        "heading": "PREMIUM SHIRTS",
-        "subheading": "Elevate your style with our latest premium collection.",
-        "button_label": "SHOP NOW",
-        "button_link": "shopify://collections/shirts",
-        "overlay_opacity": 50
+        "eyebrow": "HIGH GRADE TURKEY COPIES • 2026 EDITION",
+        "heading": "PREMIUM APPAREL",
+        "subheading": "Crafted with 1:1 precision, master fabrics, and unmatched luxury detailing.",
+        "button_label": "EXPLORE ALL",
+        "button_link": "shopify://collections/all",
+        "secondary_button_label": "NEW ARRIVALS",
+        "secondary_button_link": "shopify://collections/shirts",
+        "overlay_opacity": 45
       }
     },
     "marquee": {
       "type": "marquee",
       "settings": {
-        "text": "PREMIUM QUALITY • FREE SHIPPING OVER RS. 5,000 • SECURE PAYMENTS • EASY RETURNS • ",
-        "bg_color": "#e32c2b",
-        "text_color": "#ffffff",
-        "speed": 20
+        "text": "HIGH GRADE TURKEY COLLECTION • COMPLIMENTARY EXPRESS DELIVERY OVER RS. 5,000 • VIP LUXURY PACKAGING • HASSLE-FREE EXCHANGES",
+        "bg_color": "#111114",
+        "text_color": "#f4f4f5",
+        "speed": 22
       }
     },
     "collections_carousel": {
@@ -26,7 +107,8 @@
         "shirts": {
           "type": "collection",
           "settings": {
-            "title": "SHIRTS",
+            "title": "PREMIUM SHIRTS",
+            "tagline": "TURKEY HIGH GRADE",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/SHIRTS.jpg?v=1782605022",
             "link": "shopify://collections/shirts"
           }
@@ -34,7 +116,8 @@
         "t_shirts": {
           "type": "collection",
           "settings": {
-            "title": "T-SHIRTS",
+            "title": "OVERSIZED TEES",
+            "tagline": "1:1 MASTER COPIES",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/T-SHIRTS.jpg?v=1782604965",
             "link": "shopify://collections/t-shirts"
           }
@@ -43,6 +126,7 @@
           "type": "collection",
           "settings": {
             "title": "POLO SHIRTS",
+            "tagline": "HIGH DENSITY KNIT",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/POLO_SHIRTS.jpg?v=1782604966",
             "link": "shopify://collections/polo-shirts"
           }
@@ -50,7 +134,8 @@
         "tracksuits": {
           "type": "collection",
           "settings": {
-            "title": "SUMMER TRACKSUITS",
+            "title": "SUMMER SETS",
+            "tagline": "TWO-PIECE TRACKSUITS",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Summer_Tracksuits.jpg?v=1782652861",
             "link": "shopify://collections/tracksuits"
           }
@@ -58,7 +143,8 @@
         "caps": {
           "type": "collection",
           "settings": {
-            "title": "CAPS",
+            "title": "HEADWEAR & CAPS",
+            "tagline": "SIGNATURE EMBROIDERY",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAPS.jpg?v=1782678684",
             "link": "shopify://collections/caps"
           }
@@ -66,7 +152,8 @@
         "luggage_bags": {
           "type": "collection",
           "settings": {
-            "title": "LUGGAGE BAGS",
+            "title": "TRAVEL & DUFFLES",
+            "tagline": "LEATHER FINISH",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/Luggage_Bags.jpg?v=1782678684",
             "link": "shopify://collections/luggage-bags"
           }
@@ -74,7 +161,8 @@
         "belts": {
           "type": "collection",
           "settings": {
-            "title": "BELTS",
+            "title": "LUXURY BELTS",
+            "tagline": "SOLID BRASS BUCKLES",
             "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/BELTS.jpg?v=1782679154",
             "link": "shopify://collections/belts"
           }
@@ -90,21 +178,28 @@
         "belts"
       ],
       "settings": {
-        "heading": "Shop Collections"
+        "eyebrow": "CURATED CAPSULES",
+        "heading": "SHOP BY CATEGORY"
       }
     },
     "product_slider": {
       "type": "custom-product-slider",
       "settings": {
-        "heading": "Latest Drops",
-        "products_to_show": 8
+        "heading": "LATEST DROPS",
+        "products_to_show": 12
       }
+    },
+    "brand_features": {
+      "type": "brand-features",
+      "settings": {}
     }
   },
   "order": [
+    "category_pills",
     "custom_hero",
     "marquee",
     "collections_carousel",
-    "product_slider"
+    "product_slider",
+    "brand_features"
   ]
 }
