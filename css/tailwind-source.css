@@ -29,3 +29,31 @@
     border-color: var(--color-border);
   }
 }
+
+@layer components {
+  .load-more-btn {
+    background-color: #ffffff !important;
+    color: #09090b !important;
+    border: 2px solid #ffffff !important;
+    font-family: var(--font-display, "Arial Black", "Inter", sans-serif) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .load-more-btn:hover {
+    background-color: var(--color-accent, #ea0101) !important;
+    border-color: var(--color-accent, #ea0101) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 35px rgba(234, 1, 1, 0.6) !important;
+  }
+
+  .load-more-btn .load-more-idle,
+  .load-more-btn .load-more-loading {
+    color: inherit !important;
+  }
+}

@@ -321,7 +321,31 @@
                 {%- endfor -%}
               </ul>
               {%- if paginate.pages > 1 -%}
-                {% render 'pagination', paginate: paginate %}
+                <div class="load-more-container flex flex-col items-center justify-center mt-14 mb-10 w-full text-center px-4">
+                  {% if paginate.next %}
+                    <button
+                      type="button"
+                      class="load-more-btn group relative inline-flex items-center justify-center min-w-[220px] sm:min-w-[260px] px-10 py-4 sm:px-12 sm:py-5 bg-white text-zinc-950 border-2 border-white hover:border-accent hover:bg-accent hover:text-white font-display font-black text-sm sm:text-base tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:shadow-[0_0_35px_rgba(234,1,1,0.6)] cursor-pointer active:scale-95 disabled:pointer-events-none disabled:opacity-60"
+                      style="background-color: #ffffff; color: #09090b; border: 2px solid #ffffff; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase;"
+                      data-next-url="{{ paginate.next.url }}"
+                      aria-label="Load more search results"
+                    >
+                      <span class="load-more-idle flex items-center justify-center gap-3">
+                        <span>Load More</span>
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </span>
+                      <span class="load-more-loading hidden flex items-center justify-center gap-3">
+                        <svg class="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Loading...</span>
+                      </span>
+                    </button>
+                  {% endif %}
+                </div>
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -528,3 +552,82 @@
   ]
 }
 {% endschema %}
+
+<script>
+  (function() {
+    if (window.__bsmmaLoadMoreInitialized) return;
+    window.__bsmmaLoadMoreInitialized = true;
+
+    document.addEventListener('click', function(event) {
+      const btn = event.target.closest('.load-more-btn');
+      if (!btn || btn.disabled) return;
+      
+      event.preventDefault();
+      
+      const nextUrl = btn.getAttribute('data-next-url');
+      if (!nextUrl) return;
+
+      const idleState = btn.querySelector('.load-more-idle');
+      const loadingState = btn.querySelector('.load-more-loading');
+
+      btn.disabled = true;
+      if (idleState) idleState.classList.add('hidden');
+      if (loadingState) loadingState.classList.remove('hidden');
+
+      fetch(nextUrl)
+        .then(function(response) {
+          if (!response.ok) throw new Error('Network error loading products');
+          return response.text();
+        })
+        .then(function(html) {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          const newProducts = doc.querySelectorAll('#product-grid .grid__item, #product-grid > li');
+          const grid = document.querySelector('#product-grid');
+          
+          if (grid && newProducts.length > 0) {
+            newProducts.forEach(function(product) {
+              product.classList.remove('scroll-trigger--offscreen');
+              product.classList.add('scroll-trigger--cancel');
+              const subTriggers = product.querySelectorAll('.scroll-trigger');
+              subTriggers.forEach(function(el) {
+                el.classList.remove('scroll-trigger--offscreen');
+                el.classList.add('scroll-trigger--cancel');
+              });
+              grid.appendChild(product);
+            });
+
+            if (typeof initializeScrollAnimationTrigger === 'function') {
+              try {
+                initializeScrollAnimationTrigger(grid);
+              } catch(e) {}
+            }
+          }
+
+          const newLoadMoreBtn = doc.querySelector('.load-more-btn');
+          if (newLoadMoreBtn && newLoadMoreBtn.getAttribute('data-next-url')) {
+            btn.setAttribute('data-next-url', newLoadMoreBtn.getAttribute('data-next-url'));
+            btn.disabled = false;
+            if (idleState) idleState.classList.remove('hidden');
+            if (loadingState) loadingState.classList.add('hidden');
+          } else {
+            const container = btn.closest('.load-more-container');
+            if (container) {
+              container.style.transition = 'opacity 0.3s ease';
+              container.style.opacity = '0';
+              setTimeout(function() {
+                container.remove();
+              }, 300);
+            }
+          }
+        })
+        .catch(function(error) {
+          console.error('Error loading more products:', error);
+          btn.disabled = false;
+          if (idleState) idleState.classList.remove('hidden');
+          if (loadingState) loadingState.classList.add('hidden');
+        });
+    });
+  })();
+</script>
