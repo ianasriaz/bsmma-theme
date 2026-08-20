@@ -6,7 +6,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading (Optional)",
-      "default": "Categories"
+      "default": "CATEGORIES"
     }
   ],
   "blocks": [
@@ -15,10 +15,14 @@
       "name": "Category Item",
       "settings": [
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
           "type": "text",
           "id": "title",
-          "label": "Category Title",
-          "default": "Category"
+          "label": "Category Title Override"
         },
         {
           "type": "image_picker",
@@ -33,7 +37,7 @@
         {
           "type": "url",
           "id": "link",
-          "label": "Collection Link"
+          "label": "Custom Link Override"
         },
         {
           "type": "checkbox",
@@ -63,23 +67,26 @@
 
     <div class="flex items-center gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-2 pt-1 -mx-4 px-4 md:mx-0 md:px-0" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
       {% for block in section.blocks %}
-        {%- assign title = block.settings.title -%}
-        {%- assign image = block.settings.image -%}
+        {%- assign collection = block.settings.collection -%}
+        {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
+        {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
         {%- assign custom_image_url = block.settings.custom_image_url -%}
-        {%- assign link = block.settings.link | default: '#' -%}
+        {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
         {%- assign is_hot = block.settings.is_hot -%}
 
         <a href="{{ link }}" class="group flex flex-col items-center flex-shrink-0 snap-start text-center focus:outline-none" {{ block.shopify_attributes }}>
           <!-- Large Circle Avatar with Glowing Luxury Ring -->
           <div class="relative w-[78px] h-[78px] sm:w-[88px] sm:h-[88px] md:w-[100px] md:h-[100px] p-[2.5px] rounded-full bg-gradient-to-tr from-zinc-600 via-zinc-700 to-zinc-500 group-hover:from-accent group-hover:to-red-500 transition-all duration-300 shadow-lg">
             <div class="w-full h-full rounded-full overflow-hidden bg-zinc-950 p-[2.5px]">
-              <div class="w-full h-full rounded-full overflow-hidden bg-zinc-900">
+              <div class="w-full h-full rounded-full overflow-hidden bg-zinc-900 flex items-center justify-center">
                 {% if custom_image_url != blank %}
                   <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" loading="lazy">
                 {% elsif image != blank %}
                   {{ image | image_url: width: 250 | image_tag: class: 'w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500', loading: 'lazy' }}
                 {% else %}
-                  {{ 'product-apparel-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-zinc-800' }}
+                  <div class="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-950 flex flex-col items-center justify-center p-2 text-zinc-400 group-hover:text-accent transition-colors">
+                    <span class="text-xs sm:text-sm font-black uppercase tracking-tighter">{{ title | slice: 0, 2 }}</span>
+                  </div>
                 {% endif %}
               </div>
             </div>
