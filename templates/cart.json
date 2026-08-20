@@ -1,5 +1,226 @@
 {
   "sections": {
+    "category_pills": {
+      "type": "category-pills",
+      "blocks": {
+        "shirts": {
+          "type": "category",
+          "settings": {
+            "title": "SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/EE89E2E3-B335-442F-8F96-46A319BABE5D.jpg?v=1775138656",
+            "link": "shopify://collections/shirts",
+            "is_hot": true
+          }
+        },
+        "t_shirts": {
+          "type": "category",
+          "settings": {
+            "title": "T-SHIRTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/70825E66-786B-42B2-86DF-F83F19C09A2D.jpg?v=1781076296",
+            "link": "shopify://collections/polos-tees",
+            "is_hot": true
+          }
+        },
+        "polos": {
+          "type": "category",
+          "settings": {
+            "title": "POLOS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAA6DAC0-3033-458E-8F00-F0EAFC3E93C9.jpg?v=1780315420",
+            "link": "shopify://collections/polo-shirts",
+            "is_hot": false
+          }
+        },
+        "summer_tracksuits": {
+          "type": "category",
+          "settings": {
+            "title": "SUMMER SETS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/B0915098-9820-43E8-A9B5-18E273C753D8.jpg?v=1781008020",
+            "link": "shopify://collections/tracksuits",
+            "is_hot": true
+          }
+        },
+        "winter_tracksuit": {
+          "type": "category",
+          "settings": {
+            "title": "WINTER TRACKSUIT",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/930FB5F9-0855-41F1-99C9-4AA895A1B483.jpg?v=1774625382",
+            "link": "shopify://collections/winter-tracksuit",
+            "is_hot": false
+          }
+        },
+        "caps": {
+          "type": "category",
+          "settings": {
+            "title": "CAPS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/1CCFE77D-3CD9-4BD2-9B80-23CD79662E53.jpg?v=1775063855",
+            "link": "shopify://collections/caps",
+            "is_hot": false
+          }
+        },
+        "luggage_bags": {
+          "type": "category",
+          "settings": {
+            "title": "LUGGAGE BAGS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/B220665A-5FAB-4091-B7DC-C224FC16B2BB.jpg?v=1776938466",
+            "link": "shopify://collections/luggage-bags",
+            "is_hot": false
+          }
+        },
+        "crossbody_bags": {
+          "type": "category",
+          "settings": {
+            "title": "CROSSBODY BAGS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/B803A7F6-6E14-4C76-A422-92F48370074C.jpg?v=1776770132",
+            "link": "shopify://collections/crossbody-bags",
+            "is_hot": false
+          }
+        },
+        "ladies_bags": {
+          "type": "category",
+          "settings": {
+            "title": "LADIES BAGS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/53FED047-BDC7-4529-8EF7-D289C40D4AFB.jpg?v=1775726653",
+            "link": "shopify://collections/ladies-bags",
+            "is_hot": false
+          }
+        },
+        "laptop_bags": {
+          "type": "category",
+          "settings": {
+            "title": "LAPTOP BAGS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/40A3D6EC-D107-4E02-BA61-A337963F350E.jpg?v=1775660872",
+            "link": "shopify://collections/laptop-bags",
+            "is_hot": false
+          }
+        },
+        "belts": {
+          "type": "category",
+          "settings": {
+            "title": "BELTS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/4BAEC428-8583-4092-9B24-B6FF726C76DA.jpg?v=1778596051",
+            "link": "shopify://collections/belts",
+            "is_hot": false
+          }
+        },
+        "short_wallets": {
+          "type": "category",
+          "settings": {
+            "title": "SHORT WALLETS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/3C7E0D18-2A45-4CBC-B9CD-8DBF3FE7A05A.jpg?v=1775315909",
+            "link": "shopify://collections/short-wallets",
+            "is_hot": false
+          }
+        },
+        "long_wallets": {
+          "type": "category",
+          "settings": {
+            "title": "LONG WALLETS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/ACE3EC7C-CA88-423B-8488-841B38EA0D0A.jpg?v=1775213407",
+            "link": "shopify://collections/long-wallets",
+            "is_hot": false
+          }
+        },
+        "jackets": {
+          "type": "category",
+          "settings": {
+            "title": "JACKETS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/2E781EEB-0878-4CE4-9A10-6FF79C91A7EF.jpg?v=1779804603",
+            "link": "shopify://collections/jackets",
+            "is_hot": false
+          }
+        },
+        "sweatshirt_hoodies": {
+          "type": "category",
+          "settings": {
+            "title": "HOODIES",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/A8ED9C1E-8490-4940-978D-F7D19B3B3D29.jpg?v=1780129980",
+            "link": "shopify://collections/sweatshirt-hoodies",
+            "is_hot": false
+          }
+        },
+        "sweaters": {
+          "type": "category",
+          "settings": {
+            "title": "SWEATERS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/79A63561-B288-4760-9089-DEF221298322.jpg?v=1778332476",
+            "link": "shopify://collections/sweater-s",
+            "is_hot": false
+          }
+        },
+        "trousers": {
+          "type": "category",
+          "settings": {
+            "title": "TROUSERS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/FC5C3CD3-EA10-4DD2-B804-357E89C17CCF.jpg?v=1783523019",
+            "link": "shopify://collections/trousers",
+            "is_hot": false
+          }
+        },
+        "shoes_sneakers": {
+          "type": "category",
+          "settings": {
+            "title": "SHOES & SNEAKERS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/E7589FF5-14CD-4FFF-B5EA-2740E0EF1C79.jpg?v=1779779959",
+            "link": "shopify://collections/shoes",
+            "is_hot": false
+          }
+        },
+        "slippers": {
+          "type": "category",
+          "settings": {
+            "title": "SLIPPERS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/5089812B-8634-4BD4-9E01-D87CC2582D09.jpg?v=1780997997",
+            "link": "shopify://collections/slippers",
+            "is_hot": false
+          }
+        },
+        "socks": {
+          "type": "category",
+          "settings": {
+            "title": "SOCKS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/SHIRTS.jpg?v=1782605022",
+            "link": "shopify://collections/sox",
+            "is_hot": false
+          }
+        },
+        "scarfs": {
+          "type": "category",
+          "settings": {
+            "title": "SCARFS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/9E9CAB69-44E9-48A0-9ED2-F504E3AE6E48.jpg?v=1777885044",
+            "link": "shopify://collections/scarfs",
+            "is_hot": false
+          }
+        }
+      },
+      "block_order": [
+        "shirts",
+        "t_shirts",
+        "polos",
+        "summer_tracksuits",
+        "winter_tracksuit",
+        "caps",
+        "luggage_bags",
+        "crossbody_bags",
+        "ladies_bags",
+        "laptop_bags",
+        "belts",
+        "short_wallets",
+        "long_wallets",
+        "jackets",
+        "sweatshirt_hoodies",
+        "sweaters",
+        "trousers",
+        "shoes_sneakers",
+        "slippers",
+        "socks",
+        "scarfs"
+      ],
+      "settings": {
+        "heading": "CATEGORIES",
+        "show_heading": true
+      }
+    },
     "cart-items": {
       "type": "main-cart-items",
       "settings": {
@@ -34,6 +255,7 @@
     }
   },
   "order": [
+    "category_pills",
     "cart-items",
     "cart-footer"
   ]
