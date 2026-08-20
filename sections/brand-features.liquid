@@ -18,44 +18,147 @@
 }
 {% endschema %}
 
-<section class="w-full bg-[#09090b] py-12 md:py-16 border-b border-zinc-800">
-  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+<style>
+  .brand-features-section {
+    width: 100%;
+    background-color: #09090b;
+    border-bottom: 1px solid rgba(39, 39, 42, 0.9);
+    padding: 36px 0;
+  }
+  @media (min-width: 768px) {
+    .brand-features-section {
+      padding: 56px 0;
+    }
+  }
+  .brand-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .brand-features-grid {
+      gap: 18px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .brand-features-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+  .brand-feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #111114;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    padding: 22px 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    height: 100%;
+    justify-content: flex-start;
+  }
+  @media (min-width: 640px) {
+    .brand-feature-card {
+      padding: 30px 20px;
+    }
+  }
+  .brand-feature-card:hover {
+    border-color: #52525b;
+    transform: translateY(-2px);
+  }
+  .brand-feature-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 9999px;
+    background-color: #18181b;
+    border: 1px solid #3f3f46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  @media (min-width: 640px) {
+    .brand-feature-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 16px;
+    }
+  }
+  .brand-feature-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 6px 0;
+    line-height: 1.3;
+  }
+  @media (min-width: 640px) {
+    .brand-feature-title {
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+  }
+  .brand-feature-desc {
+    font-size: 11px;
+    font-weight: 500;
+    color: #a1a1aa;
+    margin: 0;
+    line-height: 1.4;
+  }
+  @media (min-width: 640px) {
+    .brand-feature-desc {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<section class="brand-features-section">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8">
+    <div class="brand-features-grid">
       
       <!-- Feature 1 -->
-      <div class="flex flex-col items-center text-center p-6 md:p-8 bg-[#111114] border border-zinc-800/90 rounded-lg shadow-lg hover:border-zinc-600 transition-all duration-300">
-        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-white mb-4 shadow-inner">
-          <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      <div class="brand-feature-card">
+        <div class="brand-feature-icon">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
         </div>
-        <h4 class="font-sans font-black text-sm md:text-base text-white uppercase tracking-wider mb-2">High Grade Quality</h4>
-        <p class="text-xs md:text-sm text-zinc-400 font-medium m-0 leading-normal">1:1 Master Turkish luxury apparel</p>
+        <h4 class="brand-feature-title">High Grade Quality</h4>
+        <p class="brand-feature-desc">1:1 Master Turkish luxury apparel</p>
       </div>
 
       <!-- Feature 2 -->
-      <div class="flex flex-col items-center text-center p-6 md:p-8 bg-[#111114] border border-zinc-800/90 rounded-lg shadow-lg hover:border-zinc-600 transition-all duration-300">
-        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-white mb-4 shadow-inner">
-          <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <div class="brand-feature-card">
+        <div class="brand-feature-icon">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
-        <h4 class="font-sans font-black text-sm md:text-base text-white uppercase tracking-wider mb-2">Express Delivery</h4>
-        <p class="text-xs md:text-sm text-zinc-400 font-medium m-0 leading-normal">Free shipping over Rs. 5,000</p>
+        <h4 class="brand-feature-title">Express Delivery</h4>
+        <p class="brand-feature-desc">Free shipping over Rs. 5,000</p>
       </div>
 
       <!-- Feature 3 -->
-      <div class="flex flex-col items-center text-center p-6 md:p-8 bg-[#111114] border border-zinc-800/90 rounded-lg shadow-lg hover:border-zinc-600 transition-all duration-300">
-        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-white mb-4 shadow-inner">
-          <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      <div class="brand-feature-card">
+        <div class="brand-feature-icon">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
         </div>
-        <h4 class="font-sans font-black text-sm md:text-base text-white uppercase tracking-wider mb-2">Easy Exchanges</h4>
-        <p class="text-xs md:text-sm text-zinc-400 font-medium m-0 leading-normal">Hassle-free size replacement</p>
+        <h4 class="brand-feature-title">Easy Exchanges</h4>
+        <p class="brand-feature-desc">Hassle-free size replacement</p>
       </div>
 
       <!-- Feature 4 -->
-      <div class="flex flex-col items-center text-center p-6 md:p-8 bg-[#111114] border border-zinc-800/90 rounded-lg shadow-lg hover:border-zinc-600 transition-all duration-300">
-        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-white mb-4 shadow-inner">
-          <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      <div class="brand-feature-card">
+        <div class="brand-feature-icon">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
         </div>
-        <h4 class="font-sans font-black text-sm md:text-base text-white uppercase tracking-wider mb-2">VIP Concierge</h4>
-        <p class="text-xs md:text-sm text-zinc-400 font-medium m-0 leading-normal">WhatsApp support available 24/7</p>
+        <h4 class="brand-feature-title">VIP Concierge</h4>
+        <p class="brand-feature-desc">WhatsApp support available 24/7</p>
       </div>
 
     </div>
