@@ -13,6 +13,24 @@
       "id": "show_heading",
       "label": "Display Section Heading",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "ring_style",
+      "label": "Story Ring Style",
+      "options": [
+        { "value": "instagram", "label": "Instagram Sunset (Vibrant Pink/Orange/Purple)" },
+        { "value": "cyber_neon", "label": "Cyber Neon (Electric Violet/Cyan/Pink)" },
+        { "value": "gold_luxury", "label": "Luxury Champagne & Gold" },
+        { "value": "monochrome", "label": "Minimal Brushed Titanium" }
+      ],
+      "default": "instagram"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_view_tracking",
+      "label": "Track Viewed Stories (Unread glow / Viewed muted)",
+      "default": true
     }
   ],
   "blocks": [
@@ -68,35 +86,48 @@
     width: 100%;
     background-color: #070709;
     border-bottom: 1px solid rgba(39, 39, 42, 0.6);
-    padding: 16px 0 18px;
+    padding: 16px 0 20px;
     overflow: hidden;
     contain: layout paint;
     position: relative;
     z-index: 10;
+    user-select: none;
   }
+
+  .story-nav-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
   .story-scroll-container {
     display: flex;
     align-items: center;
     gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 6px;
-    padding-top: 4px;
+    padding: 6px 4px 8px;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
     will-change: scroll-position;
     transform: translateZ(0);
+    scroll-behavior: smooth;
+    width: 100%;
   }
+
   .story-scroll-container::-webkit-scrollbar {
     display: none;
   }
+
   @media (min-width: 640px) {
     .story-scroll-container {
       gap: 22px;
     }
   }
+
+  /* Story Item Component */
   .story-item {
     display: flex;
     flex-direction: column;
@@ -107,59 +138,137 @@
     width: 80px;
     text-align: center;
     outline: none;
-    transition: transform 0.25s ease;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
   }
+
   @media (min-width: 640px) {
     .story-item {
       width: 92px;
     }
   }
+
   .story-item:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.03);
   }
+
+  .story-item:active {
+    transform: scale(0.93);
+    transition: transform 0.1s ease;
+  }
+
+  /* Instagram Vibrant Gradient Story Rings */
   .story-ring {
     position: relative;
-    width: 72px;
-    height: 72px;
+    width: 74px;
+    height: 74px;
     border-radius: 9999px;
-    padding: 2px;
-    background: linear-gradient(135deg, #27272a, #52525b, #18181b);
+    padding: 2.5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
     flex-shrink: 0;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   @media (min-width: 640px) {
     .story-ring {
-      width: 84px;
-      height: 84px;
+      width: 86px;
+      height: 86px;
+      padding: 3px;
     }
   }
-  .story-item:hover .story-ring,
-  .story-item.story-item--active .story-ring {
+
+  /* Ring Style: Instagram Sunset Gradient (Iconic & Clickable) */
+  .story-ring--instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    box-shadow: 0 4px 14px rgba(220, 39, 67, 0.35);
+  }
+
+  .story-item:hover .story-ring--instagram {
+    box-shadow: 0 0 22px rgba(220, 39, 67, 0.65), 0 0 10px rgba(240, 148, 51, 0.5);
+  }
+
+  /* Ring Style: Cyber Neon */
+  .story-ring--cyber_neon {
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 30%, #7928ca 70%, #ff0080 100%);
+    box-shadow: 0 4px 14px rgba(79, 172, 254, 0.4);
+  }
+
+  .story-item:hover .story-ring--cyber_neon {
+    box-shadow: 0 0 22px rgba(255, 0, 128, 0.65), 0 0 10px rgba(0, 242, 254, 0.5);
+  }
+
+  /* Ring Style: Gold Luxury */
+  .story-ring--gold_luxury {
+    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    box-shadow: 0 4px 14px rgba(179, 135, 40, 0.4);
+  }
+
+  .story-item:hover .story-ring--gold_luxury {
+    box-shadow: 0 0 20px rgba(252, 246, 186, 0.6);
+  }
+
+  /* Ring Style: Minimal Titanium */
+  .story-ring--monochrome {
+    background: linear-gradient(135deg, #52525b, #a1a1aa, #27272a);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .story-item:hover .story-ring--monochrome {
     background: linear-gradient(135deg, #ffffff, #d4d4d8, #71717a);
-    box-shadow: 0 0 16px rgba(255, 255, 255, 0.28);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
   }
-  .story-item.story-item--active .story-title {
-    color: #ffffff;
-    font-weight: 800;
+
+  /* Viewed State (Gentle muted ring to trigger unread FOMO) */
+  .story-item.story-item--viewed:not(.story-item--active) .story-ring {
+    background: #27272a;
+    box-shadow: none;
   }
+
+  .story-item.story-item--viewed:not(.story-item--active):hover .story-ring {
+    background: #52525b;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  }
+
+  /* Active Current Category Highlight */
+  .story-item.story-item--active .story-ring {
+    background: linear-gradient(135deg, #ffffff, #f4f4f5, #a1a1aa);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 6px #ffffff;
+  }
+
+  /* Pulsing Attention Ring for HOT/Featured items */
+  @keyframes story-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(220, 39, 67, 0.6);
+    }
+    70% {
+      box-shadow: 0 0 0 8px rgba(220, 39, 67, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(220, 39, 67, 0);
+    }
+  }
+
+  .story-ring--pulse {
+    animation: story-pulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
+  /* Inner Dark Bezel Gap (Signature Instagram Spacer) */
   .story-inner-bezel {
     width: 100%;
     height: 100%;
     border-radius: 9999px;
     background-color: #070709;
-    padding: 2px;
+    padding: 2.5px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
+
+  /* Image Container & Avatar */
   .story-img-wrap {
     width: 100%;
     height: 100%;
@@ -171,6 +280,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .story-img {
     width: 100% !important;
     height: 100% !important;
@@ -180,35 +290,58 @@
     object-fit: cover !important;
     object-position: center !important;
     display: block !important;
-    transition: transform 0.4s ease-out !important;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
     will-change: transform;
   }
-  .story-item:hover .story-img,
-  .story-item.story-item--active .story-img {
-    transform: scale(1.1);
+
+  .story-item:hover .story-img {
+    transform: scale(1.14);
   }
+
+  /* Interactive Story Badge (Bottom-Centered Instagram LIVE/HOT style) */
   .story-badge {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 9px;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #f09433, #dc2743);
+    color: #ffffff;
+    font-size: 8.5px;
     font-weight: 900;
-    letter-spacing: 0.12em;
-    padding: 1.5px 6px;
+    letter-spacing: 0.14em;
+    padding: 2px 7px;
     border-radius: 9999px;
     text-transform: uppercase;
-    border: 1.5px solid #000000;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    border: 1.5px solid #070709;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(220, 39, 67, 0.5);
     z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 3.5px;
+    white-space: nowrap;
   }
+
+  .story-badge-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    display: inline-block;
+    animation: story-dot-blink 1.2s infinite ease-in-out;
+  }
+
+  @keyframes story-dot-blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.7); }
+  }
+
+  /* Category Typography */
   .story-title {
-    margin-top: 7px;
+    margin-top: 8px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     color: #a1a1aa;
     text-align: center;
     width: 100%;
@@ -216,16 +349,66 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
   }
+
   @media (min-width: 640px) {
     .story-title {
       font-size: 12px;
       max-width: 90px;
     }
   }
+
   .story-item:hover .story-title {
     color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+
+  .story-item.story-item--active .story-title {
+    color: #ffffff;
+    font-weight: 900;
+  }
+
+  /* Desktop Carousel Arrow Navigation */
+  .story-arrow-btn {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 38px;
+    height: 38px;
+    border-radius: 9999px;
+    background: rgba(18, 18, 21, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+  }
+
+  @media (min-width: 1024px) {
+    .story-arrow-btn {
+      display: flex;
+    }
+  }
+
+  .story-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    color: #000000;
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .story-arrow-prev {
+    left: -12px;
+  }
+
+  .story-arrow-next {
+    right: -12px;
   }
 </style>
 
@@ -233,90 +416,152 @@
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
     
     {% if section.settings.show_heading and section.settings.heading != blank %}
-      <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center justify-between mb-3.5">
         <h2 class="text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-zinc-300 m-0">
           {{ section.settings.heading }}
         </h2>
-        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
-          SWIPE TO EXPLORE
+        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 flex items-center gap-1.5">
+          <span>SWIPE TO EXPLORE</span>
+          <span class="text-zinc-400">→</span>
         </span>
       </div>
     {% endif %}
 
-    <!-- Story Circles Row -->
-    <div class="story-scroll-container">
-      {% for block in section.blocks %}
-        {%- assign collection = block.settings.collection -%}
-        {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
-        {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
-        {%- assign raw_custom_url = block.settings.custom_image_url -%}
-        {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
-        {%- assign is_hot = block.settings.is_hot -%}
+    <div class="story-nav-wrapper">
+      <!-- Desktop Left Arrow -->
+      <button 
+        type="button" 
+        class="story-arrow-btn story-arrow-prev" 
+        aria-label="Previous categories"
+        onclick="document.getElementById('storyScrollContainer-{{ section.id }}').scrollBy({left: -320, behavior: 'smooth'})"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
 
-        {%- assign is_active = false -%}
-        {%- if template.name == 'collection' and collection != blank and collection.handle == collection.handle -%}
-          {%- if request.path contains collection.handle or canonical_url contains collection.handle -%}
-            {%- assign is_active = true -%}
-          {%- endif -%}
-        {%- endif -%}
+      <!-- Story Circles Row -->
+      <div class="story-scroll-container" id="storyScrollContainer-{{ section.id }}">
+        {% for block in section.blocks %}
+          {%- assign collection = block.settings.collection -%}
+          {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
+          {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
+          {%- assign raw_custom_url = block.settings.custom_image_url -%}
+          {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
+          {%- assign is_hot = block.settings.is_hot -%}
+          {%- assign item_id = block.id | default: forloop.index -%}
 
-        {%- comment -%} Efficient Shopify CDN image resizing to avoid huge 5MB image downloads {%- endcomment -%}
-        {%- assign custom_image_url = blank -%}
-        {%- if raw_custom_url != blank -%}
-          {%- if raw_custom_url contains 'cdn.shopify.com' -%}
-            {%- if raw_custom_url contains '?' -%}
-              {%- assign custom_image_url = raw_custom_url | append: '&width=180&crop=center' -%}
-            {%- else -%}
-              {%- assign custom_image_url = raw_custom_url | append: '?width=180&crop=center' -%}
+          {%- assign is_active = false -%}
+          {%- if template.name == 'collection' and collection != blank and collection.handle == collection.handle -%}
+            {%- if request.path contains collection.handle or canonical_url contains collection.handle -%}
+              {%- assign is_active = true -%}
             {%- endif -%}
-          {%- else -%}
-            {%- assign custom_image_url = raw_custom_url -%}
           {%- endif -%}
-        {%- endif -%}
 
-        <a 
-          href="{{ link }}" 
-          class="story-item{% if is_active %} story-item--active{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          <!-- Story Ring -->
-          <div class="story-ring{% if is_active %} story-ring--active{% endif %}">
-            <div class="story-inner-bezel">
-              <div class="story-img-wrap">
-                {% if custom_image_url != blank %}
-                  <img 
-                    src="{{ custom_image_url }}" 
-                    alt="{{ title | escape }}" 
-                    class="story-img" 
-                    width="84"
-                    height="84"
-                    loading="{% if forloop.index <= 8 %}eager{% else %}lazy{% endif %}"
-                    {% if forloop.index <= 4 %}fetchpriority="high"{% endif %}
-                  >
-                {% elsif image != blank %}
-                  {{ image | image_url: width: 180, crop: 'center' | image_tag: class: 'story-img', width: 84, height: 84, loading: 'eager' }}
-                {% else %}
-                  <div class="w-full h-full bg-zinc-900 flex flex-col items-center justify-center p-2 text-zinc-400">
-                    <span class="text-xs font-black uppercase">{{ title | slice: 0, 2 }}</span>
-                  </div>
-                {% endif %}
+          {%- comment -%} Efficient Shopify CDN image resizing to avoid huge 5MB image downloads {%- endcomment -%}
+          {%- assign custom_image_url = blank -%}
+          {%- if raw_custom_url != blank -%}
+            {%- if raw_custom_url contains 'cdn.shopify.com' -%}
+              {%- if raw_custom_url contains '?' -%}
+                {%- assign custom_image_url = raw_custom_url | append: '&width=180&crop=center' -%}
+              {%- else -%}
+                {%- assign custom_image_url = raw_custom_url | append: '?width=180&crop=center' -%}
+              {%- endif -%}
+            {%- else -%}
+              {%- assign custom_image_url = raw_custom_url -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          <a 
+            href="{{ link }}" 
+            class="story-item{% if is_active %} story-item--active{% endif %}"
+            data-story-id="{{ item_id }}"
+            data-story-link="{{ link }}"
+            onclick="bsmmaRecordStoryView('{{ link }}')"
+            {{ block.shopify_attributes }}
+          >
+            <!-- Story Ring -->
+            <div class="story-ring story-ring--{{ section.settings.ring_style | default: 'instagram' }}{% if is_active %} story-ring--active{% endif %}{% if is_hot %} story-ring--pulse{% endif %}">
+              <div class="story-inner-bezel">
+                <div class="story-img-wrap">
+                  {% if custom_image_url != blank %}
+                    <img 
+                      src="{{ custom_image_url }}" 
+                      alt="{{ title | escape }}" 
+                      class="story-img" 
+                      width="84"
+                      height="84"
+                      loading="{% if forloop.index <= 8 %}eager{% else %}lazy{% endif %}"
+                      {% if forloop.index <= 4 %}fetchpriority="high"{% endif %}
+                    >
+                  {% elsif image != blank %}
+                    {{ image | image_url: width: 180, crop: 'center' | image_tag: class: 'story-img', width: 84, height: 84, loading: 'eager' }}
+                  {% else %}
+                    <div class="w-full h-full bg-zinc-900 flex flex-col items-center justify-center p-2 text-zinc-400">
+                      <span class="text-xs font-black uppercase">{{ title | slice: 0, 2 }}</span>
+                    </div>
+                  {% endif %}
+                </div>
               </div>
+
+              {% if is_hot %}
+                <span class="story-badge">
+                  <span class="story-badge-dot"></span>
+                  HOT
+                </span>
+              {% endif %}
             </div>
 
-            {% if is_hot %}
-              <span class="story-badge">
-                HOT
-              </span>
-            {% endif %}
-          </div>
+            <!-- Category Typography -->
+            <span class="story-title">
+              {{ title }}
+            </span>
+          </a>
+        {% endfor %}
+      </div>
 
-          <!-- Category Typography -->
-          <span class="story-title">
-            {{ title }}
-          </span>
-        </a>
-      {% endfor %}
+      <!-- Desktop Right Arrow -->
+      <button 
+        type="button" 
+        class="story-arrow-btn story-arrow-next" 
+        aria-label="Next categories"
+        onclick="document.getElementById('storyScrollContainer-{{ section.id }}').scrollBy({left: 320, behavior: 'smooth'})"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
     </div>
 
   </div>
 </section>
+
+<script>
+  function bsmmaRecordStoryView(link) {
+    try {
+      if (!link || link === '#') return;
+      var viewed = JSON.parse(localStorage.getItem('bsmma_viewed_stories') || '[]');
+      if (viewed.indexOf(link) === -1) {
+        viewed.push(link);
+        localStorage.setItem('bsmma_viewed_stories', JSON.stringify(viewed));
+      }
+    } catch (e) {}
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      {% if section.settings.enable_view_tracking %}
+        var viewed = JSON.parse(localStorage.getItem('bsmma_viewed_stories') || '[]');
+        if (viewed && viewed.length > 0) {
+          var items = document.querySelectorAll('.story-item[data-story-link]');
+          items.forEach(function(item) {
+            var link = item.getAttribute('data-story-link');
+            if (viewed.indexOf(link) !== -1) {
+              item.classList.add('story-item--viewed');
+            }
+          });
+        }
+      {% endif %}
+    } catch (e) {}
+  });
+</script>
