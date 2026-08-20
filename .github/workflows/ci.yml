@@ -1,12 +1,19 @@
 name: CI
-on: [push]
+on: [push, pull_request]
+
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   theme-check:
     name: Theme Check
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Theme Check
         uses: shopify/theme-check-action@v2
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
