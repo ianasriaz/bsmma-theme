@@ -68,8 +68,11 @@
     width: 100%;
     background-color: #070709;
     border-bottom: 1px solid rgba(39, 39, 42, 0.6);
-    padding: 20px 0;
+    padding: 16px 0 18px;
     overflow: hidden;
+    contain: layout paint;
+    position: relative;
+    z-index: 10;
   }
   .story-scroll-container {
     display: flex;
@@ -77,18 +80,21 @@
     gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
     padding-top: 4px;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    will-change: scroll-position;
+    transform: translateZ(0);
   }
   .story-scroll-container::-webkit-scrollbar {
     display: none;
   }
   @media (min-width: 640px) {
     .story-scroll-container {
-      gap: 24px;
+      gap: 22px;
     }
   }
   .story-item {
@@ -98,14 +104,17 @@
     flex-shrink: 0;
     scroll-snap-align: start;
     text-decoration: none;
-    width: 82px;
+    width: 80px;
     text-align: center;
     outline: none;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
   @media (min-width: 640px) {
     .story-item {
-      width: 96px;
+      width: 92px;
     }
   }
   .story-item:hover {
@@ -113,8 +122,8 @@
   }
   .story-ring {
     position: relative;
-    width: 74px;
-    height: 74px;
+    width: 72px;
+    height: 72px;
     border-radius: 9999px;
     padding: 2px;
     background: linear-gradient(135deg, #27272a, #52525b, #18181b);
@@ -122,17 +131,18 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
   }
   @media (min-width: 640px) {
     .story-ring {
-      width: 86px;
-      height: 86px;
+      width: 84px;
+      height: 84px;
     }
   }
   .story-item:hover .story-ring {
     background: linear-gradient(135deg, #ffffff, #d4d4d8, #71717a);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.22);
   }
   .story-inner-bezel {
     width: 100%;
@@ -165,10 +175,11 @@
     object-fit: cover !important;
     object-position: center !important;
     display: block !important;
-    transition: transform 0.5s ease-out !important;
+    transition: transform 0.4s ease-out !important;
+    will-change: transform;
   }
   .story-item:hover .story-img {
-    transform: scale(1.12);
+    transform: scale(1.1);
   }
   .story-badge {
     position: absolute;
@@ -183,15 +194,15 @@
     border-radius: 9999px;
     text-transform: uppercase;
     border: 1.5px solid #000000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
     z-index: 10;
   }
   .story-title {
-    margin-top: 8px;
+    margin-top: 7px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     color: #a1a1aa;
     text-align: center;
     width: 100%;
@@ -204,7 +215,7 @@
   @media (min-width: 640px) {
     .story-title {
       font-size: 12px;
-      max-width: 94px;
+      max-width: 90px;
     }
   }
   .story-item:hover .story-title {
@@ -216,7 +227,7 @@
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
     
     {% if section.settings.show_heading and section.settings.heading != blank %}
-      <div class="flex items-center justify-between mb-3.5">
+      <div class="flex items-center justify-between mb-3">
         <h2 class="text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-zinc-300 flex items-center gap-2 m-0">
           <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse inline-block"></span>
           {{ section.settings.heading }}
@@ -233,9 +244,23 @@
         {%- assign collection = block.settings.collection -%}
         {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
         {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
-        {%- assign custom_image_url = block.settings.custom_image_url -%}
+        {%- assign raw_custom_url = block.settings.custom_image_url -%}
         {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
         {%- assign is_hot = block.settings.is_hot -%}
+
+        {%- comment -%} Efficient Shopify CDN image resizing to avoid huge 5MB image downloads {%- endcomment -%}
+        {%- assign custom_image_url = blank -%}
+        {%- if raw_custom_url != blank -%}
+          {%- if raw_custom_url contains 'cdn.shopify.com' -%}
+            {%- if raw_custom_url contains '?' -%}
+              {%- assign custom_image_url = raw_custom_url | append: '&width=180&crop=center' -%}
+            {%- else -%}
+              {%- assign custom_image_url = raw_custom_url | append: '?width=180&crop=center' -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- assign custom_image_url = raw_custom_url -%}
+          {%- endif -%}
+        {%- endif -%}
 
         <a 
           href="{{ link }}" 
@@ -249,12 +274,15 @@
                 {% if custom_image_url != blank %}
                   <img 
                     src="{{ custom_image_url }}" 
-                    alt="{{ title }}" 
+                    alt="{{ title | escape }}" 
                     class="story-img" 
-                    loading="lazy"
+                    width="84"
+                    height="84"
+                    loading="{% if forloop.index <= 8 %}eager{% else %}lazy{% endif %}"
+                    {% if forloop.index <= 4 %}fetchpriority="high"{% endif %}
                   >
                 {% elsif image != blank %}
-                  {{ image | image_url: width: 260 | image_tag: class: 'story-img', loading: 'lazy' }}
+                  {{ image | image_url: width: 180, crop: 'center' | image_tag: class: 'story-img', width: 84, height: 84, loading: 'eager' }}
                 {% else %}
                   <div class="w-full h-full bg-zinc-900 flex flex-col items-center justify-center p-2 text-zinc-400">
                     <span class="text-xs font-black uppercase">{{ title | slice: 0, 2 }}</span>

@@ -137,24 +137,37 @@
         {% for block in section.blocks %}
           {%- assign collection = block.settings.collection -%}
           {%- assign custom_image = block.settings.custom_image -%}
-          {%- assign custom_image_url = block.settings.custom_image_url -%}
+          {%- assign raw_card_img = block.settings.custom_image_url -%}
+          {%- assign card_img_url = blank -%}
+          {%- if raw_card_img != blank -%}
+            {%- if raw_card_img contains 'cdn.shopify.com' -%}
+              {%- if raw_card_img contains '?' -%}
+                {%- assign card_img_url = raw_card_img | append: '&width=800' -%}
+              {%- else -%}
+                {%- assign card_img_url = raw_card_img | append: '?width=800' -%}
+              {%- endif -%}
+            {%- else -%}
+              {%- assign card_img_url = raw_card_img -%}
+            {%- endif -%}
+          {%- endif -%}
           {%- assign title = block.settings.title | default: collection.title | default: 'Collection' -%}
           {%- assign tagline = block.settings.tagline | default: 'EXPLORE COLLECTION' -%}
           {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
 
           <a 
             href="{{ link }}" 
-            class="group rounded-lg overflow-hidden bg-[#111114] border border-zinc-800/90 hover:border-zinc-500 transition-all duration-500 shadow-2xl"
+            class="group rounded-lg overflow-hidden bg-[#111114] border border-zinc-800/90 hover:border-zinc-500 transition-all duration-300 shadow-2xl"
+            style="contain: layout paint;"
             {{ block.shopify_attributes }}
           >
             <!-- Background Image Frame -->
-            <div class="absolute inset-0 w-full h-full overflow-hidden bg-zinc-950">
-              {% if custom_image_url != blank %}
-                <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+            <div class="absolute inset-0 w-full h-full overflow-hidden bg-zinc-950 pointer-events-none">
+              {% if card_img_url != blank %}
+                <img src="{{ card_img_url }}" alt="{{ title | escape }}" class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy" width="600" height="600">
               {% elsif custom_image != blank %}
-                {{ custom_image | image_url: width: 1200 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
+                {{ custom_image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105', loading: 'lazy' }}
               {% elsif collection != blank and collection.image != blank %}
-                {{ collection.image | image_url: width: 1200 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105', loading: 'lazy' }}
+                {{ collection.image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105', loading: 'lazy' }}
               {% else %}
                 {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-40 !fill-zinc-800' }}
               {% endif %}
