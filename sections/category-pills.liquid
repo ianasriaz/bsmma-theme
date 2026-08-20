@@ -1,12 +1,18 @@
 {% schema %}
 {
-  "name": "Category Quick Nav",
+  "name": "Category Stories Nav",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Heading (Optional)",
       "default": "CATEGORIES"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Display Section Heading",
+      "default": true
     }
   ],
   "blocks": [
@@ -50,60 +56,95 @@
   ],
   "presets": [
     {
-      "name": "Category Quick Nav",
+      "name": "Category Stories Nav",
       "category": "Collection"
     }
   ]
 }
 {% endschema %}
 
-<section class="w-full bg-[#09090b] border-b border-zinc-800 py-6 md:py-8 overflow-hidden">
-  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-    {% if section.settings.heading != blank %}
-      <div class="mb-4">
-        <h3 class="text-sm md:text-base uppercase tracking-[0.2em] font-black text-zinc-300">{{ section.settings.heading }}</h3>
+<style>
+  .story-scroll-container {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .story-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<section class="relative w-full bg-[#08080a] border-b border-zinc-800/80 py-5 sm:py-7 overflow-hidden select-none">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 relative">
+    
+    {% if section.settings.show_heading and section.settings.heading != blank %}
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-zinc-300 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block"></span>
+          {{ section.settings.heading }}
+        </h2>
+        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
+          SWIPE TO EXPLORE
+        </span>
       </div>
     {% endif %}
 
-    <div class="flex items-center gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-2 pt-1 -mx-4 px-4 md:mx-0 md:px-0" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
-      {% for block in section.blocks %}
-        {%- assign collection = block.settings.collection -%}
-        {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
-        {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
-        {%- assign custom_image_url = block.settings.custom_image_url -%}
-        {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
-        {%- assign is_hot = block.settings.is_hot -%}
+    <!-- Story Circles Row with Subtle Masking -->
+    <div class="relative group/track">
+      <div class="story-scroll-container flex items-center gap-4 sm:gap-6 md:gap-7 overflow-x-auto snap-x snap-mandatory pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth">
+        {% for block in section.blocks %}
+          {%- assign collection = block.settings.collection -%}
+          {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
+          {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
+          {%- assign custom_image_url = block.settings.custom_image_url -%}
+          {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
+          {%- assign is_hot = block.settings.is_hot -%}
 
-        <a href="{{ link }}" class="group flex flex-col items-center flex-shrink-0 snap-start text-center focus:outline-none" {{ block.shopify_attributes }}>
-          <!-- Large Circle Avatar with Glowing Luxury Ring -->
-          <div class="relative w-[78px] h-[78px] sm:w-[88px] sm:h-[88px] md:w-[100px] md:h-[100px] p-[2.5px] rounded-full bg-gradient-to-tr from-zinc-600 via-zinc-700 to-zinc-500 group-hover:from-accent group-hover:to-red-500 transition-all duration-300 shadow-lg">
-            <div class="w-full h-full rounded-full overflow-hidden bg-zinc-950 p-[2.5px]">
-              <div class="w-full h-full rounded-full overflow-hidden bg-zinc-900 flex items-center justify-center">
-                {% if custom_image_url != blank %}
-                  <img src="{{ custom_image_url }}" alt="{{ title }}" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                {% elsif image != blank %}
-                  {{ image | image_url: width: 250 | image_tag: class: 'w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500', loading: 'lazy' }}
-                {% else %}
-                  <div class="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-950 flex flex-col items-center justify-center p-2 text-zinc-400 group-hover:text-accent transition-colors">
-                    <span class="text-xs sm:text-sm font-black uppercase tracking-tighter">{{ title | slice: 0, 2 }}</span>
-                  </div>
-                {% endif %}
+          <a 
+            href="{{ link }}" 
+            class="group/story flex flex-col items-center flex-shrink-0 snap-start text-center focus:outline-none transition-transform duration-300 hover:-translate-y-1"
+            {{ block.shopify_attributes }}
+          >
+            <!-- Minimal Luxury Story Ring -->
+            <div class="relative w-[74px] h-[74px] sm:w-[84px] sm:h-[84px] md:w-[94px] md:h-[94px] p-[1.5px] sm:p-[2px] rounded-full bg-gradient-to-tr from-zinc-700/60 via-zinc-500/40 to-zinc-700/60 group-hover/story:from-accent group-hover/story:via-zinc-200 group-hover/story:to-accent transition-all duration-500 shadow-md">
+              <div class="w-full h-full rounded-full overflow-hidden bg-[#09090b] p-[2px]">
+                <div class="w-full h-full rounded-full overflow-hidden bg-zinc-950 flex items-center justify-center relative">
+                  {% if custom_image_url != blank %}
+                    <img 
+                      src="{{ custom_image_url }}" 
+                      alt="{{ title }}" 
+                      class="w-full h-full object-cover object-center group-hover/story:scale-110 transition-transform duration-700 ease-out" 
+                      loading="lazy"
+                    >
+                  {% elsif image != blank %}
+                    {{ image | image_url: width: 260 | image_tag: class: 'w-full h-full object-cover object-center group-hover/story:scale-110 transition-transform duration-700 ease-out', loading: 'lazy' }}
+                  {% else %}
+                    <div class="w-full h-full bg-gradient-to-br from-zinc-900 to-zinc-950 flex flex-col items-center justify-center p-2 text-zinc-400 group-hover/story:text-accent transition-colors">
+                      <span class="text-[11px] sm:text-xs font-black uppercase tracking-tighter">{{ title | slice: 0, 2 }}</span>
+                    </div>
+                  {% endif %}
+                  
+                  <!-- Subtle Inner Vignette for Clean Luxury Framing -->
+                  <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+                </div>
               </div>
+
+              <!-- Minimalist Luxury 'HOT' Pill -->
+              {% if is_hot %}
+                <span class="absolute -top-1 -right-1 bg-accent text-white text-[9px] font-black tracking-widest px-1.5 py-0.5 rounded-full uppercase border border-black/90 shadow-md">
+                  HOT
+                </span>
+              {% endif %}
             </div>
 
-            {% if is_hot %}
-              <span class="absolute -top-1.5 -right-1.5 bg-accent text-white text-[10px] md:text-xs font-black tracking-wider px-2 py-0.5 rounded-full uppercase border-2 border-black shadow-md">
-                HOT
-              </span>
-            {% endif %}
-          </div>
-
-          <!-- Bold, Highly Legible Label -->
-          <span class="mt-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-200 group-hover:text-white transition-colors duration-200 line-clamp-1 max-w-[90px] md:max-w-[110px]">
-            {{ title }}
-          </span>
-        </a>
-      {% endfor %}
+            <!-- Refined Category Typography -->
+            <span class="mt-2.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-zinc-300 group-hover/story:text-white group-hover/story:tracking-[0.18em] transition-all duration-300 line-clamp-1 max-w-[80px] sm:max-w-[96px]">
+              {{ title }}
+            </span>
+          </a>
+        {% endfor %}
+      </div>
     </div>
+
   </div>
 </section>

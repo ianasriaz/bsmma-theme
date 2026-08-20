@@ -7,7 +7,7 @@
           "type": "category",
           "settings": {
             "title": "SHIRTS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/Untitled_design.jpg?v=1723748137",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/EE89E2E3-B335-442F-8F96-46A319BABE5D.jpg?v=1775138656",
             "link": "shopify://collections/shirts",
             "is_hot": true
           }
@@ -16,7 +16,7 @@
           "type": "category",
           "settings": {
             "title": "T-SHIRTS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/T-SHIRTS.jpg?v=1782604965",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/70825E66-786B-42B2-86DF-F83F19C09A2D.jpg?v=1781076296",
             "link": "shopify://collections/polos-tees",
             "is_hot": true
           }
@@ -25,7 +25,7 @@
           "type": "category",
           "settings": {
             "title": "POLOS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/9748F800-D048-4EF5-879B-A18319A93041.jpg?v=1780488418",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/CAA6DAC0-3033-458E-8F00-F0EAFC3E93C9.jpg?v=1780315420",
             "link": "shopify://collections/polo-shirts",
             "is_hot": false
           }
@@ -33,8 +33,8 @@
         "summer_tracksuits": {
           "type": "category",
           "settings": {
-            "title": "SUMMER TRACKSUITS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/3_d55ed77d-f854-4d8f-99e0-71481a37b606.jpg?v=1723748275",
+            "title": "SUMMER SETS",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/B0915098-9820-43E8-A9B5-18E273C753D8.jpg?v=1781008020",
             "link": "shopify://collections/tracksuits",
             "is_hot": true
           }
@@ -43,7 +43,7 @@
           "type": "category",
           "settings": {
             "title": "WINTER TRACKSUIT",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/335D6CDB-09CB-4D8E-B2B0-8CCC719522B4.jpg?v=1775400893",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/930FB5F9-0855-41F1-99C9-4AA895A1B483.jpg?v=1774625382",
             "link": "shopify://collections/winter-tracksuit",
             "is_hot": false
           }
@@ -52,7 +52,7 @@
           "type": "category",
           "settings": {
             "title": "CAPS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/268C5255-CE56-4C8C-BB23-C621DE7B42C2.jpg?v=1775060239",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/1CCFE77D-3CD9-4BD2-9B80-23CD79662E53.jpg?v=1775063855",
             "link": "shopify://collections/caps",
             "is_hot": false
           }
@@ -61,7 +61,7 @@
           "type": "category",
           "settings": {
             "title": "LUGGAGE BAGS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/1.jpg?v=1723748175",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/B220665A-5FAB-4091-B7DC-C224FC16B2BB.jpg?v=1776938466",
             "link": "shopify://collections/luggage-bags",
             "is_hot": false
           }
@@ -70,7 +70,7 @@
           "type": "category",
           "settings": {
             "title": "CROSSBODY BAGS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/7.jpg?v=1723748073",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/B803A7F6-6E14-4C76-A422-92F48370074C.jpg?v=1776770132",
             "link": "shopify://collections/crossbody-bags",
             "is_hot": false
           }
@@ -79,7 +79,7 @@
           "type": "category",
           "settings": {
             "title": "LADIES BAGS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/6.jpg?v=1723748095",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/53FED047-BDC7-4529-8EF7-D289C40D4AFB.jpg?v=1775726653",
             "link": "shopify://collections/ladies-bags",
             "is_hot": false
           }
@@ -97,7 +97,7 @@
           "type": "category",
           "settings": {
             "title": "BELTS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/BELTS.jpg?v=1782679154",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/4BAEC428-8583-4092-9B24-B6FF726C76DA.jpg?v=1778596051",
             "link": "shopify://collections/belts",
             "is_hot": false
           }
@@ -106,7 +106,7 @@
           "type": "category",
           "settings": {
             "title": "SHORT WALLETS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/3.jpg?v=1723748256",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/3C7E0D18-2A45-4CBC-B9CD-8DBF3FE7A05A.jpg?v=1775315909",
             "link": "shopify://collections/short-wallets",
             "is_hot": false
           }
@@ -115,7 +115,7 @@
           "type": "category",
           "settings": {
             "title": "LONG WALLETS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/4.jpg?v=1723748195",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/ACE3EC7C-CA88-423B-8488-841B38EA0D0A.jpg?v=1775213407",
             "link": "shopify://collections/long-wallets",
             "is_hot": false
           }
@@ -124,7 +124,7 @@
           "type": "category",
           "settings": {
             "title": "JACKETS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/64D3E98E-4919-4EB5-A2E7-2A61C886F4F6.jpg?v=1779441126",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/2E781EEB-0878-4CE4-9A10-6FF79C91A7EF.jpg?v=1779804603",
             "link": "shopify://collections/jackets",
             "is_hot": false
           }
@@ -133,7 +133,7 @@
           "type": "category",
           "settings": {
             "title": "HOODIES",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/856E72E9-B2D5-44D8-8E94-A27864604939.jpg?v=1778856313",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/A8ED9C1E-8490-4940-978D-F7D19B3B3D29.jpg?v=1780129980",
             "link": "shopify://collections/sweatshirt-hoodies",
             "is_hot": false
           }
@@ -142,7 +142,7 @@
           "type": "category",
           "settings": {
             "title": "SWEATERS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/ADB3A2B7-1239-4ABD-AF26-CBA73837FEE5.jpg?v=1778856294",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/79A63561-B288-4760-9089-DEF221298322.jpg?v=1778332476",
             "link": "shopify://collections/sweater-s",
             "is_hot": false
           }
@@ -151,7 +151,7 @@
           "type": "category",
           "settings": {
             "title": "TROUSERS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/2.jpg?v=1723748215",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/FC5C3CD3-EA10-4DD2-B804-357E89C17CCF.jpg?v=1783523019",
             "link": "shopify://collections/trousers",
             "is_hot": false
           }
@@ -187,7 +187,7 @@
           "type": "category",
           "settings": {
             "title": "SCARFS",
-            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/collections/9.jpg?v=1723748118",
+            "custom_image_url": "https://cdn.shopify.com/s/files/1/0701/1847/3958/files/9E9CAB69-44E9-48A0-9ED2-F504E3AE6E48.jpg?v=1777885044",
             "link": "shopify://collections/scarfs",
             "is_hot": false
           }
@@ -217,7 +217,8 @@
         "scarfs"
       ],
       "settings": {
-        "heading": "CATEGORIES"
+        "heading": "CATEGORIES",
+        "show_heading": true
       }
     },
     "custom_hero": {
