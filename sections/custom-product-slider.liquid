@@ -38,14 +38,14 @@
 }
 {% endschema %}
 
-<section class="w-full bg-[#09090b] py-16 md:py-24 border-b border-zinc-800">
+<section class="w-full bg-[#070709] py-16 md:py-24 border-b border-zinc-800/80">
   <div class="max-w-[1400px] mx-auto px-4 md:px-8">
     
     <!-- Section Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16">
       <div>
         {% if section.settings.eyebrow != blank %}
-          <span class="text-sm md:text-base font-black uppercase tracking-[0.25em] text-accent block mb-2">
+          <span class="text-xs sm:text-sm font-black uppercase tracking-[0.28em] text-zinc-400 block mb-2">
             {{ section.settings.eyebrow }}
           </span>
         {% endif %}
@@ -60,7 +60,7 @@
       {% endif %}
 
       {% if target_collection != blank %}
-        <a href="{{ target_collection.url }}" class="hidden md:inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] font-bold text-zinc-300 hover:text-white transition-colors">
+        <a href="{{ target_collection.url }}" class="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] font-bold text-zinc-400 hover:text-white transition-colors">
           <span>VIEW FULL CATALOG</span>
           <span>→</span>
         </a>
@@ -101,7 +101,7 @@
     <!-- Spacious, Bold View All CTA Button -->
     {% if target_collection != blank %}
       <div class="flex justify-center mt-10 md:mt-16">
-        <a href="{{ target_collection.url }}" class="w-full sm:w-auto text-center inline-flex items-center justify-center px-12 py-5 min-w-[260px] bg-zinc-900 border-2 border-zinc-700 text-white font-black uppercase tracking-[0.2em] text-sm sm:text-base rounded-md hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-2xl">
+        <a href="{{ target_collection.url }}" class="w-full sm:w-auto text-center inline-flex items-center justify-center px-12 py-5 min-w-[260px] bg-[#121215] border border-zinc-700 text-white font-black uppercase tracking-[0.2em] text-xs sm:text-sm rounded-md hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-2xl">
           VIEW ALL PRODUCTS
         </a>
       </div>

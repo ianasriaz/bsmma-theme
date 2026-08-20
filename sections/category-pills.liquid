@@ -66,8 +66,8 @@
 <style>
   .story-nav-section {
     width: 100%;
-    background-color: #09090b;
-    border-bottom: 1px solid rgba(39, 39, 42, 0.8);
+    background-color: #070709;
+    border-bottom: 1px solid rgba(39, 39, 42, 0.6);
     padding: 20px 0;
     overflow: hidden;
   }
@@ -117,12 +117,12 @@
     height: 74px;
     border-radius: 9999px;
     padding: 2px;
-    background: linear-gradient(135deg, #3f3f46, #71717a, #27272a);
+    background: linear-gradient(135deg, #27272a, #52525b, #18181b);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
   @media (min-width: 640px) {
     .story-ring {
@@ -131,14 +131,14 @@
     }
   }
   .story-item:hover .story-ring {
-    background: linear-gradient(135deg, #e11d48, #fb7185, #f43f5e);
-    box-shadow: 0 4px 20px rgba(225, 29, 72, 0.35);
+    background: linear-gradient(135deg, #ffffff, #d4d4d8, #71717a);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
   }
   .story-inner-bezel {
     width: 100%;
     height: 100%;
     border-radius: 9999px;
-    background-color: #09090b;
+    background-color: #070709;
     padding: 2px;
     display: flex;
     align-items: center;
@@ -150,7 +150,7 @@
     height: 100%;
     border-radius: 9999px;
     overflow: hidden;
-    background-color: #18181b;
+    background-color: #121215;
     position: relative;
     display: flex;
     align-items: center;
@@ -174,16 +174,16 @@
     position: absolute;
     top: -2px;
     right: -2px;
-    background-color: #e11d48;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
     font-size: 9px;
     font-weight: 900;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     padding: 1.5px 6px;
     border-radius: 9999px;
     text-transform: uppercase;
-    border: 1.5px solid #09090b;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    border: 1.5px solid #000000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     z-index: 10;
   }
   .story-title {
@@ -192,7 +192,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: #d4d4d8;
+    color: #a1a1aa;
     text-align: center;
     width: 100%;
     max-width: 80px;
@@ -218,7 +218,7 @@
     {% if section.settings.show_heading and section.settings.heading != blank %}
       <div class="flex items-center justify-between mb-3.5">
         <h2 class="text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-zinc-300 flex items-center gap-2 m-0">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse inline-block"></span>
           {{ section.settings.heading }}
         </h2>
         <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">

@@ -105,14 +105,14 @@
           {% endcomment %}
           <div class="absolute top-0 right-0 z-10 pointer-events-none">
             {%- if is_sold_out -%}
-              <span class="badge-sold-out inline-block bg-zinc-950/90 text-zinc-300 font-sans font-bold uppercase tracking-wider text-xs px-3 py-1.5 shadow-sm">
+              <span class="badge-sold-out inline-block bg-zinc-950 text-zinc-300 font-sans font-bold uppercase tracking-wider text-xs px-3 py-1.5 shadow-md">
                 {{- 'products.product.sold_out' | t -}}
               </span>
             {%- elsif is_on_sale -%}
               {%- assign discount_percent = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
-              <span class="badge-sale inline-block bg-[#ea0101] text-white font-sans font-bold uppercase tracking-wider text-xs px-3 py-1.5 shadow-sm">
+              <span class="badge-sale inline-block bg-white text-black font-sans font-black uppercase tracking-[0.12em] text-[10px] sm:text-xs px-2.5 py-1 shadow-md">
                 {%- if discount_percent > 0 -%}
-                  {{ discount_percent }}% OFF
+                  -{{ discount_percent }}%
                 {%- else -%}
                   SALE
                 {%- endif -%}
@@ -130,7 +130,7 @@
       </div>
 
       {% comment %} Content — Title & Price (already perfect per your feedback) {% endcomment %}
-      <div class="card-product__content flex flex-col gap-2.5 p-4 md:p-5 flex-grow bg-[#111114]">
+      <div class="card-product__content flex flex-col gap-2 p-4 md:p-5 flex-grow bg-[#111114]">
 
         <!-- Product Title -->
         <h3 class="font-sans font-medium text-sm md:text-base leading-snug text-zinc-100 group-hover/card:text-white transition-colors duration-200 line-clamp-2 m-0">
@@ -140,16 +140,16 @@
         </h3>
 
         <!-- Price Row: Regular Price + Sale Price + Save Amount -->
-        <div class="flex items-baseline flex-wrap gap-x-3 gap-y-1 text-base md:text-xl font-sans mt-1">
+        <div class="flex items-baseline flex-wrap gap-x-2.5 gap-y-1 text-base md:text-xl font-sans mt-1">
           {%- if is_on_sale -%}
-            <s class="text-zinc-400 line-through text-base md:text-xl font-medium">
+            <s class="text-zinc-500 line-through text-sm sm:text-base md:text-lg font-medium">
               {{ card_product.compare_at_price | money }}
             </s>
             <span class="text-white font-bold text-base md:text-xl">
               {{ card_product.price | money }}
             </span>
             {%- assign save_amount = card_product.compare_at_price | minus: card_product.price -%}
-            <span class="text-[#ea0101] font-bold text-base md:text-xl whitespace-nowrap">
+            <span class="text-zinc-400 font-semibold text-xs sm:text-sm tracking-wide whitespace-nowrap">
               Save {{ save_amount | money }}
             </span>
           {%- else -%}
