@@ -110,7 +110,7 @@
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
       {% if section.settings.button_label != blank %}
         <a 
-          href="{{ section.settings.button_link | default: '/collections/all' }}"
+          href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
           class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 sm:px-12 sm:py-5 min-w-[200px] bg-white text-black font-sans font-black text-sm sm:text-base uppercase tracking-[0.2em] rounded-md hover:bg-zinc-200 transition-all duration-300 shadow-2xl border-2 border-white"
         >
           {{ section.settings.button_label }}
@@ -119,7 +119,7 @@
 
       {% if section.settings.secondary_button_label != blank %}
         <a 
-          href="{{ section.settings.secondary_button_link | default: '/collections/all' }}"
+          href="{{ section.settings.secondary_button_link | default: routes.all_products_collection_url }}"
           class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 sm:px-12 sm:py-5 min-w-[200px] bg-black/80 backdrop-blur-md text-white border-2 border-white/40 font-sans font-black text-sm sm:text-base uppercase tracking-[0.2em] rounded-md hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-2xl"
         >
           {{ section.settings.secondary_button_label }}
