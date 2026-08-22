@@ -1,12 +1,15 @@
 {% schema %}
 {
   "name": "Category Stories Nav",
+  "disabled_on": {
+    "templates": ["product"]
+  },
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Heading (Optional)",
-      "default": "COLLECTIONS"
+      "default": "QUICK SHOP"
     },
     {
       "type": "checkbox",
@@ -412,6 +415,7 @@
   }
 </style>
 
+{% unless template.name == 'product' %}
 <section class="story-nav-section">
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
     
@@ -568,3 +572,4 @@
     } catch (e) {}
   });
 </script>
+{% endunless %}

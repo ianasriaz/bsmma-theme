@@ -196,7 +196,7 @@
         "scarfs"
       ],
       "settings": {
-        "heading": "COLLECTIONS",
+        "heading": "QUICK SHOP",
         "show_heading": true
       }
     },
@@ -216,7 +216,7 @@
     "marquee": {
       "type": "marquee",
       "settings": {
-        "text": "HIGH GRADE TURKEY COLLECTION • COMPLIMENTARY EXPRESS DELIVERY OVER RS. 5,000 • VIP LUXURY PACKAGING • HASSLE-FREE EXCHANGES",
+        "text": "NEW SEASON ARRIVALS • COMPLIMENTARY EXPRESS DELIVERY OVER RS. 5,000 • VIP LUXURY PACKAGING • HASSLE-FREE EXCHANGES",
         "bg_color": "#111114",
         "text_color": "#f4f4f5",
         "speed": 20
@@ -397,7 +397,7 @@
         "scarfs"
       ],
       "settings": {
-        "heading": "SHOP BY CATEGORY",
+        "heading": "SHOP BY COLLECTIONS",
         "min_products": 2
       }
     },
