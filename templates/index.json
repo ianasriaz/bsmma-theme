@@ -236,7 +236,7 @@
         "t_shirts": {
           "type": "collection",
           "settings": {
-            "collection": "t-shirts",
+            "collection": "polos-tees",
             "title": "OVERSIZED TEES",
             "tagline": "1:1 MASTER COPIES"
           }
@@ -257,6 +257,62 @@
             "tagline": "TWO-PIECE TRACKSUITS"
           }
         },
+        "winter_tracksuit": {
+          "type": "collection",
+          "settings": {
+            "collection": "winter-tracksuit",
+            "title": "WINTER TRACKSUITS",
+            "tagline": "HEAVYWEIGHT FLEECE"
+          }
+        },
+        "jackets": {
+          "type": "collection",
+          "settings": {
+            "collection": "jackets",
+            "title": "JACKETS & COATS",
+            "tagline": "WINTER LUXURY"
+          }
+        },
+        "sweatshirt_hoodies": {
+          "type": "collection",
+          "settings": {
+            "collection": "sweatshirt-hoodies",
+            "title": "HOODIES & SWEATS",
+            "tagline": "OVERSIZED LUXURY"
+          }
+        },
+        "sweaters": {
+          "type": "collection",
+          "settings": {
+            "collection": "sweater-s",
+            "title": "KNITWEAR & SWEATERS",
+            "tagline": "PREMIUM WOOL"
+          }
+        },
+        "trousers": {
+          "type": "collection",
+          "settings": {
+            "collection": "trousers",
+            "title": "TROUSERS & PANTS",
+            "tagline": "TAILORED CASUAL"
+          }
+        },
+        "shoes_sneakers": {
+          "type": "collection",
+          "settings": {
+            "collection": "shoes",
+            "title": "SHOES & SNEAKERS",
+            "tagline": "LUXURY FOOTWEAR"
+          }
+        },
+        "slippers": {
+          "type": "collection",
+          "settings": {
+            "collection": "slippers",
+            "title": "SLIPPERS & SLIDES",
+            "tagline": "COMFORT LUXURY"
+          }
+        },
         "caps": {
           "type": "collection",
           "settings": {
@@ -273,12 +329,68 @@
             "tagline": "LEATHER FINISH"
           }
         },
+        "crossbody_bags": {
+          "type": "collection",
+          "settings": {
+            "collection": "crossbody-bags",
+            "title": "CROSSBODY BAGS",
+            "tagline": "STREETWEAR UTILITY"
+          }
+        },
+        "ladies_bags": {
+          "type": "collection",
+          "settings": {
+            "collection": "ladies-bags",
+            "title": "LADIES HANDBAGS",
+            "tagline": "SIGNATURE LUXURY"
+          }
+        },
+        "laptop_bags": {
+          "type": "collection",
+          "settings": {
+            "collection": "laptop-bags",
+            "title": "LAPTOP BAGS",
+            "tagline": "EXECUTIVE EDITION"
+          }
+        },
         "belts": {
           "type": "collection",
           "settings": {
             "collection": "belts",
             "title": "LUXURY BELTS",
-            "tagline": "SOLID BRASS BUCKLES"
+            "tagline": "SOLID BRASS HARDWARE"
+          }
+        },
+        "short_wallets": {
+          "type": "collection",
+          "settings": {
+            "collection": "short-wallets",
+            "title": "SHORT WALLETS",
+            "tagline": "GENUINE LEATHER"
+          }
+        },
+        "long_wallets": {
+          "type": "collection",
+          "settings": {
+            "collection": "long-wallets",
+            "title": "LONG WALLETS",
+            "tagline": "EXECUTIVE FINISH"
+          }
+        },
+        "socks": {
+          "type": "collection",
+          "settings": {
+            "collection": "sox",
+            "title": "DESIGNER SOCKS",
+            "tagline": "COMBED COTTON"
+          }
+        },
+        "scarfs": {
+          "type": "collection",
+          "settings": {
+            "collection": "scarfs",
+            "title": "WINTER SCARFS",
+            "tagline": "SOFT CASHMERE BLEND"
           }
         }
       },
@@ -287,13 +399,28 @@
         "t_shirts",
         "polo_shirts",
         "tracksuits",
+        "winter_tracksuit",
+        "jackets",
+        "sweatshirt_hoodies",
+        "sweaters",
+        "trousers",
+        "shoes_sneakers",
+        "slippers",
         "caps",
         "luggage_bags",
-        "belts"
+        "crossbody_bags",
+        "ladies_bags",
+        "laptop_bags",
+        "belts",
+        "short_wallets",
+        "long_wallets",
+        "socks",
+        "scarfs"
       ],
       "settings": {
         "eyebrow": "CURATED CAPSULES",
-        "heading": "SHOP BY CATEGORY"
+        "heading": "SHOP BY CATEGORY",
+        "min_products": 2
       }
     },
     "product_slider": {

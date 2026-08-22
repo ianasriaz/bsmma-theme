@@ -13,6 +13,16 @@
       "id": "heading",
       "label": "Heading",
       "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type": "range",
+      "id": "min_products",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 2,
+      "label": "Minimum Products Required",
+      "info": "Only collections with at least this many products will be shown (set to 2 to hide collections with 1 or 0 products)."
     }
   ],
   "blocks": [
@@ -133,9 +143,17 @@
 
     <!-- Editorial Collection Grid -->
     <div class="luxury-collection-grid">
+      {%- assign min_products = section.settings.min_products | default: 2 -%}
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {%- assign collection = block.settings.collection -%}
+          {%- if collection != blank -%}
+            {%- assign count = collection.all_products_count | default: collection.products_count | default: 0 -%}
+            {%- if min_products > 0 and count < min_products -%}
+              {%- continue -%}
+            {%- endif -%}
+          {%- endif -%}
+
           {%- assign collection_image = collection.featured_image | default: collection.image | default: collection.products.first.featured_image -%}
           {%- assign custom_image = block.settings.custom_image -%}
           {%- assign raw_card_img = block.settings.custom_image_url -%}
@@ -180,6 +198,11 @@
             <!-- Content Overlay at Bottom -->
             <div class="relative z-10 p-4 sm:p-5 md:p-6 flex items-end justify-between gap-2">
               <div>
+                {% if tagline != blank %}
+                  <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 block mb-1">
+                    {{ tagline }}
+                  </span>
+                {% endif %}
                 <h3 class="font-display text-lg sm:text-2xl md:text-3xl lg:text-4xl !font-black !text-white uppercase tracking-wider group-hover:text-zinc-200 transition-colors m-0 drop-shadow-lg leading-tight">
                   {{ title }}
                 </h3>
