@@ -136,6 +136,7 @@
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {%- assign collection = block.settings.collection -%}
+          {%- assign collection_image = collection.featured_image | default: collection.image | default: collection.products.first.featured_image -%}
           {%- assign custom_image = block.settings.custom_image -%}
           {%- assign raw_card_img = block.settings.custom_image_url -%}
           {%- assign card_img_url = blank -%}
@@ -162,12 +163,12 @@
           >
             <!-- Background Image Frame -->
             <div class="absolute inset-0 w-full h-full overflow-hidden bg-zinc-950 pointer-events-none">
-              {% if card_img_url != blank %}
-                <img src="{{ card_img_url }}" alt="{{ title | escape }}" class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy" width="600" height="600">
+              {% if collection != blank and collection_image != blank %}
+                {{ collection_image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105', loading: 'lazy', alt: title }}
               {% elsif custom_image != blank %}
-                {{ custom_image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105', loading: 'lazy' }}
-              {% elsif collection != blank and collection.image != blank %}
-                {{ collection.image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105', loading: 'lazy' }}
+                {{ custom_image | image_url: width: 800 | image_tag: class: 'w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105', loading: 'lazy', alt: title }}
+              {% elsif card_img_url != blank %}
+                <img src="{{ card_img_url }}" alt="{{ title | escape }}" class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy" width="600" height="600">
               {% else %}
                 {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-40 !fill-zinc-800' }}
               {% endif %}

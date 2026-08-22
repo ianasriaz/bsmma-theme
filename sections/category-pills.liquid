@@ -444,8 +444,9 @@
       <div class="story-scroll-container" id="storyScrollContainer-{{ section.id }}">
         {% for block in section.blocks %}
           {%- assign collection = block.settings.collection -%}
+          {%- assign collection_image = collection.featured_image | default: collection.image | default: collection.products.first.featured_image -%}
           {%- assign title = block.settings.title | default: collection.title | default: 'Category' -%}
-          {%- assign image = block.settings.image | default: collection.image | default: collection.featured_image -%}
+          {%- assign image = block.settings.image -%}
           {%- assign raw_custom_url = block.settings.custom_image_url -%}
           {%- assign link = collection.url | default: block.settings.link | default: '#' -%}
           {%- assign is_hot = block.settings.is_hot -%}
@@ -484,7 +485,11 @@
             <div class="story-ring story-ring--{{ section.settings.ring_style | default: 'instagram' }}{% if is_active %} story-ring--active{% endif %}{% if is_hot %} story-ring--pulse{% endif %}">
               <div class="story-inner-bezel">
                 <div class="story-img-wrap">
-                  {% if custom_image_url != blank %}
+                  {% if collection != blank and collection_image != blank %}
+                    {{ collection_image | image_url: width: 180, crop: 'center' | image_tag: class: 'story-img', width: 84, height: 84, loading: 'eager', alt: title }}
+                  {% elsif image != blank %}
+                    {{ image | image_url: width: 180, crop: 'center' | image_tag: class: 'story-img', width: 84, height: 84, loading: 'eager', alt: title }}
+                  {% elsif custom_image_url != blank %}
                     <img 
                       src="{{ custom_image_url }}" 
                       alt="{{ title | escape }}" 
@@ -494,8 +499,6 @@
                       loading="{% if forloop.index <= 8 %}eager{% else %}lazy{% endif %}"
                       {% if forloop.index <= 4 %}fetchpriority="high"{% endif %}
                     >
-                  {% elsif image != blank %}
-                    {{ image | image_url: width: 180, crop: 'center' | image_tag: class: 'story-img', width: 84, height: 84, loading: 'eager' }}
                   {% else %}
                     <div class="w-full h-full bg-zinc-900 flex flex-col items-center justify-center p-2 text-zinc-400">
                       <span class="text-xs font-black uppercase">{{ title | slice: 0, 2 }}</span>
