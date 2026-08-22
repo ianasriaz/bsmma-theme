@@ -229,168 +229,147 @@
           "type": "collection",
           "settings": {
             "collection": "shirts",
-            "title": "PREMIUM SHIRTS",
-            "tagline": "TURKEY HIGH GRADE"
+            "title": "PREMIUM SHIRTS"
           }
         },
         "t_shirts": {
           "type": "collection",
           "settings": {
             "collection": "polos-tees",
-            "title": "OVERSIZED TEES",
-            "tagline": "1:1 MASTER COPIES"
+            "title": "OVERSIZED TEES"
           }
         },
         "polo_shirts": {
           "type": "collection",
           "settings": {
             "collection": "polo-shirts",
-            "title": "POLO SHIRTS",
-            "tagline": "HIGH DENSITY KNIT"
+            "title": "POLO SHIRTS"
           }
         },
         "tracksuits": {
           "type": "collection",
           "settings": {
             "collection": "tracksuits",
-            "title": "SUMMER SETS",
-            "tagline": "TWO-PIECE TRACKSUITS"
+            "title": "SUMMER SETS"
           }
         },
         "winter_tracksuit": {
           "type": "collection",
           "settings": {
             "collection": "winter-tracksuit",
-            "title": "WINTER TRACKSUITS",
-            "tagline": "HEAVYWEIGHT FLEECE"
+            "title": "WINTER TRACKSUITS"
           }
         },
         "jackets": {
           "type": "collection",
           "settings": {
             "collection": "jackets",
-            "title": "JACKETS & COATS",
-            "tagline": "WINTER LUXURY"
+            "title": "JACKETS & COATS"
           }
         },
         "sweatshirt_hoodies": {
           "type": "collection",
           "settings": {
             "collection": "sweatshirt-hoodies",
-            "title": "HOODIES & SWEATS",
-            "tagline": "OVERSIZED LUXURY"
+            "title": "HOODIES & SWEATS"
           }
         },
         "sweaters": {
           "type": "collection",
           "settings": {
             "collection": "sweater-s",
-            "title": "KNITWEAR & SWEATERS",
-            "tagline": "PREMIUM WOOL"
+            "title": "KNITWEAR & SWEATERS"
           }
         },
         "trousers": {
           "type": "collection",
           "settings": {
             "collection": "trousers",
-            "title": "TROUSERS & PANTS",
-            "tagline": "TAILORED CASUAL"
+            "title": "TROUSERS & PANTS"
           }
         },
         "shoes_sneakers": {
           "type": "collection",
           "settings": {
             "collection": "shoes",
-            "title": "SHOES & SNEAKERS",
-            "tagline": "LUXURY FOOTWEAR"
+            "title": "SHOES & SNEAKERS"
           }
         },
         "slippers": {
           "type": "collection",
           "settings": {
             "collection": "slippers",
-            "title": "SLIPPERS & SLIDES",
-            "tagline": "COMFORT LUXURY"
+            "title": "SLIPPERS & SLIDES"
           }
         },
         "caps": {
           "type": "collection",
           "settings": {
             "collection": "caps",
-            "title": "HEADWEAR & CAPS",
-            "tagline": "SIGNATURE EMBROIDERY"
+            "title": "HEADWEAR & CAPS"
           }
         },
         "luggage_bags": {
           "type": "collection",
           "settings": {
             "collection": "luggage-bags",
-            "title": "TRAVEL & DUFFLES",
-            "tagline": "LEATHER FINISH"
+            "title": "TRAVEL & DUFFLES"
           }
         },
         "crossbody_bags": {
           "type": "collection",
           "settings": {
             "collection": "crossbody-bags",
-            "title": "CROSSBODY BAGS",
-            "tagline": "STREETWEAR UTILITY"
+            "title": "CROSSBODY BAGS"
           }
         },
         "ladies_bags": {
           "type": "collection",
           "settings": {
             "collection": "ladies-bags",
-            "title": "LADIES HANDBAGS",
-            "tagline": "SIGNATURE LUXURY"
+            "title": "LADIES HANDBAGS"
           }
         },
         "laptop_bags": {
           "type": "collection",
           "settings": {
             "collection": "laptop-bags",
-            "title": "LAPTOP BAGS",
-            "tagline": "EXECUTIVE EDITION"
+            "title": "LAPTOP BAGS"
           }
         },
         "belts": {
           "type": "collection",
           "settings": {
             "collection": "belts",
-            "title": "LUXURY BELTS",
-            "tagline": "SOLID BRASS HARDWARE"
+            "title": "LUXURY BELTS"
           }
         },
         "short_wallets": {
           "type": "collection",
           "settings": {
             "collection": "short-wallets",
-            "title": "SHORT WALLETS",
-            "tagline": "GENUINE LEATHER"
+            "title": "SHORT WALLETS"
           }
         },
         "long_wallets": {
           "type": "collection",
           "settings": {
             "collection": "long-wallets",
-            "title": "LONG WALLETS",
-            "tagline": "EXECUTIVE FINISH"
+            "title": "LONG WALLETS"
           }
         },
         "socks": {
           "type": "collection",
           "settings": {
             "collection": "sox",
-            "title": "DESIGNER SOCKS",
-            "tagline": "COMBED COTTON"
+            "title": "DESIGNER SOCKS"
           }
         },
         "scarfs": {
           "type": "collection",
           "settings": {
             "collection": "scarfs",
-            "title": "WINTER SCARFS",
-            "tagline": "SOFT CASHMERE BLEND"
+            "title": "WINTER SCARFS"
           }
         }
       },
@@ -418,7 +397,6 @@
         "scarfs"
       ],
       "settings": {
-        "eyebrow": "CURATED CAPSULES",
         "heading": "SHOP BY CATEGORY",
         "min_products": 2
       }
