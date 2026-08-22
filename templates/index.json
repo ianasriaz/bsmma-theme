@@ -229,21 +229,21 @@
           "type": "collection",
           "settings": {
             "collection": "shirts",
-            "title": "PREMIUM SHIRTS"
+            "title": "SHIRTS"
           }
         },
         "t_shirts": {
           "type": "collection",
           "settings": {
             "collection": "polos-tees",
-            "title": "OVERSIZED TEES"
+            "title": "T-SHIRTS"
           }
         },
         "polo_shirts": {
           "type": "collection",
           "settings": {
             "collection": "polo-shirts",
-            "title": "POLO SHIRTS"
+            "title": "POLOS"
           }
         },
         "tracksuits": {
@@ -257,35 +257,35 @@
           "type": "collection",
           "settings": {
             "collection": "winter-tracksuit",
-            "title": "WINTER TRACKSUITS"
+            "title": "WINTER TRACKSUIT"
           }
         },
         "jackets": {
           "type": "collection",
           "settings": {
             "collection": "jackets",
-            "title": "JACKETS & COATS"
+            "title": "JACKETS"
           }
         },
         "sweatshirt_hoodies": {
           "type": "collection",
           "settings": {
             "collection": "sweatshirt-hoodies",
-            "title": "HOODIES & SWEATS"
+            "title": "HOODIES"
           }
         },
         "sweaters": {
           "type": "collection",
           "settings": {
             "collection": "sweater-s",
-            "title": "KNITWEAR & SWEATERS"
+            "title": "SWEATERS"
           }
         },
         "trousers": {
           "type": "collection",
           "settings": {
             "collection": "trousers",
-            "title": "TROUSERS & PANTS"
+            "title": "TROUSERS"
           }
         },
         "shoes_sneakers": {
@@ -299,21 +299,21 @@
           "type": "collection",
           "settings": {
             "collection": "slippers",
-            "title": "SLIPPERS & SLIDES"
+            "title": "SLIPPERS"
           }
         },
         "caps": {
           "type": "collection",
           "settings": {
             "collection": "caps",
-            "title": "HEADWEAR & CAPS"
+            "title": "CAPS"
           }
         },
         "luggage_bags": {
           "type": "collection",
           "settings": {
             "collection": "luggage-bags",
-            "title": "TRAVEL & DUFFLES"
+            "title": "LUGGAGE BAGS"
           }
         },
         "crossbody_bags": {
@@ -327,7 +327,7 @@
           "type": "collection",
           "settings": {
             "collection": "ladies-bags",
-            "title": "LADIES HANDBAGS"
+            "title": "LADIES BAGS"
           }
         },
         "laptop_bags": {
@@ -341,7 +341,7 @@
           "type": "collection",
           "settings": {
             "collection": "belts",
-            "title": "LUXURY BELTS"
+            "title": "BELTS"
           }
         },
         "short_wallets": {
@@ -362,14 +362,14 @@
           "type": "collection",
           "settings": {
             "collection": "sox",
-            "title": "DESIGNER SOCKS"
+            "title": "SOCKS"
           }
         },
         "scarfs": {
           "type": "collection",
           "settings": {
             "collection": "scarfs",
-            "title": "WINTER SCARFS"
+            "title": "SCARFS"
           }
         }
       },
