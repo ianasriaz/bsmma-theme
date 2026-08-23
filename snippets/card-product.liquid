@@ -134,27 +134,27 @@
       <div class="card-product__content flex flex-col gap-2 p-4 md:p-5 flex-grow bg-[#111114]">
 
         <!-- Product Title -->
-        <h3 class="font-sans font-medium text-sm md:text-base leading-snug text-zinc-100 group-hover/card:text-white transition-colors duration-200 line-clamp-2 m-0">
+        <h3 class="font-sans font-bold text-base sm:text-lg uppercase leading-snug text-white group-hover/card:text-zinc-200 transition-colors duration-200 line-clamp-2 m-0 tracking-wide">
           <a href="{{ card_product.url }}" class="full-unstyled-link">
             {{ card_product.title | escape }}
           </a>
         </h3>
 
         <!-- Price Row: Regular Price + Sale Price + Save Amount -->
-        <div class="flex items-baseline flex-wrap gap-x-2.5 gap-y-1 text-base md:text-xl font-sans mt-1">
+        <div class="flex items-center flex-wrap gap-x-2.5 gap-y-1.5 font-sans mt-1">
           {%- if is_on_sale -%}
-            <s class="text-zinc-500 line-through text-sm sm:text-base md:text-lg font-medium">
+            <s class="text-zinc-400 line-through text-sm sm:text-base font-semibold">
               {{ card_product.compare_at_price | money }}
             </s>
-            <span class="text-white font-bold text-base md:text-xl">
+            <span class="text-white font-black text-lg sm:text-xl md:text-2xl tracking-tight">
               {{ card_product.price | money }}
             </span>
             {%- assign save_amount = card_product.compare_at_price | minus: card_product.price -%}
-            <span class="text-zinc-400 font-semibold text-xs sm:text-sm tracking-wide whitespace-nowrap">
+            <span class="text-emerald-400 font-bold text-xs sm:text-sm tracking-wide whitespace-nowrap bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5">
               Save {{ save_amount | money }}
             </span>
           {%- else -%}
-            <span class="text-white font-bold text-base md:text-xl">
+            <span class="text-white font-black text-lg sm:text-xl md:text-2xl tracking-tight">
               {{ card_product.price | money }}
             </span>
           {%- endif -%}
@@ -162,7 +162,7 @@
 
         <!-- Size Badges at the bottom -->
         {%- if card_product.has_only_default_variant == false -%}
-          <div class="flex flex-wrap gap-1.5 items-center mt-1">
+          <div class="flex flex-wrap gap-1.5 items-center mt-1.5">
             {%- for option in card_product.options_with_values -%}
               {%- for value in option.values -%}
                 {%- liquid
@@ -175,11 +175,11 @@
                   endfor
                 -%}
                 {%- if is_available -%}
-                  <span class="min-w-[28px] h-6 inline-flex items-center justify-center text-xs font-bold uppercase px-2 bg-zinc-800 text-white border border-zinc-700 rounded-sm leading-none tracking-wider shadow-sm">
+                  <span class="min-w-[32px] h-7 inline-flex items-center justify-center text-xs font-black uppercase px-2.5 bg-zinc-800 text-white border border-zinc-600 rounded-none leading-none tracking-wider shadow-sm hover:border-white transition-colors">
                     {{ value }}
                   </span>
                 {%- else -%}
-                  <span class="min-w-[28px] h-6 inline-flex items-center justify-center text-xs font-medium uppercase px-2 bg-zinc-900/40 text-zinc-500 border border-zinc-800 rounded-sm leading-none tracking-wider opacity-60">
+                  <span class="min-w-[32px] h-7 inline-flex items-center justify-center text-xs font-semibold uppercase px-2.5 bg-zinc-900/60 text-zinc-500 border border-zinc-800/80 rounded-none leading-none tracking-wider line-through opacity-70">
                     {{ value }}
                   </span>
                 {%- endif -%}
