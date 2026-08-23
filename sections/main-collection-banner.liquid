@@ -9,24 +9,24 @@
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient bg-transparent">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %} pt-3 pb-2 md:pt-4 md:pb-4">
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient bg-transparent w-full">
+  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %} pt-2 pb-2 md:pt-3 md:pb-3" style="display: flex !important; flex-direction: column !important; align-items: stretch !important; width: 100% !important;">
     
     <!-- Breadcrumbs matching reference -->
-    <nav class="w-full text-left py-1 text-xs font-medium uppercase tracking-wider text-zinc-400" aria-label="Breadcrumbs">
-      <a href="{{ routes.root_url }}" class="hover:text-white transition-colors text-zinc-400">Home</a>
-      <span class="mx-2 text-zinc-600">&gt;</span>
-      <span class="text-zinc-300 font-semibold">{{ collection.title | escape }}</span>
+    <nav class="w-full text-left py-1 text-xs font-semibold uppercase tracking-wider text-zinc-400" aria-label="Breadcrumbs" style="width: 100% !important; text-align: left !important;">
+      <a href="{{ routes.root_url }}" class="hover:text-white transition-colors" style="color: #a1a1aa !important; text-decoration: none !important;">Home</a>
+      <span class="mx-2" style="color: #52525b !important;">&gt;</span>
+      <span class="font-bold" style="color: #e4e4e7 !important;">{{ collection.title | escape }}</span>
     </nav>
 
-    <div class="collection-hero__text-wrapper flex flex-col items-center text-center py-4 md:py-8">
-      <h1 class="collection-hero__title !text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl !font-black font-display uppercase tracking-wider text-white m-0 italic">
+    <div class="collection-hero__text-wrapper w-full flex flex-col items-center justify-center text-center py-4 md:py-6" style="width: 100% !important; text-align: center !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;">
+      <h1 class="collection-hero__title !text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl !font-black font-display uppercase tracking-wider text-white m-0 italic text-center" style="color: #ffffff !important; margin: 0 !important;">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
 
       {%- if section.settings.show_collection_description and collection.description != blank -%}
-        <div class="collection-hero__description rte !text-base md:!text-lg text-zinc-400 mt-4 max-w-3xl">{{ collection.description }}</div>
+        <div class="collection-hero__description rte !text-base md:!text-lg text-zinc-400 mt-3 max-w-3xl text-center" style="color: #a1a1aa !important;">{{ collection.description }}</div>
       {%- endif -%}
     </div>
 

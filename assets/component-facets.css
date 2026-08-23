@@ -1,8 +1,8 @@
 .facets-container {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(2, auto);
-  padding-top: 1rem;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  padding-top: 0.5rem;
 }
 
 .active-facets-mobile {
@@ -26,8 +26,7 @@
 
 @media screen and (max-width: 989px) {
   .facets-container {
-    grid-template-columns: auto minmax(0, max-content);
-    column-gap: 2rem;
+    width: 100% !important;
   }
 }
 

@@ -1,6 +1,8 @@
 .collection-hero__inner {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
 }
 
 .collection-hero--with-image .collection-hero__inner {
@@ -15,11 +17,14 @@
   }
 
   .collection-hero--with-image .collection-hero__inner {
+    align-items: center !important;
+    flex-direction: row !important;
     padding-bottom: 0;
   }
 }
 
 .collection-hero__text-wrapper {
+  width: 100% !important;
   flex-basis: 100%;
 }
 
@@ -27,16 +32,10 @@
   .collection-hero {
     padding: 0;
   }
-
-  .collection-hero__inner {
-    align-items: center;
-    flex-direction: row;
-    padding-bottom: 0;
-  }
 }
 
 .collection-hero__title {
-  margin: 2.5rem 0;
+  margin: 1.5rem 0;
 }
 
 .collection-hero__title + .collection-hero__description {
