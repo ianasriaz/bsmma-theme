@@ -1,74 +1,16 @@
-<style>
-@keyframes topbarMarquee {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-@-webkit-keyframes topbarMarquee {
-  0% { -webkit-transform: translate3d(0, 0, 0); }
-  100% { -webkit-transform: translate3d(-50%, 0, 0); }
-}
-
-.topbar-ticker-wrapper {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: #27272a;
-}
-
-.topbar-ticker-track {
-  display: flex !important;
-  width: max-content !important;
-  min-width: 200% !important;
-  animation: topbarMarquee 20s linear infinite !important;
-  -webkit-animation: topbarMarquee 20s linear infinite !important;
-  will-change: transform;
-}
-
-.topbar-ticker-track:hover {
-  animation-play-state: paused !important;
-  -webkit-animation-play-state: paused !important;
-}
-
-.topbar-ticker-item {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding: 0 1.5rem;
-  white-space: nowrap;
-}
-</style>
-
 <div 
-  class="topbar-ticker-wrapper text-white py-3.5 sm:py-3.5 min-h-[44px] flex items-center border-b border-zinc-700/80 shadow-sm relative z-30 cursor-pointer"
-  onclick="window.location.href='{{ routes.all_products_collection_url }}'"
-  title="Click to explore the latest collection"
+  class="w-full bg-[#121212] text-zinc-200 py-2 sm:py-2.5 px-4 min-h-[38px] flex items-center justify-center border-b border-zinc-800/40 relative z-30 transition-colors"
+  {% if section.settings.link != blank %}
+    onclick="window.location.href='{{ section.settings.link }}'"
+    role="link"
+    tabindex="0"
+    style="cursor: pointer;"
+  {% endif %}
 >
-  <div class="topbar-ticker-track whitespace-nowrap flex items-center">
-    
-    <!-- Set 1 -->
-    <div class="topbar-ticker-item text-xs sm:text-sm font-sans font-black uppercase tracking-[0.18em] text-white">
-      <span class="inline-flex items-center gap-2">🚚 FREE EXPRESS DELIVERY OVER RS. 5,000</span>
-      <span class="text-accent text-xs">◆</span>
-      <span class="inline-flex items-center gap-2">⚡ DAILY NEW ARRIVALS</span>
-      <span class="text-accent text-xs">◆</span>
-      <span class="inline-flex items-center gap-2">🔄 HASSLE-FREE EXCHANGES & RETURNS</span>
-      <span class="text-accent text-xs">◆</span>
-      <span class="inline-flex items-center gap-2">✨ PREMIUM QUALITY GUARANTEED</span>
-      <span class="text-accent text-xs">◆</span>
-    </div>
-
-    <!-- Set 2 (Continuous Loop) -->
-    <div class="topbar-ticker-item text-xs sm:text-sm font-sans font-black uppercase tracking-[0.18em] text-white" aria-hidden="true">
-      <span class="inline-flex items-center gap-2">🚚 FREE EXPRESS DELIVERY OVER RS. 5,000</span>
-      <span class="text-accent text-xs">◆</span>
-      <span class="inline-flex items-center gap-2">⚡ DAILY NEW ARRIVALS</span>
-      <span class="text-accent text-xs">◆</span>
-      <span class="inline-flex items-center gap-2">🔄 HASSLE-FREE EXCHANGES & RETURNS</span>
-      <span class="text-accent text-xs">◆</span>
-      <span class="inline-flex items-center gap-2">✨ PREMIUM QUALITY GUARANTEED</span>
-      <span class="text-accent text-xs">◆</span>
-    </div>
-
+  <div class="w-full max-w-[1400px] mx-auto text-center">
+    <p class="text-xs sm:text-[13px] font-normal tracking-wide text-zinc-300 m-0 select-none">
+      {{ section.settings.announcement_text | default: "Enjoy Free Delivery on Prepaid Orders in Pakistan." }}
+    </p>
   </div>
 </div>
 
@@ -76,7 +18,19 @@
 {
   "name": "t:sections.announcement-bar.name",
   "class": "announcement-bar-section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Enjoy Free Delivery on Prepaid Orders in Pakistan."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Announcement link"
+    }
+  ],
   "presets": [
     {
       "name": "t:sections.announcement-bar.presets.name"
